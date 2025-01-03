@@ -1,0 +1,122 @@
+name: spies
+description: "spies project."
+publish_to: 'none'
+version: 1.0.0+11
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Нужные разрешения для проекта
+  app_tracking_transparency: ^2.0.6+1
+
+  # Проверка соединения
+  connectivity_plus: ^6.1.1
+
+  # Переход по ссылкам
+  url_launcher: ^6.1.11
+
+  # Клиент сервер
+  client_server_sockets: ^1.0.1
+  network_info_plus: ^6.1.2
+
+  # Генерация dart pub add flutter_launcher_iconsплюшек
+  flutter_native_splash: ^2.4.3
+  flutter_launcher_icons: ^0.14.2
+
+  # Версия и всё что связанно с приложением
+  package_info_plus: ^8.1.2
+
+  # Шимер анимация
+  shimmer: ^3.0.0
+  
+  # Svg в проекте
+  flutter_svg: 2.0.16
+
+  # Навигация в приложении
+  auto_route: ^9.2.2
+
+  # Анализатор кода
+  flutter_lints: ^5.0.0
+
+  # Иньекция Singleton зависимостей
+  get_it: ^7.6.4
+
+  # Менеджер состояний
+  # bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+
+  # Локализация приложения
+  intl: ^0.19.0
+  intl_utils: ^2.8.7
+
+  # Сохранение в кеш
+  shared_preferences: ^2.3.2
+
+  # fromJson и toJson
+  json_serializable: ^6.8.0
+
+  # collection - для работы с коллекциями
+  collection: ^1.18.0
+
+  # оверрайдид "==" и "hashCode"
+  equatable: ^2.0.5
+
+  # dartz - используется для работы с состояниями: если приходит ошибка, кладем ее в left(error),инача right(responseModel)
+  dartz: ^0.10.1
+  auto_route_generator: ^9.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.13
+
+# Генерация иконок
+flutter_gen:
+  output: lib/core/gen/
+  line_length: 120
+  integrations:
+    flutter_svg: true
+    lottie: true
+
+# Настройка локализации
+flutter_intl:
+  enabled: true
+  main_locale: ru
+  arb_dir: lib/core/gen/l10n/arb
+  output_dir: lib/core/gen/l10n/generated
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/
+    - assets/icons/
+    
+  fonts:
+  - family: ShantellSans
+    fonts:
+      - asset: assets/fonts/ShantellSans-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/ShantellSans-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/ShantellSans-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/ShantellSans-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/ShantellSans-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/ShantellSans-Light.ttf
+        weight: 300
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app-icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  remove_alpha_ios: true
