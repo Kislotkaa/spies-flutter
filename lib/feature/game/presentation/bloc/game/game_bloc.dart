@@ -55,6 +55,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         }
         if (state.gameInitialParams?.role == GameRoleEnum.client) {
           clientService.send(MessageModel(type: MessageTypeEnum.disconnectGame));
+          clientService.disconnect();
         }
         sl<OnClientCubit>().clearPlayers();
         router.replaceAll([HomeRoute()]);
