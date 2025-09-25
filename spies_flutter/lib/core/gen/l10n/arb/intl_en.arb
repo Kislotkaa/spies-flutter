@@ -1,0 +1,6 @@
+{
+  "@@locale": "en",
+  "somethingWentWrong": "Something went wrong",
+  "serverError": "A server error occurred, please try again later",
+  "authFailedToSignIn": "Failed to log in, please try again later"
+}

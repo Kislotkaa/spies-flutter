@@ -1,0 +1,6 @@
+class: DisconnectGameRequest
+
+fields:
+  gameId: UuidValue
+  playerId: UuidValue
+

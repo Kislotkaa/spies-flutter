@@ -1,0 +1,5 @@
+class: SignInRequest
+
+fields:
+  deviceId: String
+  name: String

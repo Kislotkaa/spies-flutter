@@ -1,0 +1,6 @@
+class: ConnectGameRequest
+
+fields:
+  code: String
+  playerId: UuidValue
+

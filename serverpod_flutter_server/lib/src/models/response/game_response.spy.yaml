@@ -1,0 +1,16 @@
+class: GameResponse
+
+fields:
+  id: UuidValue, defaultModel=random
+  owner: UserResponse,
+  name: String
+  code: String
+  currentWord: WordResponse?
+  nextWord: WordResponse?
+  suggestWord: WordResponse?
+  wordCategoryList: List<WordCategoryResponse>
+  playerList: List<UserResponse>
+  isShowWordHint: bool
+  isSubmittedUserWord: bool
+  status: GameStatus, default=created
+

@@ -1,0 +1,7 @@
+class: SuggestWordRequest
+
+fields:
+  gameId: UuidValue
+  word: String
+
+

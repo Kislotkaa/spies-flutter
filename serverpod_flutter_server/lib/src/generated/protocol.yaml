@@ -1,0 +1,22 @@
+game:
+  - subscribe:
+  - create:
+  - start:
+  - finish:
+  - disconnect:
+  - connect:
+  - changeSettings:
+  - suggestWord:
+  - suggestAccepted:
+  - nextWord:
+  - getInfo:
+user:
+  - getUser:
+  - signIn:
+  - signOut:
+  - changeName:
+word:
+  - getWords:
+  - addWord:
+  - getCategories:
+  - addCategory:

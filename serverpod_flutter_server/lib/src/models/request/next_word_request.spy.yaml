@@ -1,0 +1,6 @@
+class: NextWordRequest
+
+fields:
+  userId: UuidValue
+  gameId: UuidValue
+

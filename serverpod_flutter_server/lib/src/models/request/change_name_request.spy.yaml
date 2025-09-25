@@ -1,0 +1,6 @@
+class: ChangeNameRequest
+
+fields:
+  userId: UuidValue
+  deviceId: String
+  newName: String

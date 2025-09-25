@@ -1,0 +1,9 @@
+class: CreateGameRequest
+
+fields:
+  name: String
+  ownerId: UuidValue
+  wordCategoryIds: List<UuidValue>
+  isShowWordHint: bool
+  isSubmittedUserWord: bool
+

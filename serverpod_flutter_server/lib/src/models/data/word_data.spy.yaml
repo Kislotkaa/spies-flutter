@@ -1,0 +1,8 @@
+class: WordData
+table: words
+
+fields:
+  id: UuidValue, defaultModel=random
+  word: String
+  hint: String?
+  wordCategory: WordCategoryData?, relation(optional)

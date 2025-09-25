@@ -1,0 +1,6 @@
+class: WordCategoryData
+table: word_categories
+
+fields:
+  id: UuidValue, defaultModel=random
+  name: String

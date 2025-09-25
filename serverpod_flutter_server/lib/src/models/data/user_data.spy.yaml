@@ -1,0 +1,9 @@
+class: UserData
+table: users
+
+fields:
+  id: UuidValue, defaultModel=random
+  deviceId: String
+  name: String
+
+

@@ -1,0 +1,4 @@
+class: GameUuidEntity
+
+fields:
+  uuid: UuidValue

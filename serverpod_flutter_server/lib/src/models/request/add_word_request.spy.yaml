@@ -1,0 +1,7 @@
+class: AddWordRequest
+
+fields:
+  word: String
+  hint: String?
+  wordCategoryId: UuidValue
+

@@ -1,0 +1,8 @@
+class: ChangeGameSettingsRequest
+
+fields:
+  gameId: UuidValue
+  userId: UuidValue
+  wordCategoryIds: List<UuidValue>?
+  isShowWordHint: bool?
+  isSubmittedUserWord: bool?

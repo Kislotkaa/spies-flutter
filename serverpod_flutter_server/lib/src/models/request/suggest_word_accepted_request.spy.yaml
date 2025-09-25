@@ -1,0 +1,8 @@
+class: SuggestWordAcceptedRequest
+
+fields:
+  wordId: UuidValue
+  gameId: UuidValue
+  userId: UuidValue
+
+

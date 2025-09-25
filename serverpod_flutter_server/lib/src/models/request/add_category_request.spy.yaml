@@ -1,0 +1,4 @@
+class: AddCategoryRequest
+
+fields:
+  name: String

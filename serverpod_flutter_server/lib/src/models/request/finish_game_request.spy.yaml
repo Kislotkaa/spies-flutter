@@ -1,0 +1,5 @@
+class: FinishGameRequest
+
+fields:
+  gameId: UuidValue
+  userId: UuidValue

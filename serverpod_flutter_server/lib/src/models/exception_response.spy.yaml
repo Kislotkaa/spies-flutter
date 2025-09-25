@@ -1,0 +1,5 @@
+exception: ExceptionResponse
+
+fields:
+  title: String, default="Что-то пошло не так"
+  subTitle: String?

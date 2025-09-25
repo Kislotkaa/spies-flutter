@@ -1,0 +1,1 @@
+flutter build appbundle --release lib/main.dart --dart-define=POLIT_URL=empty

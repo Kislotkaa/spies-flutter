@@ -1,0 +1,88 @@
+name: sample
+description: "sample project"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+    
+  serverpod_flutter: ^2.9.1
+  serverpod_flutter_client:
+    path: ../serverpod_flutter_client
+  flutter_native_splash: ^2.4.3
+  flutter_launcher_icons: ^0.14.2
+  flutter_animate: ^4.5.2
+  package_info_plus: ^8.1.2
+  shimmer: ^3.0.0
+  flutter_svg: 2.0.16
+  auto_route: ^9.2.2
+  flutter_lints: ^5.0.0
+  get_it: ^7.6.4
+  flutter_bloc: ^8.1.6
+  intl: ^0.19.0
+  intl_utils: ^2.8.7
+  shared_preferences: ^2.3.2
+  json_serializable: ^6.8.0
+  collection: ^1.18.0
+  dartz: ^0.10.1
+  auto_route_generator: ^9.0.0
+  device_info_plus: ^10.1.2
+  yaml: ^3.1.2
+  url_launcher: ^6.1.11
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.13
+
+# Ассеты
+flutter_gen:
+  output: lib/core/gen/
+  line_length: 120
+  integrations:
+    flutter_svg: true
+    lottie: true
+
+# Локализация
+flutter_intl:
+  enabled: true
+  main_locale: ru
+  arb_dir: lib/core/gen/l10n/arb
+  output_dir: lib/core/gen/l10n/generated
+
+flutter:
+  uses-material-design: true
+  assets:
+    - pubspec.yaml
+    - assets/images/
+    - assets/fonts/
+    - assets/icons/
+  
+  fonts:
+  - family: ShantellSans
+    fonts:
+      - asset: assets/fonts/ShantellSans-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/ShantellSans-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/ShantellSans-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/ShantellSans-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/ShantellSans-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/ShantellSans-Light.ttf
+        weight: 300
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app-icon.jpg"
+  min_sdk_android: 21
+  remove_alpha_ios: true

@@ -1,0 +1,5 @@
+class: StartGameRequest
+
+fields:
+  gameId: UuidValue
+  userId: UuidValue

@@ -1,0 +1,5 @@
+class: WordCategoryResponse
+
+fields:
+  id: UuidValue, defaultModel=random
+  name: String

@@ -1,0 +1,7 @@
+class: WordResponse
+
+fields:
+  id: UuidValue, defaultModel=random
+  word: String
+  hint: String?
+  wordCategory: WordCategoryResponse?

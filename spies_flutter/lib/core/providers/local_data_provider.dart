@@ -1,0 +1,33 @@
+import 'package:sample/core/constants/sprefs_keys.dart';
+import 'package:sample/core/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class LocalDataProvider {
+  final SharedPreferences _prefs;
+
+  LocalDataProvider(this._prefs);
+
+  void saveUser(UserModel? user) {
+    if (user == null) {
+      _prefs.remove(SPrefsKeys.USER);
+      return;
+    }
+
+    _prefs.setString(SPrefsKeys.USER, user.toJson());
+  }
+
+  UserModel? getUser() {
+    final result = _prefs.getString(SPrefsKeys.USER);
+    if (result == null) return null;
+
+    return UserModel.fromJson(result);
+  }
+
+  String? getLocal() => _prefs.getString(SPrefsKeys.INTL);
+
+  void saveLocale(String locale) => _prefs.setString(SPrefsKeys.INTL, locale);
+
+  String? getTheme() => _prefs.getString(SPrefsKeys.THEME);
+
+  void saveTheme(String themeName) => _prefs.setString(SPrefsKeys.THEME, themeName);
+}
