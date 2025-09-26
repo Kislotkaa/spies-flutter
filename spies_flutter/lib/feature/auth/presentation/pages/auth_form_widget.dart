@@ -26,7 +26,7 @@ class AuthFormWidget extends StatelessWidget {
           return Column(
             children: [
               TextFieldWidget(
-                titleText: 'Никней',
+                titleText: 'Никнейм',
                 titleCenter: true,
                 initialValue: state.name,
                 prefixIcon: IconButton(
