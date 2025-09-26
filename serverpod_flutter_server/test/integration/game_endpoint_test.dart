@@ -371,17 +371,183 @@ void main() {
 
     test(
       'suggest word',
-      () async {},
+      () async {
+        final user = await endpoints.user.signIn(
+          sessionBuilder,
+          SignInRequest(
+            deviceId: 'test_device_id_1',
+            name: 'Тестовый аккаунт 1',
+          ),
+        );
+
+        final category = await endpoints.word.addCategory(
+          sessionBuilder,
+          AddCategoryRequest(
+            name: 'Персонажи',
+          ),
+        );
+
+        final result = await endpoints.game.create(
+          sessionBuilder,
+          CreateGameRequest(
+            name: gameName,
+            ownerId: user.id,
+            wordCategoryIds: [category.id],
+            isShowWordHint: true,
+            isSubmittedUserWord: true,
+          ),
+        );
+
+        final subscription = endpoints.game.subscribe(sessionBuilder, result.id).first;
+
+        final suggestWord = 'Предложенное слово';
+
+        await endpoints.game.suggestWord(
+          sessionBuilder,
+          SuggestWordRequest(
+            gameId: result.id,
+            word: suggestWord,
+          ),
+        );
+
+        final subScribeGame = await subscription;
+
+        expect(subScribeGame.suggestWord?.word, suggestWord);
+      },
     );
 
     test(
       'suggest accepted',
-      () async {},
+      () async {
+        final user = await endpoints.user.signIn(
+          sessionBuilder,
+          SignInRequest(
+            deviceId: 'test_device_id_1',
+            name: 'Тестовый аккаунт 1',
+          ),
+        );
+
+        final category = await endpoints.word.addCategory(
+          sessionBuilder,
+          AddCategoryRequest(
+            name: 'Персонажи',
+          ),
+        );
+
+        final result = await endpoints.game.create(
+          sessionBuilder,
+          CreateGameRequest(
+            name: gameName,
+            ownerId: user.id,
+            wordCategoryIds: [category.id],
+            isShowWordHint: true,
+            isSubmittedUserWord: true,
+          ),
+        );
+
+        final subscription = endpoints.game.subscribe(sessionBuilder, result.id).first;
+
+        final suggestWord = 'Предложенное слово';
+
+        await endpoints.game.suggestWord(
+          sessionBuilder,
+          SuggestWordRequest(
+            gameId: result.id,
+            word: suggestWord,
+          ),
+        );
+
+        final subScribeSuggest = await subscription;
+
+        if (subScribeSuggest.suggestWord?.id == null) throw 'Ошибка в предложенном слове';
+
+        final subscriptionSuggestAccepted = endpoints.game.subscribe(sessionBuilder, result.id).first;
+
+        await endpoints.game.suggestAccepted(
+          sessionBuilder,
+          SuggestWordAcceptedRequest(
+            gameId: result.id,
+            userId: user.id,
+          ),
+        );
+
+        final subScribeGame = await subscriptionSuggestAccepted;
+
+        expect(subScribeGame.nextWord?.word, suggestWord);
+        expect(subScribeGame.suggestWord?.word, null);
+      },
     );
 
     test(
       'next word',
-      () async {},
+      () async {
+        final user = await endpoints.user.signIn(
+          sessionBuilder,
+          SignInRequest(
+            deviceId: 'test_device_id_1',
+            name: 'Тестовый аккаунт 1',
+          ),
+        );
+
+        final category = await endpoints.word.addCategory(
+          sessionBuilder,
+          AddCategoryRequest(
+            name: 'Персонажи',
+          ),
+        );
+
+        await endpoints.word.addWord(
+          sessionBuilder,
+          AddWordRequest(
+            word: 'Гарри Поттер',
+            wordCategoryId: category.id,
+          ),
+        );
+
+        final result = await endpoints.game.create(
+          sessionBuilder,
+          CreateGameRequest(
+            name: gameName,
+            ownerId: user.id,
+            wordCategoryIds: [category.id],
+            isShowWordHint: true,
+            isSubmittedUserWord: true,
+          ),
+        );
+
+        final suggestWord = 'Предложенное слово';
+
+        await endpoints.game.suggestWord(
+          sessionBuilder,
+          SuggestWordRequest(
+            gameId: result.id,
+            word: suggestWord,
+          ),
+        );
+
+        await endpoints.game.suggestAccepted(
+          sessionBuilder,
+          SuggestWordAcceptedRequest(
+            gameId: result.id,
+            userId: user.id,
+          ),
+        );
+
+        final subscription = endpoints.game.subscribe(sessionBuilder, result.id).first;
+
+        await endpoints.game.nextWord(
+          sessionBuilder,
+          NextWordRequest(
+            gameId: result.id,
+            userId: user.id,
+          ),
+        );
+
+        final subScribeGame = await subscription;
+
+        expect(subScribeGame.currentWord?.word, suggestWord);
+        expect(subScribeGame.suggestWord?.word, null);
+      },
     );
   });
 }
