@@ -22,11 +22,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "appName": MessageLookupByLibrary.simpleMessage("Spy"),
         "authFailedToSignIn": MessageLookupByLibrary.simpleMessage(
             "Failed to log in, please try again later"),
-        "nick": MessageLookupByLibrary.simpleMessage("Nickname"),
+        "enter": MessageLookupByLibrary.simpleMessage("Enter"),
+        "name": MessageLookupByLibrary.simpleMessage("Nickname"),
+        "nameNotValid": MessageLookupByLibrary.simpleMessage(
+            "The length of the nickname should be at least 2 characters"),
+        "politPart1": MessageLookupByLibrary.simpleMessage(
+            "Entering, you agree with the present "),
+        "politPart2": MessageLookupByLibrary.simpleMessage("privacy policy."),
         "serverError": MessageLookupByLibrary.simpleMessage(
             "A server error occurred, please try again later"),
+        "serverUnavailable": MessageLookupByLibrary.simpleMessage(
+            "The server is currently not available"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Something went wrong"),
         "youAreYours": MessageLookupByLibrary.simpleMessage("Are you your own?")

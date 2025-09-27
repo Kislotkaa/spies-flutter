@@ -67,7 +67,8 @@ class TextFieldWidget extends StatelessWidget {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: titleCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment:
+          titleCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         if (titleText != null)
           Padding(
@@ -109,9 +110,12 @@ class TextFieldWidget extends StatelessWidget {
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             alignLabelWithHint: true,
-            hintStyle: appTheme.textTheme.bodySemibold14.copyWith(color: appTheme.textGrayColor),
-            labelStyle: appTheme.textTheme.bodySemibold14.copyWith(color: appTheme.textGrayColor),
-            errorStyle: appTheme.textTheme.bodyExtrabold14.copyWith(color: appTheme.redColor),
+            hintStyle: appTheme.textTheme.bodySemibold14
+                .copyWith(color: appTheme.textGrayColor),
+            labelStyle: appTheme.textTheme.bodySemibold14
+                .copyWith(color: appTheme.textGrayColor),
+            errorStyle: appTheme.textTheme.bodyExtrabold14
+                .copyWith(color: appTheme.redColor),
             errorMaxLines: 4,
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -168,7 +172,8 @@ class TextFieldWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 4),
             child: Text(
               errorText!,
-              style: appTheme.textTheme.bodySemibold14.copyWith(color: appTheme.redColor),
+              style: appTheme.textTheme.bodySemibold14
+                  .copyWith(color: appTheme.redColor),
             ),
           ),
       ],

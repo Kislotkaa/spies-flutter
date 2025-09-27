@@ -17,9 +17,6 @@ class AppResponse<Data, Error extends GatewayError> {
 }
 
 enum GatewayError {
-  somethingWrong('Что-то пошло не так');
-
-  final String title;
-
-  const GatewayError(this.title);
+  somethingWrong,
+  serverUnavailable;
 }

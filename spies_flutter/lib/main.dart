@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sample/app.dart';
 import 'package:sample/core/cubits/intl_cubit.dart';
-import 'package:sample/core/cubits/snackbar_cubit.dart';
+
 import 'package:sample/core/cubits/theme_cubit.dart';
 import 'package:sample/core/providers/local_data_provider.dart';
 import 'package:sample/core/providers/remote_data_provider.dart';
@@ -52,7 +52,6 @@ Future<void> main() async {
         // --- Cubits --- \\
         BlocProvider(create: (_) => ThemeCubit(themeRepository)),
         BlocProvider(create: (_) => IntlCubit(intlRepository)),
-        BlocProvider(create: (_) => SnackBarCubit()),
       ],
       child: const App(),
     ),

@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Сервер в данный момент не доступен`
+  String get serverUnavailable {
+    return Intl.message(
+      'Сервер в данный момент не доступен',
+      name: 'serverUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Произошла серверная ошибка, повторите попытку позже`
   String get serverError {
     return Intl.message(
@@ -91,10 +101,10 @@ class S {
   }
 
   /// `Никнейм`
-  String get nick {
+  String get name {
     return Intl.message(
       'Никнейм',
-      name: 'nick',
+      name: 'name',
       desc: '',
       args: [],
     );
@@ -120,11 +130,11 @@ class S {
     );
   }
 
-  /// `Длина должна быть не меньше 2-х символов`
-  String get nickFailed {
+  /// `Длина никнейма должна быть не меньше 2-х символов`
+  String get nameNotValid {
     return Intl.message(
-      'Длина должна быть не меньше 2-х символов',
-      name: 'nickFailed',
+      'Длина никнейма должна быть не меньше 2-х символов',
+      name: 'nameNotValid',
       desc: '',
       args: [],
     );

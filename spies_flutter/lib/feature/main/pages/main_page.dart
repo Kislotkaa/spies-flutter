@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample/core/cubits/snackbar_cubit.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
 import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/gen/l10n/generated/l10n.dart';
@@ -26,7 +25,6 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = context.read<ThemeCubit>().appTheme;
-    final snackBar = context.read<SnackBarCubit>();
 
     return Scaffold(
       appBar: AppBarWidget(
@@ -81,7 +79,8 @@ class MainPage extends StatelessWidget {
                 BlocBuilder<ThemeCubit, ThemeState>(
                   builder: (context, state) {
                     return SwitcherWidget(
-                      callBack: (isActive) => context.read<ThemeCubit>().switchTheme(),
+                      callBack: (isActive) =>
+                          context.read<ThemeCubit>().switchTheme(),
                       initialActive: state.isDarkMode,
                     );
                   },
@@ -133,20 +132,18 @@ class MainPage extends StatelessWidget {
             TextButtonWidget(
               text: 'Show snackbar',
               onTap: () {
-                snackBar.show(
-                  SnackbarModel(
-                    title: 'title',
-                    subTitle: 'description',
-                    status: SnackbarStatus.info,
-                    withFeedBack: true,
-                    duration: const Duration(seconds: 60),
-                    button: SnackbarButtonModel(
-                      onTap: () {
-                        log('onTap');
-                      },
-                      text: 'Ok',
-                    ),
+                SnackbarWidget.show(
+                  title: 'title',
+                  subTitle: 'description',
+                  status: SnackbarStatus.info,
+                  duration: const Duration(seconds: 60),
+                  button: SnackbarButtonModel(
+                    onTap: () {
+                      log('onTap');
+                    },
+                    text: 'Ok',
                   ),
+                  overlayState: Overlay.of(context),
                 );
                 log('onTap');
               },

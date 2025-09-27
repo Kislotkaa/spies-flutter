@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample/core/gen/assets.gen.dart';
-import 'package:sample/core/cubits/snackbar_cubit.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
+import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/widgets/button_widget.dart';
 
 OverlayEntry? _previousEntry;
@@ -13,19 +12,31 @@ enum SnackbarPosition { BOTTOM, TOP }
 
 enum SnackbarStatus { warning, access, normal, error, info }
 
+class SnackbarButtonModel {
+  final Function() onTap;
+  final String? text;
+  final ButtonStateEnum state;
+
+  SnackbarButtonModel({
+    required this.onTap,
+    this.text,
+    this.state = ButtonStateEnum.fill,
+  });
+}
+
 class SnackbarWidget {
   static void closeSnackbar() {
     _previousEntry?.remove();
     _previousEntry = null;
   }
 
-  static void showSnackBar({
+  static void show({
     required String title,
-    String? description,
-    required Duration duration,
+    String? subTitle,
+    Duration duration = const Duration(seconds: 3),
     required OverlayState overlayState,
     SnackbarButtonModel? button,
-    SnackbarStatus? status,
+    SnackbarStatus status = SnackbarStatus.normal,
   }) {
     late OverlayEntry overlayEntry;
 
@@ -58,42 +69,41 @@ class SnackbarWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    if (status != null)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: Builder(builder: (context) {
-                          switch (status) {
-                            case SnackbarStatus.error:
-                              return Assets.icons.alertDiamond.svg(
-                                colorFilter: ColorFilter.mode(
-                                    appTheme.redColor, BlendMode.srcIn),
-                                height: 32,
-                              );
-                            case SnackbarStatus.warning:
-                              return Assets.icons.alert.svg(
-                                colorFilter: ColorFilter.mode(
-                                    appTheme.yellowColor, BlendMode.srcIn),
-                                height: 32,
-                              );
-                            case SnackbarStatus.access:
-                              return Assets.icons.tickDouble.svg(
-                                colorFilter: ColorFilter.mode(
-                                    appTheme.greenColor, BlendMode.srcIn),
-                                height: 32,
-                              );
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Builder(builder: (context) {
+                        switch (status) {
+                          case SnackbarStatus.error:
+                            return Assets.icons.alertDiamond.svg(
+                              colorFilter: ColorFilter.mode(
+                                  appTheme.redColor, BlendMode.srcIn),
+                              height: 32,
+                            );
+                          case SnackbarStatus.warning:
+                            return Assets.icons.alert.svg(
+                              colorFilter: ColorFilter.mode(
+                                  appTheme.yellowColor, BlendMode.srcIn),
+                              height: 32,
+                            );
+                          case SnackbarStatus.access:
+                            return Assets.icons.tickDouble.svg(
+                              colorFilter: ColorFilter.mode(
+                                  appTheme.greenColor, BlendMode.srcIn),
+                              height: 32,
+                            );
 
-                            case SnackbarStatus.info:
-                              return Assets.icons.informationSquare.svg(
-                                colorFilter: ColorFilter.mode(
-                                    appTheme.revertTextColor, BlendMode.srcIn),
-                                height: 32,
-                              );
+                          case SnackbarStatus.info:
+                            return Assets.icons.informationSquare.svg(
+                              colorFilter: ColorFilter.mode(
+                                  appTheme.revertTextColor, BlendMode.srcIn),
+                              height: 32,
+                            );
 
-                            default:
-                              return const SizedBox();
-                          }
-                        }),
-                      ),
+                          default:
+                            return const SizedBox();
+                        }
+                      }),
+                    ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,11 +114,11 @@ class SnackbarWidget {
                               color: appTheme.revertTextColor,
                             ),
                           ),
-                          if (description != null)
+                          if (subTitle != null)
                             Padding(
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
-                                description,
+                                subTitle,
                                 style: appTheme.textTheme.bodySemibold14
                                     .copyWith(color: appTheme.textGrayColor),
                               ),

@@ -30,14 +30,15 @@ class AuthFormWidget extends StatelessWidget {
           return Column(
             children: [
               TextFieldWidget(
-                titleText: locale.nick,
+                titleText: locale.name,
                 titleCenter: true,
                 controller: state.nameController,
                 prefixIcon: IconWidget(
                   icon: Assets.icons.userSquare,
                 ),
                 suffixIcon: BlocBuilder<AuthBloc, AuthState>(
-                  buildWhen: (previous, current) => current is AuthSuffixShownState,
+                  buildWhen: (previous, current) =>
+                      current is AuthSuffixShownState,
                   builder: (context, state) {
                     if (state is AuthSuffixShownState && state.isShownSuffix) {
                       return IconButton(
@@ -51,11 +52,12 @@ class AuthFormWidget extends StatelessWidget {
                 onChanged: (value) => bloc.add(AuthInputEvent()),
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(20),
-                  FilteringTextInputFormatter.allow(RegExp(r'[\p{L}\p{N}_]', unicode: true)),
+                  FilteringTextInputFormatter.allow(
+                      RegExp(r'[\p{L}\p{N}_]', unicode: true)),
                 ],
                 validator: (value) {
                   if (value == null || value.length < 2) {
-                    return locale.nickFailed;
+                    return locale.nameNotValid;
                   }
                   return null;
                 },
@@ -68,7 +70,8 @@ class AuthFormWidget extends StatelessWidget {
               Text.rich(
                 textAlign: TextAlign.center,
                 TextSpan(
-                  recognizer: TapGestureRecognizer()..onTap = () => launchUrlString(Constants.politUrl),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => launchUrlString(Constants.politUrl),
                   children: [
                     TextSpan(
                       text: locale.politPart1,

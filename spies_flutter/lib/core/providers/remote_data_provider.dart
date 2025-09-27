@@ -14,9 +14,7 @@ class RemoteDataProvider {
 
   Client? _client;
 
-  Future<AppResponse<UserResponse, GatewayError>> signIn(
-    SignInRequest model,
-  ) async {
+  Future<AppResponse<UserResponse, GatewayError>> signIn(SignInRequest model) async {
     try {
       await _client?.user.signIn(model);
 
@@ -26,9 +24,7 @@ class RemoteDataProvider {
     }
   }
 
-  Future<AppResponse<void, GatewayError>> signOut(
-    SignOutRequest model,
-  ) async {
+  Future<AppResponse<void, GatewayError>> signOut(SignOutRequest model) async {
     try {
       await _client?.user.signOut(model);
 
@@ -38,8 +34,13 @@ class RemoteDataProvider {
     }
   }
 
-  AppResponse<T, GatewayError> _errorHandler<T>(e) {
+  AppResponse<T, GatewayError> _errorHandler<T>(Object e) {
     log(e.toString());
+
+    if (e is SocketException) {
+      return AppResponse.error(GatewayError.serverUnavailable);
+    }
+
     return AppResponse.error(GatewayError.somethingWrong);
   }
 }
