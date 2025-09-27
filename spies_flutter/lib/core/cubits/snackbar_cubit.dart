@@ -1,14 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/widgets/button_widget.dart';
 import 'package:sample/core/widgets/snackbar_widget.dart';
-import 'package:sample/locator.dart';
-
-SnackBarCubit get snackBar => sl<SnackBarCubit>();
 
 class SnackBarCubit extends Cubit<SnackbarState> {
   SnackBarCubit() : super(const SnackbarState());
 
-  void show(SnackbarModel snackbarModel) => emit(SnackbarState(snackbarModel: snackbarModel));
+  void show(SnackbarModel snackbarModel) =>
+      emit(SnackbarState(snackbarModel: snackbarModel));
 }
 
 class SnackbarState {

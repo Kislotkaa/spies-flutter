@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/cubits/snackbar_cubit.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
@@ -29,100 +30,109 @@ class SnackbarWidget {
     late OverlayEntry overlayEntry;
 
     overlayEntry = OverlayEntry(
-      builder: (_) => _AppFloatingSnackBarWidget(
-        onDismissed: () {
-          overlayEntry.remove();
-          _previousEntry = null;
-        },
-        borderRadius: BorderRadius.circular(16),
-        forwardAnimationDuration: const Duration(milliseconds: 300),
-        reverseAnimationDuration: const Duration(milliseconds: 300),
-        displayDuration: duration,
-        forwardCurve: Curves.easeIn,
-        reverseCurve: Curves.easeOut,
-        dismissDirection: DismissDirection.up,
-        snackBarPosition: SnackbarPosition.TOP,
-        margin: const EdgeInsets.only(left: 16, right: 16),
-        isDismissible: true,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-          decoration: BoxDecoration(color: appTheme.revertBasicColor),
-          clipBehavior: Clip.none,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (status != null)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Builder(builder: (context) {
-                        switch (status) {
-                          case SnackbarStatus.error:
-                            return Assets.icons.alertDiamond.svg(
-                              colorFilter: ColorFilter.mode(appTheme.redColor, BlendMode.srcIn),
-                              height: 32,
-                            );
-                          case SnackbarStatus.warning:
-                            return Assets.icons.alert.svg(
-                              colorFilter: ColorFilter.mode(appTheme.yellowColor, BlendMode.srcIn),
-                              height: 32,
-                            );
-                          case SnackbarStatus.access:
-                            return Assets.icons.tickDouble.svg(
-                              colorFilter: ColorFilter.mode(appTheme.greenColor, BlendMode.srcIn),
-                              height: 32,
-                            );
+      builder: (context) {
+        final appTheme = context.read<ThemeCubit>().appTheme;
 
-                          case SnackbarStatus.info:
-                            return Assets.icons.informationSquare.svg(
-                              colorFilter: ColorFilter.mode(appTheme.revertTextColor, BlendMode.srcIn),
-                              height: 32,
-                            );
+        return _AppFloatingSnackBarWidget(
+          onDismissed: () {
+            overlayEntry.remove();
+            _previousEntry = null;
+          },
+          borderRadius: BorderRadius.circular(16),
+          forwardAnimationDuration: const Duration(milliseconds: 300),
+          reverseAnimationDuration: const Duration(milliseconds: 300),
+          displayDuration: duration,
+          forwardCurve: Curves.easeIn,
+          reverseCurve: Curves.easeOut,
+          dismissDirection: DismissDirection.up,
+          snackBarPosition: SnackbarPosition.TOP,
+          margin: const EdgeInsets.only(left: 16, right: 16),
+          isDismissible: true,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            decoration: BoxDecoration(color: appTheme.revertBasicColor),
+            clipBehavior: Clip.none,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (status != null)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: Builder(builder: (context) {
+                          switch (status) {
+                            case SnackbarStatus.error:
+                              return Assets.icons.alertDiamond.svg(
+                                colorFilter: ColorFilter.mode(
+                                    appTheme.redColor, BlendMode.srcIn),
+                                height: 32,
+                              );
+                            case SnackbarStatus.warning:
+                              return Assets.icons.alert.svg(
+                                colorFilter: ColorFilter.mode(
+                                    appTheme.yellowColor, BlendMode.srcIn),
+                                height: 32,
+                              );
+                            case SnackbarStatus.access:
+                              return Assets.icons.tickDouble.svg(
+                                colorFilter: ColorFilter.mode(
+                                    appTheme.greenColor, BlendMode.srcIn),
+                                height: 32,
+                              );
 
-                          default:
-                            return const SizedBox();
-                        }
-                      }),
-                    ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: appTheme.textTheme.bodySemibold16.copyWith(
-                            color: appTheme.revertTextColor,
-                          ),
-                        ),
-                        if (description != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4),
-                            child: Text(
-                              description,
-                              style: appTheme.textTheme.bodySemibold14.copyWith(color: appTheme.textGrayColor),
+                            case SnackbarStatus.info:
+                              return Assets.icons.informationSquare.svg(
+                                colorFilter: ColorFilter.mode(
+                                    appTheme.revertTextColor, BlendMode.srcIn),
+                                height: 32,
+                              );
+
+                            default:
+                              return const SizedBox();
+                          }
+                        }),
+                      ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: appTheme.textTheme.bodySemibold16.copyWith(
+                              color: appTheme.revertTextColor,
                             ),
                           ),
-                      ],
+                          if (description != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                description,
+                                style: appTheme.textTheme.bodySemibold14
+                                    .copyWith(color: appTheme.textGrayColor),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              if (button != null)
-                ButtonWidget(
-                  onTap: () {
-                    closeSnackbar();
-                    button.onTap();
-                  },
-                  padding: const EdgeInsets.only(top: 16),
-                  text: button.text ?? 'Ок',
-                  state: button.state,
-                )
-            ],
+                  ],
+                ),
+                if (button != null)
+                  ButtonWidget(
+                    onTap: () {
+                      closeSnackbar();
+                      button.onTap();
+                    },
+                    padding: const EdgeInsets.only(top: 16),
+                    text: button.text ?? 'Ок',
+                    state: button.state,
+                  )
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
 
     if (_previousEntry?.mounted == true) closeSnackbar();
@@ -164,7 +174,8 @@ class _AppFloatingSnackBarWidget extends StatefulWidget {
   _AppFloatingSnackBarState createState() => _AppFloatingSnackBarState();
 }
 
-class _AppFloatingSnackBarState extends State<_AppFloatingSnackBarWidget> with SingleTickerProviderStateMixin {
+class _AppFloatingSnackBarState extends State<_AppFloatingSnackBarWidget>
+    with SingleTickerProviderStateMixin {
   late final Animation<Offset> _offsetAnimation;
   late final AnimationController _animationController;
   late final Tween<Offset> _offsetTween;
@@ -224,8 +235,12 @@ class _AppFloatingSnackBarState extends State<_AppFloatingSnackBarWidget> with S
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: widget.snackBarPosition == SnackbarPosition.TOP ? widget.margin.top : null,
-      bottom: widget.snackBarPosition == SnackbarPosition.BOTTOM ? widget.margin.bottom : null,
+      top: widget.snackBarPosition == SnackbarPosition.TOP
+          ? widget.margin.top
+          : null,
+      bottom: widget.snackBarPosition == SnackbarPosition.BOTTOM
+          ? widget.margin.bottom
+          : null,
       left: widget.margin.left,
       right: widget.margin.right,
       child: SlideTransition(

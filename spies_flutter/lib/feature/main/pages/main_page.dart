@@ -2,13 +2,11 @@ import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/cubits/snackbar_cubit.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
 import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/gen/l10n/generated/l10n.dart';
-import 'package:sample/core/providers/local_data_provider.dart';
-import 'package:sample/core/router/app_router.dart';
-import 'package:sample/core/router/app_router.gr.dart';
 import 'package:sample/core/widgets/animated_column_widget.dart';
 import 'package:sample/core/widgets/appbar_widget.dart';
 import 'package:sample/core/widgets/button_widget.dart';
@@ -20,7 +18,6 @@ import 'package:sample/core/widgets/switcher_widget.dart';
 import 'package:sample/core/widgets/text_button_widget.dart';
 import 'package:sample/core/widgets/text_field_widget.dart';
 import 'package:sample/core/widgets/version_widget.dart';
-import 'package:sample/locator.dart';
 
 @RoutePage()
 class MainPage extends StatelessWidget {
@@ -28,11 +25,14 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+    final snackBar = context.read<SnackBarCubit>();
+
     return Scaffold(
       appBar: AppBarWidget(
         title: 'Main Screen',
         actions: [
-          IconButtonWidget(
+          IconWidget(
             icon: Assets.icons.edit,
             padding: const EdgeInsets.all(16),
             onTap: () {
@@ -42,7 +42,7 @@ class MainPage extends StatelessWidget {
               log('onLongTap');
             },
           ),
-          IconButtonWidget(
+          IconWidget(
             icon: Assets.icons.setting,
             padding: const EdgeInsets.all(16),
             onTap: () {
@@ -54,10 +54,7 @@ class MainPage extends StatelessWidget {
           ),
           TextButtonWidget(
             text: 'Готово',
-            onTap: () {
-              sl<LocalDataProvider>().saveUser(null);
-              router.replace(const AuthRoute());
-            },
+            onTap: () {},
             onLongTap: () {
               log('onLongTap');
             },
@@ -81,13 +78,17 @@ class MainPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SwitcherWidget(
-                  callBack: (isActive) => sl<ThemeCubit>().switchTheme(),
-                  initialActive: isDarkMode,
+                BlocBuilder<ThemeCubit, ThemeState>(
+                  builder: (context, state) {
+                    return SwitcherWidget(
+                      callBack: (isActive) => context.read<ThemeCubit>().switchTheme(),
+                      initialActive: state.isDarkMode,
+                    );
+                  },
                 ),
               ],
             ),
-            IconButtonWidget(
+            IconWidget(
               icon: Assets.icons.call,
               onTap: () {
                 log('onTap');
@@ -108,13 +109,13 @@ class MainPage extends StatelessWidget {
               titleText: 'Имя пользователя',
               hintText: 'Введите имя...',
               maxLines: 1,
-              prefixIcon: IconButtonWidget(
+              prefixIcon: IconWidget(
                 icon: Assets.icons.userSquare,
                 onTap: () {
                   log('onTap');
                 },
               ),
-              suffixIcon: IconButtonWidget(
+              suffixIcon: IconWidget(
                 icon: Assets.icons.cancelLine,
                 onTap: () {
                   log('onTap');
@@ -150,7 +151,7 @@ class MainPage extends StatelessWidget {
                 log('onTap');
               },
             ),
-            IconButtonWidget(
+            IconWidget(
               onTap: () {
                 log('onTap');
               },

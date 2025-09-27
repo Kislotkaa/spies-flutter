@@ -58,39 +58,52 @@ class AppTextThemeModel {
     );
   }
 
-  static AppTextThemeModel lerp(AppTextThemeModel begin, AppTextThemeModel end, double t) => AppTextThemeModel(
+  static AppTextThemeModel lerp(
+          AppTextThemeModel begin, AppTextThemeModel end, double t) =>
+      AppTextThemeModel(
         bodySemibold20: begin.bodySemibold20.copyWith(
-          color: Color.lerp(begin.bodySemibold20.color, end.bodySemibold20.color, t),
+          color: Color.lerp(
+              begin.bodySemibold20.color, end.bodySemibold20.color, t),
         ),
         bodyExtrabold20: begin.bodyExtrabold20.copyWith(
-          color: Color.lerp(begin.bodyExtrabold20.color, end.bodyExtrabold20.color, t),
+          color: Color.lerp(
+              begin.bodyExtrabold20.color, end.bodyExtrabold20.color, t),
         ),
         bodySemibold18: begin.bodySemibold18.copyWith(
-          color: Color.lerp(begin.bodySemibold18.color, end.bodySemibold18.color, t),
+          color: Color.lerp(
+              begin.bodySemibold18.color, end.bodySemibold18.color, t),
         ),
         bodyExtrabold18: begin.bodyExtrabold18.copyWith(
-          color: Color.lerp(begin.bodyExtrabold18.color, end.bodyExtrabold18.color, t),
+          color: Color.lerp(
+              begin.bodyExtrabold18.color, end.bodyExtrabold18.color, t),
         ),
         bodySemibold16: begin.bodySemibold16.copyWith(
-          color: Color.lerp(begin.bodySemibold16.color, end.bodySemibold16.color, t),
+          color: Color.lerp(
+              begin.bodySemibold16.color, end.bodySemibold16.color, t),
         ),
         bodyExtrabold16: begin.bodyExtrabold16.copyWith(
-          color: Color.lerp(begin.bodyExtrabold16.color, end.bodyExtrabold16.color, t),
+          color: Color.lerp(
+              begin.bodyExtrabold16.color, end.bodyExtrabold16.color, t),
         ),
         bodySemibold14: begin.bodySemibold14.copyWith(
-          color: Color.lerp(begin.bodySemibold14.color, end.bodySemibold14.color, t),
+          color: Color.lerp(
+              begin.bodySemibold14.color, end.bodySemibold14.color, t),
         ),
         bodyExtrabold14: begin.bodyExtrabold14.copyWith(
-          color: Color.lerp(begin.bodyExtrabold14.color, end.bodyExtrabold14.color, t),
+          color: Color.lerp(
+              begin.bodyExtrabold14.color, end.bodyExtrabold14.color, t),
         ),
         bodySemibold12: begin.bodySemibold12.copyWith(
-          color: Color.lerp(begin.bodySemibold12.color, end.bodySemibold12.color, t),
+          color: Color.lerp(
+              begin.bodySemibold12.color, end.bodySemibold12.color, t),
         ),
         bodyExtrabold12: begin.bodyExtrabold12.copyWith(
-          color: Color.lerp(begin.bodyExtrabold12.color, end.bodyExtrabold12.color, t),
+          color: Color.lerp(
+              begin.bodyExtrabold12.color, end.bodyExtrabold12.color, t),
         ),
         bodySemibold10: begin.bodySemibold10.copyWith(
-          color: Color.lerp(begin.bodySemibold10.color, end.bodySemibold10.color, t),
+          color: Color.lerp(
+              begin.bodySemibold10.color, end.bodySemibold10.color, t),
         ),
       );
 }

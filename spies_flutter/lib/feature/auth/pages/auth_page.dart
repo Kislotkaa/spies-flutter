@@ -2,13 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/cubits/snackbar_cubit.dart';
+import 'package:sample/core/repositories/user_repository.dart';
 import 'package:sample/core/router/app_router.dart';
+
 import 'package:sample/core/router/app_router.gr.dart';
 import 'package:sample/core/widgets/snackbar_widget.dart';
-import 'package:sample/feature/auth/presentation/bloc/auth_bloc.dart';
-import 'package:sample/feature/auth/presentation/pages/auth_form_widget.dart';
-import 'package:sample/feature/auth/presentation/widgets/auth_content_widget.dart';
-import 'package:sample/locator.dart';
+import 'package:sample/feature/auth/bloc/auth_bloc.dart';
+import 'package:sample/feature/auth/pages/auth_form_widget.dart';
+import 'package:sample/feature/auth/widgets/auth_content_widget.dart';
 
 @RoutePage()
 class AuthPage extends StatelessWidget {
@@ -18,7 +19,7 @@ class AuthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthBloc(
-        sl(),
+        context.read<UserRepository>(),
       )..add(AuthInitialEvent()),
       child: const _AuthView(),
     );
@@ -30,10 +31,12 @@ class _AuthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final snackBar = context.read<SnackBarCubit>();
+
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          // if (state is AuthSuccessState) router.replace(const MainRoute());
+          if (state is AuthSuccessState) router.replace(const MainRoute());
           if (state is AuthErrorState) {
             snackBar.show(
               SnackbarModel(

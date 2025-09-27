@@ -50,7 +50,8 @@ class $AssetsIconsGen {
   const $AssetsIconsGen();
 
   /// File path: assets/icons/alert-diamond.svg
-  SvgGenImage get alertDiamond => const SvgGenImage('assets/icons/alert-diamond.svg');
+  SvgGenImage get alertDiamond =>
+      const SvgGenImage('assets/icons/alert-diamond.svg');
 
   /// File path: assets/icons/alert.svg
   SvgGenImage get alert => const SvgGenImage('assets/icons/alert.svg');
@@ -62,7 +63,8 @@ class $AssetsIconsGen {
   SvgGenImage get arrowLeft => const SvgGenImage('assets/icons/arrow-left.svg');
 
   /// File path: assets/icons/arrow-right.svg
-  SvgGenImage get arrowRight => const SvgGenImage('assets/icons/arrow-right.svg');
+  SvgGenImage get arrowRight =>
+      const SvgGenImage('assets/icons/arrow-right.svg');
 
   /// File path: assets/icons/arrow-up.svg
   SvgGenImage get arrowUp => const SvgGenImage('assets/icons/arrow-up.svg');
@@ -71,13 +73,15 @@ class $AssetsIconsGen {
   SvgGenImage get call => const SvgGenImage('assets/icons/call.svg');
 
   /// File path: assets/icons/cancel-line.svg
-  SvgGenImage get cancelLine => const SvgGenImage('assets/icons/cancel-line.svg');
+  SvgGenImage get cancelLine =>
+      const SvgGenImage('assets/icons/cancel-line.svg');
 
   /// File path: assets/icons/cancel.svg
   SvgGenImage get cancel => const SvgGenImage('assets/icons/cancel.svg');
 
   /// File path: assets/icons/checkmark-square.svg
-  SvgGenImage get checkmarkSquare => const SvgGenImage('assets/icons/checkmark-square.svg');
+  SvgGenImage get checkmarkSquare =>
+      const SvgGenImage('assets/icons/checkmark-square.svg');
 
   /// File path: assets/icons/clear.svg
   SvgGenImage get clear => const SvgGenImage('assets/icons/clear.svg');
@@ -95,7 +99,8 @@ class $AssetsIconsGen {
   SvgGenImage get eye => const SvgGenImage('assets/icons/eye.svg');
 
   /// File path: assets/icons/favourite-fill.svg
-  SvgGenImage get favouriteFill => const SvgGenImage('assets/icons/favourite-fill.svg');
+  SvgGenImage get favouriteFill =>
+      const SvgGenImage('assets/icons/favourite-fill.svg');
 
   /// File path: assets/icons/favourite.svg
   SvgGenImage get favourite => const SvgGenImage('assets/icons/favourite.svg');
@@ -107,16 +112,19 @@ class $AssetsIconsGen {
   SvgGenImage get flash => const SvgGenImage('assets/icons/flash.svg');
 
   /// File path: assets/icons/image-delete.svg
-  SvgGenImage get imageDelete => const SvgGenImage('assets/icons/image-delete.svg');
+  SvgGenImage get imageDelete =>
+      const SvgGenImage('assets/icons/image-delete.svg');
 
   /// File path: assets/icons/image-upload.svg
-  SvgGenImage get imageUpload => const SvgGenImage('assets/icons/image-upload.svg');
+  SvgGenImage get imageUpload =>
+      const SvgGenImage('assets/icons/image-upload.svg');
 
   /// File path: assets/icons/image.svg
   SvgGenImage get image => const SvgGenImage('assets/icons/image.svg');
 
   /// File path: assets/icons/information-square.svg
-  SvgGenImage get informationSquare => const SvgGenImage('assets/icons/information-square.svg');
+  SvgGenImage get informationSquare =>
+      const SvgGenImage('assets/icons/information-square.svg');
 
   /// File path: assets/icons/lock-key.svg
   SvgGenImage get lockKey => const SvgGenImage('assets/icons/lock-key.svg');
@@ -128,13 +136,15 @@ class $AssetsIconsGen {
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
 
   /// File path: assets/icons/message-user.svg
-  SvgGenImage get messageUser => const SvgGenImage('assets/icons/message-user.svg');
+  SvgGenImage get messageUser =>
+      const SvgGenImage('assets/icons/message-user.svg');
 
   /// File path: assets/icons/moon.svg
   SvgGenImage get moon => const SvgGenImage('assets/icons/moon.svg');
 
   /// File path: assets/icons/more-horizontal-square.svg
-  SvgGenImage get moreHorizontalSquare => const SvgGenImage('assets/icons/more-horizontal-square.svg');
+  SvgGenImage get moreHorizontalSquare =>
+      const SvgGenImage('assets/icons/more-horizontal-square.svg');
 
   /// File path: assets/icons/note.svg
   SvgGenImage get note => const SvgGenImage('assets/icons/note.svg');
@@ -155,7 +165,8 @@ class $AssetsIconsGen {
   SvgGenImage get share => const SvgGenImage('assets/icons/share.svg');
 
   /// File path: assets/icons/tick-double.svg
-  SvgGenImage get tickDouble => const SvgGenImage('assets/icons/tick-double.svg');
+  SvgGenImage get tickDouble =>
+      const SvgGenImage('assets/icons/tick-double.svg');
 
   /// File path: assets/icons/tick.svg
   SvgGenImage get tick => const SvgGenImage('assets/icons/tick.svg');
@@ -167,7 +178,8 @@ class $AssetsIconsGen {
   SvgGenImage get timer => const SvgGenImage('assets/icons/timer.svg');
 
   /// File path: assets/icons/user-square.svg
-  SvgGenImage get userSquare => const SvgGenImage('assets/icons/user-square.svg');
+  SvgGenImage get userSquare =>
+      const SvgGenImage('assets/icons/user-square.svg');
 
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
@@ -222,7 +234,8 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/app-icon.jpg
-  AssetGenImage get appIcon => const AssetGenImage('assets/images/app-icon.jpg');
+  AssetGenImage get appIcon =>
+      const AssetGenImage('assets/images/app-icon.jpg');
 
   /// List of all assets
   List<AssetGenImage> get values => [appIcon];
@@ -402,7 +415,8 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ?? (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
+      colorFilter: colorFilter ??
+          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );

@@ -62,11 +62,13 @@ class AppThemeModel {
   static AppThemeModel lerp(AppThemeModel begin, AppThemeModel end, double t) {
     return AppThemeModel(
       basicColor: Color.lerp(begin.basicColor, end.basicColor, t)!,
-      revertBasicColor: Color.lerp(begin.revertBasicColor, end.revertBasicColor, t)!,
+      revertBasicColor:
+          Color.lerp(begin.revertBasicColor, end.revertBasicColor, t)!,
       textGrayColor: Color.lerp(begin.textGrayColor, end.textGrayColor, t)!,
       cardColor: Color.lerp(begin.cardColor, end.cardColor, t)!,
       textColor: Color.lerp(begin.textColor, end.textColor, t)!,
-      revertTextColor: Color.lerp(begin.revertTextColor, end.revertTextColor, t)!,
+      revertTextColor:
+          Color.lerp(begin.revertTextColor, end.revertTextColor, t)!,
       brightness: begin.brightness,
       textTheme: AppTextThemeModel.lerp(begin.textTheme, end.textTheme, t),
     );

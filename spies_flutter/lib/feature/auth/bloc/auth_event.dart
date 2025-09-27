@@ -8,8 +8,4 @@ class AuthSignInEvent extends AuthEvent {}
 
 class AuthClearNameEvent extends AuthEvent {}
 
-class AuthInputEvent extends AuthEvent {
-  final String text;
-
-  AuthInputEvent(this.text);
-}
+class AuthInputEvent extends AuthEvent {}

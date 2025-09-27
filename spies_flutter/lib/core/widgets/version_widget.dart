@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
 import 'package:sample/core/utils/device_extension.dart';
 
@@ -7,6 +8,8 @@ class VersionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+
     return Container(
       alignment: Alignment.center,
       child: Text(

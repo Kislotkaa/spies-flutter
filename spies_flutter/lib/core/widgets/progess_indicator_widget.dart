@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
 import 'package:shimmer/shimmer.dart';
+
+enum ProgressIndicatorEnum { circular, linear, shimmer }
 
 class ProgressIndicatorWidget extends StatelessWidget {
   const ProgressIndicatorWidget({
@@ -14,6 +17,8 @@ class ProgressIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+
     return switch (state) {
       ProgressIndicatorEnum.circular => const SizedBox.square(
           dimension: 24,
@@ -28,5 +33,3 @@ class ProgressIndicatorWidget extends StatelessWidget {
     };
   }
 }
-
-enum ProgressIndicatorEnum { circular, linear, shimmer }

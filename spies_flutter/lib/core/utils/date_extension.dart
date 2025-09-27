@@ -2,7 +2,8 @@ import 'package:intl/intl.dart';
 
 extension DateExtension on DateTime {
   DateTime get _getDate => DateTime(year, month, day);
-  int get _getDifferenceDay => DateTime.now()._getDate.difference(_getDate).inDays;
+  int get _getDifferenceDay =>
+      DateTime.now()._getDate.difference(_getDate).inDays;
 
   String getDateLabel(String format) {
     return switch (_getDifferenceDay) {
@@ -12,5 +13,6 @@ extension DateExtension on DateTime {
     };
   }
 
-  String getFormatedDate(String format) => DateFormat(format, 'RU_ru').format(this);
+  String getFormatedDate(String format) =>
+      DateFormat(format, 'RU_ru').format(this);
 }

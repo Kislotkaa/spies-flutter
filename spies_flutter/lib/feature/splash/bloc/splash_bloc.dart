@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample/core/repositories/auth_repository.dart';
-import 'package:sample/core/router/app_router.dart';
-import 'package:sample/core/router/app_router.gr.dart';
+import 'package:sample/core/repositories/user_repository.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';
@@ -18,15 +16,13 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   FutureOr<void> _init(SplashInitialEvent event, emit) async {
-    _userRepository.checkAuth();
-
     await Future.delayed(const Duration(seconds: 1));
 
     if (_userRepository.isAuth) {
-      router.replace(const MainRoute());
+      emit(SplashToMainState());
       return;
     }
 
-    router.replace(const AuthRoute());
+    emit(SplashToAuthState());
   }
 }

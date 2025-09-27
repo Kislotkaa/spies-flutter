@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
 import 'package:sample/core/utils/button_animation_mixin.dart';
 
@@ -26,6 +27,8 @@ class _SwitcherWidgetState extends State<SwitcherWidget> with ButtonMixin {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+
     return GestureDetector(
       onTap: () => pressSwitch(
         callBack: () => widget.callBack?.call(isPressed),

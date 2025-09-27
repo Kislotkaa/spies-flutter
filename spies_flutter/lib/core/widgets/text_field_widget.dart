@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
-import 'package:sample/core/utils/hide_keyboard.dart';
 
-class TextFieldWidget extends StatelessWidget with HideKeyboard {
+class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
     super.key,
     this.titleText,
@@ -63,6 +63,8 @@ class TextFieldWidget extends StatelessWidget with HideKeyboard {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: titleCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
@@ -99,10 +101,65 @@ class TextFieldWidget extends StatelessWidget with HideKeyboard {
           textInputAction: textInputAction,
           textCapitalization: textCapitalization,
           keyboardType: type,
-          decoration: _getInputDecoration(),
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.only(right: 12, left: 12),
+            filled: true,
+            fillColor: Colors.transparent,
+            hintText: hintText,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            alignLabelWithHint: true,
+            hintStyle: appTheme.textTheme.bodySemibold14.copyWith(color: appTheme.textGrayColor),
+            labelStyle: appTheme.textTheme.bodySemibold14.copyWith(color: appTheme.textGrayColor),
+            errorStyle: appTheme.textTheme.bodyExtrabold14.copyWith(color: appTheme.redColor),
+            errorMaxLines: 4,
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                width: 1,
+                color: appTheme.cardColor,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                width: 1,
+                color: appTheme.cardColor,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                width: 1,
+                color: appTheme.cardColor,
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                width: 1,
+                color: appTheme.cardColor,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                width: 1,
+                color: appTheme.textGrayColor,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                width: 1,
+                color: appTheme.textGrayColor,
+              ),
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+          ),
           onChanged: (value) => onChanged?.call(value),
           onSaved: (value) => onSaved?.call(value ?? ''),
-          onTapOutside: (_) => hideKeyboard(),
+          onTapOutside: (_) => hide(),
           onEditingComplete: onEditingComplete,
           onTap: onTap,
         ),
@@ -118,60 +175,8 @@ class TextFieldWidget extends StatelessWidget with HideKeyboard {
     );
   }
 
-  InputDecoration _getInputDecoration() => InputDecoration(
-        contentPadding: const EdgeInsets.only(right: 12, left: 12),
-        filled: true,
-        fillColor: Colors.transparent,
-        hintText: hintText,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        alignLabelWithHint: true,
-        hintStyle: appTheme.textTheme.bodySemibold14.copyWith(color: appTheme.textGrayColor),
-        labelStyle: appTheme.textTheme.bodySemibold14.copyWith(color: appTheme.textGrayColor),
-        errorStyle: appTheme.textTheme.bodyExtrabold14.copyWith(color: appTheme.redColor),
-        errorMaxLines: 4,
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            width: 1,
-            color: appTheme.cardColor,
-          ),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            width: 1,
-            color: appTheme.cardColor,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            width: 1,
-            color: appTheme.cardColor,
-          ),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            width: 1,
-            color: appTheme.cardColor,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            width: 1,
-            color: appTheme.textGrayColor,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            width: 1,
-            color: appTheme.textGrayColor,
-          ),
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-      );
+  void hide() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+  }
 }

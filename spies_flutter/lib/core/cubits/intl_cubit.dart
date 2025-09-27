@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample/core/constants/constants.dart';
+import 'package:sample/core/utils/constants.dart';
 import 'package:sample/core/repositories/intl_repository.dart';
 
 class IntlCubit extends Cubit<IntlState> {
