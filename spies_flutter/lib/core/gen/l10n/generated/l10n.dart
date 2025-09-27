@@ -18,15 +18,17 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(
-        _current != null, 'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(_current != null,
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -46,6 +48,16 @@ class S {
 
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
+  }
+
+  /// `Шпион`
+  String get appName {
+    return Intl.message(
+      'Шпион',
+      name: 'appName',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Что-то пошло не так`
@@ -73,6 +85,66 @@ class S {
     return Intl.message(
       'Не удалось авторизироваться, повторите попытку позже',
       name: 'authFailedToSignIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Никнейм`
+  String get nick {
+    return Intl.message(
+      'Никнейм',
+      name: 'nick',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ты свой?`
+  String get youAreYours {
+    return Intl.message(
+      'Ты свой?',
+      name: 'youAreYours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Войти`
+  String get enter {
+    return Intl.message(
+      'Войти',
+      name: 'enter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Длина должна быть не меньше 2-х символов`
+  String get nickFailed {
+    return Intl.message(
+      'Длина должна быть не меньше 2-х символов',
+      name: 'nickFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Войдя, вы соглашаетесь с настоящей `
+  String get politPart1 {
+    return Intl.message(
+      'Войдя, вы соглашаетесь с настоящей ',
+      name: 'politPart1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `политикой конфиденциальности.`
+  String get politPart2 {
+    return Intl.message(
+      'политикой конфиденциальности.',
+      name: 'politPart2',
       desc: '',
       args: [],
     );

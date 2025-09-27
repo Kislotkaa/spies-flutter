@@ -15,39 +15,34 @@ class UserRepository {
     this._localDataProvider,
   );
 
-  UserModel? user;
+  UserModel? _user;
 
   bool get isAuth => user != null;
-
-  bool checkAuth() {
-    user = _localDataProvider.getUser();
-    return isAuth;
+  UserModel? get user {
+    _user = _localDataProvider.getUser();
+    return _user;
   }
 
-  Future<AppResponse<UserResponse, GatewayError>> signIn(
-    SignInRequest model,
-  ) async {
+  Future<AppResponse<UserResponse, GatewayError>> signIn(SignInRequest model) async {
     final result = await _remoteDataProvider.signIn(model);
 
     if (result.isSuccess) {
-      user = UserModel(
+      _user = UserModel(
         name: model.name,
         deviceId: model.deviceId,
       );
 
-      _localDataProvider.saveUser(user);
+      _localDataProvider.saveUser(_user);
     }
 
     return result;
   }
 
-  Future<AppResponse<void, GatewayError>> signOut(
-    SignOutRequest model,
-  ) async {
+  Future<AppResponse<void, GatewayError>> signOut(SignOutRequest model) async {
     final result = await _remoteDataProvider.signOut(model);
 
     if (result.isSuccess) {
-      user = null;
+      _user = null;
       _localDataProvider.saveUser(null);
     }
 

@@ -22,9 +22,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "authFailedToSignIn":
-            MessageLookupByLibrary.simpleMessage("Не удалось авторизироваться, повторите попытку позже"),
-        "serverError": MessageLookupByLibrary.simpleMessage("Произошла серверная ошибка, повторите попытку позже"),
-        "somethingWentWrong": MessageLookupByLibrary.simpleMessage("Что-то пошло не так")
+        "authFailedToSignIn": MessageLookupByLibrary.simpleMessage(
+            "Не удалось авторизироваться, повторите попытку позже"),
+        "enter": MessageLookupByLibrary.simpleMessage("Войти"),
+        "nick": MessageLookupByLibrary.simpleMessage("Никнейм"),
+        "nickFailed": MessageLookupByLibrary.simpleMessage(
+            "Длина должна быть не меньше 2-х символов"),
+        "politPart1": MessageLookupByLibrary.simpleMessage(
+            "Войдя, вы соглашаетесь с настоящей "),
+        "politPart2": MessageLookupByLibrary.simpleMessage(
+            "политикой конфиденциальности."),
+        "serverError": MessageLookupByLibrary.simpleMessage(
+            "Произошла серверная ошибка, повторите попытку позже"),
+        "somethingWentWrong":
+            MessageLookupByLibrary.simpleMessage("Что-то пошло не так"),
+        "youAreYours": MessageLookupByLibrary.simpleMessage("Ты свой?")
       };
 }

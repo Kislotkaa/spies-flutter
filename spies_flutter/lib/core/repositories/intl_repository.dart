@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:sample/core/constants/constants.dart';
+import 'package:sample/core/utils/constants.dart';
 import 'package:sample/core/providers/local_data_provider.dart';
 
 class IntlRepository {

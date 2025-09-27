@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/router/app_router.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
@@ -20,6 +21,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+
     return AppBar(
       elevation: 0.0,
       titleSpacing: 20,
@@ -27,7 +30,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           (needClose
               ? Padding(
                   padding: const EdgeInsets.only(left: 8),
-                  child: IconButtonWidget(
+                  child: IconWidget(
                     onTap: () => router.removeLast(),
                     icon: Assets.icons.arrowLeft,
                     withFeedback: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
 
 enum ButtonStateEnum { fill, outline }
@@ -21,54 +22,50 @@ class ButtonWidget extends StatelessWidget {
   final EdgeInsets? padding;
   final bool isChips;
 
-  TextStyle get _getDefaultTextStyle => appTheme.textTheme.bodySemibold18;
-
-  ButtonStyle get _getDefaultStyle => ButtonStyle(
-        minimumSize: WidgetStatePropertyAll(Size(double.infinity, height)),
-        padding: const WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: 32),
-        ),
-        elevation: const WidgetStatePropertyAll(0),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(isChips ? 36 : 12),
-          ),
-        ),
-      );
-
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+    final defaultTextStyle = appTheme.textTheme.bodySemibold18;
+    final defaultButtnStyle = ButtonStyle(
+      minimumSize: WidgetStatePropertyAll(Size(double.infinity, height)),
+      padding: const WidgetStatePropertyAll(
+        EdgeInsets.symmetric(horizontal: 32),
+      ),
+      elevation: const WidgetStatePropertyAll(0),
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(isChips ? 36 : 12),
+        ),
+      ),
+    );
+
     return Padding(
       padding: padding ?? EdgeInsets.zero,
       child: ElevatedButton(
-        style: _getButtonStyle,
+        style: switch (state) {
+          ButtonStateEnum.fill => defaultButtnStyle.copyWith(
+              backgroundColor: WidgetStatePropertyAll(appTheme.primaryColor),
+              overlayColor: WidgetStatePropertyAll(appTheme.revertBasicColor),
+            ),
+          ButtonStateEnum.outline => defaultButtnStyle.copyWith(
+              backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+              overlayColor: WidgetStatePropertyAll(appTheme.cardColor),
+              side: WidgetStatePropertyAll(
+                BorderSide(color: appTheme.textGrayColor),
+              ),
+            ),
+        },
         onPressed: onTap,
         child: Text(
           text,
-          style: _getTextStyle,
+          style: switch (state) {
+            ButtonStateEnum.fill => defaultTextStyle.copyWith(
+                color: appTheme.alwaysWhiteColor,
+              ),
+            ButtonStateEnum.outline => defaultTextStyle,
+          },
         ),
       ),
     );
   }
-
-  TextStyle get _getTextStyle => switch (state) {
-        ButtonStateEnum.fill => _getDefaultTextStyle.copyWith(
-            color: appTheme.alwaysWhiteColor,
-          ),
-        ButtonStateEnum.outline => _getDefaultTextStyle,
-      };
-
-  ButtonStyle get _getButtonStyle => switch (state) {
-        ButtonStateEnum.fill => _getDefaultStyle.copyWith(
-            backgroundColor: WidgetStatePropertyAll(appTheme.primaryColor),
-            overlayColor: WidgetStatePropertyAll(appTheme.revertBasicColor),
-          ),
-        ButtonStateEnum.outline => _getDefaultStyle.copyWith(
-            backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
-            overlayColor: WidgetStatePropertyAll(appTheme.cardColor),
-            side: WidgetStatePropertyAll(
-              BorderSide(color: appTheme.textGrayColor),
-            ),
-          ),
-      };
 }

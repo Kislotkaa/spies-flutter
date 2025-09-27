@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
 import 'package:sample/core/utils/button_animation_mixin.dart';
 
@@ -23,13 +24,20 @@ class TextButtonWidget extends StatefulWidget {
 class _TextButtonWidgetState extends State<TextButtonWidget> with ButtonMixin {
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onLongPressCancel: () => onLongPressState(false, callBack: widget.onLongTap, setState: setState),
-      onLongPressEnd: (_) => onLongPressState(false, callBack: widget.onLongTap, setState: setState),
-      onLongPressDown: (_) => onLongPressState(true, callBack: widget.onLongTap, setState: setState),
-      onLongPressStart: (_) =>
-          onLongPressEvent(callBack: widget.onLongTap, withFeedback: widget.withFeedback, setState: setState),
+      onLongPressCancel: () => onLongPressState(false,
+          callBack: widget.onLongTap, setState: setState),
+      onLongPressEnd: (_) => onLongPressState(false,
+          callBack: widget.onLongTap, setState: setState),
+      onLongPressDown: (_) => onLongPressState(true,
+          callBack: widget.onLongTap, setState: setState),
+      onLongPressStart: (_) => onLongPressEvent(
+          callBack: widget.onLongTap,
+          withFeedback: widget.withFeedback,
+          setState: setState),
       onTap: () => onTapEvent(
         callBack: widget.onTap,
         withFeedback: widget.withFeedback,

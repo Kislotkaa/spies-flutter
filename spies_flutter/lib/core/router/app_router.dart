@@ -1,8 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:sample/core/router/app_router.gr.dart';
-import 'package:sample/locator.dart';
 
-AppRouter get router => sl<AppRouter>();
+final router = AppRouter();
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {

@@ -1,6 +1,13 @@
 {
   "@@locale": "en",
+  "appName": "Spy",
   "somethingWentWrong": "Something went wrong",
   "serverError": "A server error occurred, please try again later",
-  "authFailedToSignIn": "Failed to log in, please try again later"
+  "authFailedToSignIn": "Failed to log in, please try again later",
+  "nick": "Nickname",
+  "youAreYours": "Are you your own?"
+  "enter": "Enter",
+  "nickFailed": "The length should be at least 2 characters",
+  "politPart1": "Entering, you agree with the present ",
+  "politPart2": "privacy policy."
 }

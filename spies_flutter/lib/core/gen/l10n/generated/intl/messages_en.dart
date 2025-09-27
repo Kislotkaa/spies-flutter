@@ -22,8 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "authFailedToSignIn": MessageLookupByLibrary.simpleMessage("Failed to log in, please try again later"),
-        "serverError": MessageLookupByLibrary.simpleMessage("A server error occurred, please try again later"),
-        "somethingWentWrong": MessageLookupByLibrary.simpleMessage("Something went wrong")
+        "authFailedToSignIn": MessageLookupByLibrary.simpleMessage(
+            "Failed to log in, please try again later"),
+        "nick": MessageLookupByLibrary.simpleMessage("Nickname"),
+        "serverError": MessageLookupByLibrary.simpleMessage(
+            "A server error occurred, please try again later"),
+        "somethingWentWrong":
+            MessageLookupByLibrary.simpleMessage("Something went wrong"),
+        "youAreYours": MessageLookupByLibrary.simpleMessage("Are you your own?")
       };
 }

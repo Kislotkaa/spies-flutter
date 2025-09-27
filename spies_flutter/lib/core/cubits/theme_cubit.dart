@@ -7,14 +7,11 @@ import 'package:sample/core/repositories/theme_repository.dart';
 import 'package:sample/core/models/theme/app_theme.dart';
 import 'package:sample/core/models/theme/app_theme_data.dart';
 import 'package:sample/core/models/theme/models/app_theme_model.dart';
-import 'package:sample/locator.dart';
-
-bool get isDarkMode => sl<ThemeCubit>().state.isDarkMode;
-
-AppThemeModel get appTheme => sl<ThemeCubit>().state.appTheme ?? sl<ThemeCubit>()._getAppTheme();
 
 class ThemeCubit extends Cubit<ThemeState> {
   final ThemeRepository _themeRepository;
+
+  AppThemeModel get appTheme => state.appTheme ?? _getAppTheme;
 
   ThemeCubit(
     this._themeRepository,
@@ -23,7 +20,7 @@ class ThemeCubit extends Cubit<ThemeState> {
 
     emit(
       ThemeState(
-        appTheme: _getAppTheme(),
+        appTheme: _getAppTheme,
       ),
     );
   }
@@ -103,11 +100,12 @@ class ThemeCubit extends Cubit<ThemeState> {
     (context as Element).visitChildren(rebuild);
   }
 
-  ThemeData getLightThemeData() => AppThemeData.light;
+  ThemeData get getLightThemeData => AppThemeData.light;
 
-  ThemeData getDarkThemeData() => AppThemeData.dark;
+  ThemeData get getDarkThemeData => AppThemeData.dark;
 
-  AppThemeModel _getAppTheme() => state.isDarkMode ? AppTheme.dark : AppTheme.light;
+  AppThemeModel get _getAppTheme =>
+      state.isDarkMode ? AppTheme.dark : AppTheme.light;
 }
 
 class ThemeState {

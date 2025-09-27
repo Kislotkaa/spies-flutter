@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/cubits/theme_cubit.dart';
 import 'package:sample/core/utils/button_animation_mixin.dart';
 
-class IconButtonWidget extends StatefulWidget {
-  const IconButtonWidget({
+class IconWidget extends StatefulWidget {
+  const IconWidget({
     super.key,
     required this.icon,
     this.text,
@@ -28,12 +29,14 @@ class IconButtonWidget extends StatefulWidget {
   final EdgeInsetsGeometry paddingIcon;
 
   @override
-  State<IconButtonWidget> createState() => _IconButtonWidgetState();
+  State<IconWidget> createState() => _IconWidgetState();
 }
 
-class _IconButtonWidgetState extends State<IconButtonWidget> with ButtonMixin {
+class _IconWidgetState extends State<IconWidget> with ButtonMixin {
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeCubit>().appTheme;
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onLongPressCancel: () => onLongPressState(

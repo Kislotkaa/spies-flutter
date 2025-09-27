@@ -18,8 +18,14 @@ class AuthErrorState extends AuthState {
 
 class AuthSuccessState extends AuthState {}
 
-class AuthUpdatedState extends AuthState {
-  final String name;
+class AuthSuffixShownState extends AuthState {
+  final bool isShownSuffix;
 
-  AuthUpdatedState(this.name);
+  AuthSuffixShownState({required this.isShownSuffix});
+}
+
+class AuthUpdatedState extends AuthState {
+  final TextEditingController nameController;
+
+  AuthUpdatedState(this.nameController);
 }
