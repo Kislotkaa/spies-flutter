@@ -6,11 +6,11 @@ class AuthInitialState extends AuthState {}
 
 class AuthLoadingState extends AuthState {}
 
-class AuthNameValidFailedState extends AuthState {
+class AuthNameValidationFailedState extends AuthState {
   final String title;
   final String? subTitle;
 
-  AuthNameValidFailedState({
+  AuthNameValidationFailedState({
     required this.title,
     this.subTitle,
   });

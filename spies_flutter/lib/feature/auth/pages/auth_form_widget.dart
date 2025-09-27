@@ -37,23 +37,21 @@ class AuthFormWidget extends StatelessWidget {
                   icon: Assets.icons.userSquare,
                 ),
                 suffixIcon: BlocBuilder<AuthBloc, AuthState>(
-                  buildWhen: (previous, current) =>
-                      current is AuthSuffixShownState,
+                  buildWhen: (previous, current) => current is AuthSuffixShownState,
                   builder: (context, state) {
                     if (state is AuthSuffixShownState && state.isShownSuffix) {
                       return IconButton(
-                        onPressed: () => bloc.add(AuthClearNameEvent()),
+                        onPressed: () => bloc.add(AuthOnClearNameEvent()),
                         icon: Assets.icons.clear.svg(),
                       );
                     }
                     return const SizedBox.shrink();
                   },
                 ),
-                onChanged: (value) => bloc.add(AuthInputEvent()),
+                onChanged: (value) => bloc.add(AuthOnInputNameEvent()),
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(20),
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r'[\p{L}\p{N}_]', unicode: true)),
+                  FilteringTextInputFormatter.allow(RegExp(r'[\p{L}\p{N}_]', unicode: true)),
                 ],
                 validator: (value) {
                   if (value == null || value.length < 2) {
@@ -70,8 +68,7 @@ class AuthFormWidget extends StatelessWidget {
               Text.rich(
                 textAlign: TextAlign.center,
                 TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => launchUrlString(Constants.politUrl),
+                  recognizer: TapGestureRecognizer()..onTap = () => launchUrlString(Constants.politUrl),
                   children: [
                     TextSpan(
                       text: locale.politPart1,

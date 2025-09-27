@@ -6,6 +6,6 @@ class AuthInitialEvent extends AuthEvent {}
 
 class AuthSignInEvent extends AuthEvent {}
 
-class AuthClearNameEvent extends AuthEvent {}
+class AuthOnClearNameEvent extends AuthEvent {}
 
-class AuthInputEvent extends AuthEvent {}
+class AuthOnInputNameEvent extends AuthEvent {}

@@ -18,9 +18,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this._userRepository,
   ) : super(AuthInitialState()) {
     on<AuthInitialEvent>(_init);
-    on<AuthInputEvent>(_input);
+    on<AuthOnInputNameEvent>(_input);
     on<AuthSignInEvent>(_signIn);
-    on<AuthClearNameEvent>(_cleanName);
+    on<AuthOnClearNameEvent>(_cleanName);
   }
 
   final _nameController = TextEditingController();
@@ -33,7 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoadingState());
 
     if (_nameController.text.isEmpty || _nameController.text.length < 2) {
-      emit(AuthNameValidFailedState(title: S.current.nameNotValid));
+      emit(AuthNameValidationFailedState(title: S.current.nameNotValid));
       return;
     }
 
@@ -46,7 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (result.isError) {
       return emit(
-        AuthNameValidFailedState(
+        AuthNameValidationFailedState(
           title: result.error == GatewayError.serverUnavailable
               ? S.current.serverUnavailable
               : S.current.somethingWentWrong,
@@ -58,12 +58,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthSuccessState());
   }
 
-  FutureOr<void> _cleanName(AuthClearNameEvent event, emit) {
+  FutureOr<void> _cleanName(AuthOnClearNameEvent event, emit) {
     _nameController.clear();
     emit(AuthSuffixShownState(isShownSuffix: _nameController.text.isNotEmpty));
   }
 
-  FutureOr<void> _input(AuthInputEvent event, emit) {
+  FutureOr<void> _input(AuthOnInputNameEvent event, emit) {
     emit(AuthSuffixShownState(isShownSuffix: _nameController.text.isNotEmpty));
   }
 }

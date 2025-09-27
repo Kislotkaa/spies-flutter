@@ -41,6 +41,10 @@ class RemoteDataProvider {
       return AppResponse.error(GatewayError.serverUnavailable);
     }
 
+    if (e is ServerpodClientException) {
+      return AppResponse.error(GatewayError.somethingWrong);
+    }
+
     return AppResponse.error(GatewayError.somethingWrong);
   }
 }
