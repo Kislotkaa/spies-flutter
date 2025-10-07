@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sample/app.dart';
-import 'package:sample/core/cubits/intl_cubit.dart';
+import 'package:sample/src/cubits/intl_cubit.dart';
 
-import 'package:sample/core/cubits/theme_cubit.dart';
-import 'package:sample/core/providers/local_data_provider.dart';
-import 'package:sample/core/providers/remote_data_provider.dart';
-import 'package:sample/core/repositories/user_repository.dart';
-import 'package:sample/core/repositories/intl_repository.dart';
-import 'package:sample/core/repositories/theme_repository.dart';
+import 'package:sample/src/cubits/theme_cubit.dart';
+import 'package:sample/src/providers/local_data_provider.dart';
+import 'package:sample/src/providers/remote_data_provider.dart';
+import 'package:sample/src/repositories/user_repository.dart';
+import 'package:sample/src/repositories/intl_repository.dart';
+import 'package:sample/src/repositories/theme_repository.dart';
 import 'package:sample/core/utils/device_extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
