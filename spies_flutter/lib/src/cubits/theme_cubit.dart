@@ -12,8 +12,6 @@ class ThemeCubit extends Cubit<ThemeState> {
     this._themeRepository,
   ) : super(const ThemeState()) {
     _listenTheme();
-
-    emit(const ThemeState());
   }
 
   StreamSubscription<ThemeMode>? _themeSubscription;

@@ -1,4 +1,4 @@
-import 'package:sample/core/utils/sprefs_keys.dart';
+import 'package:sample/core/utils/constants.dart';
 import 'package:sample/core/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +29,5 @@ class LocalDataProvider {
 
   String? getTheme() => _prefs.getString(SPrefsKeys.THEME);
 
-  void saveTheme(String themeName) =>
-      _prefs.setString(SPrefsKeys.THEME, themeName);
+  void saveTheme(String themeName) => _prefs.setString(SPrefsKeys.THEME, themeName);
 }

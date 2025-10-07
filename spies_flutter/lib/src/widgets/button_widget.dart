@@ -24,9 +24,8 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorTheme = context.colorTheme;
-    final textTheme = context.textTheme;
 
-    final defaultTextStyle = textTheme.semi18;
+    final defaultTextStyle = context.textTheme.semi18;
     final defaultButtnStyle = ButtonStyle(
       minimumSize: WidgetStatePropertyAll(Size(double.infinity, height)),
       padding: const WidgetStatePropertyAll(
