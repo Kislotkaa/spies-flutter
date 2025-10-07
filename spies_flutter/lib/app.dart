@@ -5,7 +5,7 @@ import 'package:sample/core/models/theme/theme_data.dart';
 import 'package:sample/src/cubits/theme_cubit.dart';
 import 'package:sample/src/cubits/intl_cubit.dart';
 import 'package:sample/core/gen/l10n/generated/l10n.dart';
-import 'package:sample/src/router/app_router.dart';
+import 'package:sample/core/router/app_router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

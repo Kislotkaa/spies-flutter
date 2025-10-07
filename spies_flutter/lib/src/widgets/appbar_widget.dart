@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample/core/gen/assets.gen.dart';
-import 'package:sample/src/router/app_router.dart';
+import 'package:sample/core/router/app_router.dart';
 import 'package:sample/core/utils/context_extension.dart';
 import 'package:sample/src/widgets/icon_button_widget.dart';
 
