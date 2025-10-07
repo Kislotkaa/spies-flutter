@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-mixin ButtonMixin {
+mixin FeedBackMixin {
   bool isPressed = false;
   bool _isProcess = false;
   Duration duration = Durations.short2;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample/core/models/theme/colors.dart';
 
-class ColorTheme extends ThemeExtension<ColorTheme> {
+class AppColorTheme extends ThemeExtension<AppColorTheme> {
   final Color basicColor;
   final Color revertBasicColor;
   final Color cardColor;
@@ -19,7 +19,7 @@ class ColorTheme extends ThemeExtension<ColorTheme> {
   Color get yellowColor => AppStaticColors.yellow;
   Color get greenColor => AppStaticColors.green;
 
-  static const light = ColorTheme(
+  static const light = AppColorTheme(
     basicColor: AppLightColors.basic,
     revertBasicColor: AppDarkColors.basic,
     textGrayColor: AppLightColors.textGray,
@@ -28,7 +28,7 @@ class ColorTheme extends ThemeExtension<ColorTheme> {
     cardColor: AppLightColors.card,
   );
 
-  static const dark = ColorTheme(
+  static const dark = AppColorTheme(
     basicColor: AppDarkColors.basic,
     revertBasicColor: AppLightColors.basic,
     textGrayColor: AppDarkColors.textGray,
@@ -37,7 +37,7 @@ class ColorTheme extends ThemeExtension<ColorTheme> {
     cardColor: AppDarkColors.card,
   );
 
-  const ColorTheme({
+  const AppColorTheme({
     required this.basicColor,
     required this.revertBasicColor,
     required this.textGrayColor,
@@ -47,15 +47,15 @@ class ColorTheme extends ThemeExtension<ColorTheme> {
   });
 
   @override
-  ThemeExtension<ColorTheme> lerp(
-    ThemeExtension<ColorTheme>? other,
+  ThemeExtension<AppColorTheme> lerp(
+    ThemeExtension<AppColorTheme>? other,
     double t,
   ) {
-    if (other is! ColorTheme?) {
+    if (other is! AppColorTheme?) {
       return this;
     }
 
-    return ColorTheme(
+    return AppColorTheme(
       basicColor: Color.lerp(basicColor, other?.basicColor, t)!,
       revertBasicColor: Color.lerp(revertBasicColor, other?.revertBasicColor, t)!,
       textGrayColor: Color.lerp(textGrayColor, other?.textGrayColor, t)!,
@@ -66,5 +66,5 @@ class ColorTheme extends ThemeExtension<ColorTheme> {
   }
 
   @override
-  ThemeExtension<ColorTheme> copyWith() => this;
+  ThemeExtension<AppColorTheme> copyWith() => this;
 }

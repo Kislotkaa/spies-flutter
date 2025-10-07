@@ -32,7 +32,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   child: IconWidget(
                     onTap: () => router.removeLast(),
                     icon: Assets.icons.arrowLeft,
-                    withFeedback: true,
                   ),
                 )
               : null),

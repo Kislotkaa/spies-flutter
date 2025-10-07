@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample/core/utils/button_animation_mixin.dart';
 import 'package:sample/core/utils/context_extension.dart';
 
 class SwitcherWidget extends StatefulWidget {
@@ -16,12 +15,20 @@ class SwitcherWidget extends StatefulWidget {
   State<SwitcherWidget> createState() => _SwitcherWidgetState();
 }
 
-class _SwitcherWidgetState extends State<SwitcherWidget> with ButtonMixin {
+class _SwitcherWidgetState extends State<SwitcherWidget> {
+  bool isPressed = false;
+
   @override
   void initState() {
     isPressed = widget.initialActive;
-    duration = Durations.short3;
     super.initState();
+  }
+
+  void _onPress() {
+    setState(() {
+      isPressed = !isPressed;
+      widget.callBack?.call(isPressed);
+    });
   }
 
   @override
@@ -29,11 +36,7 @@ class _SwitcherWidgetState extends State<SwitcherWidget> with ButtonMixin {
     final colorTheme = context.colorTheme;
 
     return GestureDetector(
-      onTap: () => pressSwitch(
-        callBack: () => widget.callBack?.call(isPressed),
-        setState: setState,
-        withFeedback: true,
-      ),
+      onTap: _onPress,
       child: AnimatedContainer(
         height: 28,
         width: 55,
@@ -43,7 +46,7 @@ class _SwitcherWidgetState extends State<SwitcherWidget> with ButtonMixin {
           borderRadius: BorderRadius.circular(32),
         ),
         padding: const EdgeInsets.all(3),
-        duration: duration,
+        duration: Durations.short3,
         alignment: isPressed ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
           width: 24,

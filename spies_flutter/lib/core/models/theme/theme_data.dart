@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:sample/core/models/theme/app_color_theme.dart';
+import 'package:sample/core/models/theme/app_text_theme.dart';
 import 'package:sample/core/models/theme/colors.dart';
-import 'package:sample/core/models/theme/theme_color.dart';
-import 'package:sample/core/models/theme/theme_text.dart';
 
 class AppThemeData {
   static final ThemeData dark = ThemeData.dark().copyWith(
     appBarTheme: AppBarTheme(
       elevation: 0,
-      color: ColorTheme.dark.basicColor,
-      iconTheme: IconThemeData(color: ColorTheme.light.basicColor),
+      color: AppColorTheme.dark.basicColor,
+      iconTheme: IconThemeData(color: AppColorTheme.light.basicColor),
       surfaceTintColor: AppStaticColors.black,
     ),
     extensions: [
-      ColorTheme.dark,
-      ThemeText.dark,
+      AppColorTheme.dark,
+      AppTextTheme.dark,
     ],
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       circularTrackColor: AppStaticColors.black,
@@ -30,17 +30,6 @@ class AppThemeData {
     scaffoldBackgroundColor: AppStaticColors.black,
     inputDecorationTheme: const InputDecorationTheme(),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(color: AppDarkColors.text),
-      bodyLarge: TextStyle(color: AppDarkColors.text),
-      bodyMedium: TextStyle(color: AppDarkColors.text),
-      headlineSmall: TextStyle(color: AppDarkColors.text),
-      headlineMedium: TextStyle(color: AppDarkColors.text),
-      displaySmall: TextStyle(color: AppDarkColors.text),
-      displayMedium: TextStyle(color: AppDarkColors.text),
-      displayLarge: TextStyle(color: AppDarkColors.text),
-      titleMedium: TextStyle(color: AppDarkColors.text),
-    ),
   );
 
   static final ThemeData light = ThemeData.light().copyWith(
@@ -53,8 +42,8 @@ class AppThemeData {
       surfaceTintColor: AppStaticColors.white,
     ),
     extensions: [
-      ColorTheme.light,
-      ThemeText.light,
+      AppColorTheme.light,
+      AppTextTheme.light,
     ],
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       circularTrackColor: AppStaticColors.white,
@@ -71,16 +60,5 @@ class AppThemeData {
     disabledColor: AppLightColors.textGray,
     inputDecorationTheme: const InputDecorationTheme(),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(color: AppLightColors.text),
-      bodyLarge: TextStyle(color: AppLightColors.text),
-      bodyMedium: TextStyle(color: AppLightColors.text),
-      headlineSmall: TextStyle(color: AppLightColors.text),
-      headlineMedium: TextStyle(color: AppLightColors.text),
-      displaySmall: TextStyle(color: AppLightColors.text),
-      displayMedium: TextStyle(color: AppLightColors.text),
-      displayLarge: TextStyle(color: AppLightColors.text),
-      titleMedium: TextStyle(color: AppLightColors.text),
-    ),
   );
 }

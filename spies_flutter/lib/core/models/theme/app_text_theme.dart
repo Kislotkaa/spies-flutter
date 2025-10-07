@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sample/core/gen/fonts.gen.dart';
-import 'package:sample/core/models/theme/theme_color.dart';
+import 'package:sample/core/models/theme/app_color_theme.dart';
 
-class ThemeText extends ThemeExtension<ThemeText> {
+class AppTextTheme extends ThemeExtension<AppTextTheme> {
   final TextStyle semi20;
   final TextStyle extra20;
   final TextStyle semi18;
@@ -11,7 +11,7 @@ class ThemeText extends ThemeExtension<ThemeText> {
   final TextStyle extra14;
   final TextStyle semi12;
 
-  const ThemeText({
+  const AppTextTheme({
     required this.semi20,
     required this.extra20,
     required this.semi18,
@@ -21,7 +21,7 @@ class ThemeText extends ThemeExtension<ThemeText> {
     required this.semi12,
   });
 
-  static ThemeText _getTextTheme(Color? color) => ThemeText(
+  static AppTextTheme _getTextTheme(Color? color) => AppTextTheme(
         semi20: TextStyle(
           fontFamily: FontFamily.shantellSans,
           fontSize: 20,
@@ -73,17 +73,17 @@ class ThemeText extends ThemeExtension<ThemeText> {
         ),
       );
 
-  static get light => _getTextTheme(ColorTheme.light.textColor);
+  static AppTextTheme get light => _getTextTheme(AppColorTheme.light.textColor);
 
-  static get dark => _getTextTheme(ColorTheme.dark.textColor);
+  static AppTextTheme get dark => _getTextTheme(AppColorTheme.dark.textColor);
 
   @override
-  ThemeExtension<ThemeText> lerp(ThemeExtension<ThemeText>? other, double t) {
-    if (other is! ThemeText) {
+  ThemeExtension<AppTextTheme> lerp(ThemeExtension<AppTextTheme>? other, double t) {
+    if (other is! AppTextTheme) {
       return this;
     }
 
-    return ThemeText(
+    return AppTextTheme(
       semi20: other.semi20.copyWith(color: Color.lerp(semi20.color, other.semi20.color, t)),
       extra20: other.semi20.copyWith(color: Color.lerp(extra20.color, other.extra20.color, t)),
       semi18: other.semi20.copyWith(color: Color.lerp(semi18.color, other.semi18.color, t)),
@@ -95,5 +95,5 @@ class ThemeText extends ThemeExtension<ThemeText> {
   }
 
   @override
-  ThemeExtension<ThemeText> copyWith() => this;
+  ThemeExtension<AppTextTheme> copyWith() => this;
 }

@@ -35,9 +35,6 @@ class MainPage extends StatelessWidget {
             onTap: () {
               log('onTap');
             },
-            onLongPress: () {
-              log('onLongTap');
-            },
           ),
           IconWidget(
             icon: Assets.icons.setting,
@@ -45,16 +42,10 @@ class MainPage extends StatelessWidget {
             onTap: () {
               log('onTap');
             },
-            onLongPress: () {
-              log('onLongTap');
-            },
           ),
           TextButtonWidget(
             text: 'Готово',
             onTap: () {},
-            onLongTap: () {
-              log('onLongTap');
-            },
           ),
         ],
       ),
@@ -89,9 +80,6 @@ class MainPage extends StatelessWidget {
               icon: Assets.icons.call,
               onTap: () {
                 log('onTap');
-              },
-              onLongPress: () {
-                log('onLongTap');
               },
             ),
             ButtonWidget(
@@ -150,10 +138,6 @@ class MainPage extends StatelessWidget {
               onTap: () {
                 log('onTap');
               },
-              onLongPress: () {
-                log('onLongTap');
-              },
-              withFeedback: true,
               icon: Assets.icons.call,
             ),
             const Column(

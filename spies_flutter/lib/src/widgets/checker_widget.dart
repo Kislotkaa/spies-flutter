@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample/core/utils/button_animation_mixin.dart';
 import 'package:sample/core/utils/context_extension.dart';
 
 class CheckerWidget extends StatefulWidget {
@@ -16,12 +15,20 @@ class CheckerWidget extends StatefulWidget {
   State<CheckerWidget> createState() => _CheckerWidgetState();
 }
 
-class _CheckerWidgetState extends State<CheckerWidget> with ButtonMixin {
+class _CheckerWidgetState extends State<CheckerWidget> {
+  bool isPressed = false;
+
   @override
   void initState() {
     isPressed = widget.initialActive;
-    duration = Durations.short3;
     super.initState();
+  }
+
+  void _onPress() {
+    setState(() {
+      isPressed = !isPressed;
+      widget.callBack?.call(isPressed);
+    });
   }
 
   @override
@@ -29,11 +36,7 @@ class _CheckerWidgetState extends State<CheckerWidget> with ButtonMixin {
     final colorTheme = context.colorTheme;
 
     return GestureDetector(
-      onTap: () => pressSwitch(
-        callBack: () => widget.callBack?.call(isPressed),
-        setState: setState,
-        withFeedback: true,
-      ),
+      onTap: _onPress,
       child: AnimatedContainer(
         height: 28,
         width: 55,
@@ -45,7 +48,7 @@ class _CheckerWidgetState extends State<CheckerWidget> with ButtonMixin {
           shape: BoxShape.circle,
         ),
         padding: const EdgeInsets.all(2),
-        duration: duration,
+        duration: Durations.short3,
       ),
     );
   }
