@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample/core/gen/assets.gen.dart';
 
 import 'package:sample/core/utils/context_extension.dart';
+import 'package:sample/src/widgets/feedback_widget.dart';
 
 class IconWidget extends StatelessWidget {
   const IconWidget({
@@ -25,20 +26,23 @@ class IconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorTheme = context.colorTheme;
 
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: padding.horizontal,
-          vertical: padding.vertical,
-        ),
-        child: icon.svg(
-          height: iconSize,
-          width: iconSize,
-          colorFilter: ColorFilter.mode(
-            iconColor ?? colorTheme.textColor,
-            BlendMode.srcIn,
+    return FeedbackWidget(
+      isEnabled: onTap != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: padding.horizontal,
+            vertical: padding.vertical,
+          ),
+          child: icon.svg(
+            height: iconSize,
+            width: iconSize,
+            colorFilter: ColorFilter.mode(
+              iconColor ?? colorTheme.textColor,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),

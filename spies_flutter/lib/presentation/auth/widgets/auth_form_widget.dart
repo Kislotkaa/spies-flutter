@@ -43,9 +43,9 @@ class AuthFormWidget extends StatelessWidget {
                     buildWhen: (previous, current) => current is AuthSuffixShownState,
                     builder: (context, state) {
                       if (state is AuthSuffixShownState && state.isShownSuffix) {
-                        return IconButton(
-                          onPressed: () => bloc.add(AuthOnClearNameEvent()),
-                          icon: Assets.icons.clear.svg(),
+                        return IconWidget(
+                          onTap: () => bloc.add(AuthOnClearNameEvent()),
+                          icon: Assets.icons.clear,
                         );
                       }
                       return const SizedBox.shrink();

@@ -107,6 +107,7 @@ class TextFieldWidget extends StatelessWidget {
             fillColor: Colors.transparent,
             hintText: hintText,
             prefixIconConstraints: BoxConstraints.tight(const Size(48, 24)),
+            suffixIconConstraints: BoxConstraints.tight(const Size(48, 24)),
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             alignLabelWithHint: true,

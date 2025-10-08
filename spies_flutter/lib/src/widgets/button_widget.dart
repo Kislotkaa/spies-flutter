@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample/core/utils/context_extension.dart';
+import 'package:sample/src/widgets/feedback_widget.dart';
 
 enum ButtonStateEnum { fill, outline }
 
@@ -39,31 +40,34 @@ class ButtonWidget extends StatelessWidget {
       ),
     );
 
-    return Padding(
-      padding: padding ?? EdgeInsets.zero,
-      child: ElevatedButton(
-        style: switch (state) {
-          ButtonStateEnum.fill => defaultButtnStyle.copyWith(
-              backgroundColor: WidgetStatePropertyAll(colorTheme.primaryColor),
-              overlayColor: WidgetStatePropertyAll(colorTheme.revertBasicColor),
-            ),
-          ButtonStateEnum.outline => defaultButtnStyle.copyWith(
-              backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
-              overlayColor: WidgetStatePropertyAll(colorTheme.cardColor),
-              side: WidgetStatePropertyAll(
-                BorderSide(color: colorTheme.textGrayColor),
-              ),
-            ),
-        },
-        onPressed: onTap,
-        child: Text(
-          text,
+    return FeedbackWidget(
+      scalePattern: 0.9,
+      child: Padding(
+        padding: padding ?? EdgeInsets.zero,
+        child: ElevatedButton(
           style: switch (state) {
-            ButtonStateEnum.fill => defaultTextStyle.copyWith(
-                color: colorTheme.alwaysWhiteColor,
+            ButtonStateEnum.fill => defaultButtnStyle.copyWith(
+                backgroundColor: WidgetStatePropertyAll(colorTheme.primaryColor),
+                overlayColor: WidgetStatePropertyAll(colorTheme.revertBasicColor),
               ),
-            ButtonStateEnum.outline => defaultTextStyle,
+            ButtonStateEnum.outline => defaultButtnStyle.copyWith(
+                backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+                overlayColor: WidgetStatePropertyAll(colorTheme.cardColor),
+                side: WidgetStatePropertyAll(
+                  BorderSide(color: colorTheme.textGrayColor),
+                ),
+              ),
           },
+          onPressed: onTap,
+          child: Text(
+            text,
+            style: switch (state) {
+              ButtonStateEnum.fill => defaultTextStyle.copyWith(
+                  color: colorTheme.alwaysWhiteColor,
+                ),
+              ButtonStateEnum.outline => defaultTextStyle,
+            },
+          ),
         ),
       ),
     );
