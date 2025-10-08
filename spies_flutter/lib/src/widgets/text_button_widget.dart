@@ -7,12 +7,10 @@ class TextButtonWidget extends StatelessWidget {
     super.key,
     required this.text,
     this.onTap,
-    this.withFeedback = false,
   });
 
   final VoidCallback? onTap;
   final String text;
-  final bool withFeedback;
 
   @override
   Widget build(BuildContext context) {

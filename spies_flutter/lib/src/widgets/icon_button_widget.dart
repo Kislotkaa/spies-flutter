@@ -12,7 +12,6 @@ class IconWidget extends StatelessWidget {
     this.iconSize = 24,
     this.iconColor,
     this.padding = EdgeInsets.zero,
-    this.paddingIcon = EdgeInsets.zero,
   });
 
   final SvgGenImage icon;
@@ -20,7 +19,6 @@ class IconWidget extends StatelessWidget {
   final double iconSize;
   final Color? iconColor;
   final EdgeInsetsGeometry padding;
-  final EdgeInsetsGeometry paddingIcon;
 
   @override
   Widget build(BuildContext context) {
