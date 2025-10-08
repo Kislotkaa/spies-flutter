@@ -30,36 +30,40 @@ class AuthFormWidget extends StatelessWidget {
         if (state is AuthUpdatedState) {
           return Column(
             children: [
-              TextFieldWidget(
-                titleText: locale.name,
-                titleCenter: true,
-                controller: state.nameController,
-                prefixIcon: IconWidget(
-                  icon: Assets.icons.userSquare,
-                ),
-                suffixIcon: BlocBuilder<AuthBloc, AuthState>(
-                  buildWhen: (previous, current) => current is AuthSuffixShownState,
-                  builder: (context, state) {
-                    if (state is AuthSuffixShownState && state.isShownSuffix) {
-                      return IconButton(
-                        onPressed: () => bloc.add(AuthOnClearNameEvent()),
-                        icon: Assets.icons.clear.svg(),
-                      );
+              Form(
+                key: state.formKey,
+                child: TextFieldWidget(
+                  titleText: locale.name,
+                  titleCenter: true,
+                  controller: state.nameController,
+                  prefixIcon: IconWidget(
+                    icon: Assets.icons.userSquare,
+                  ),
+                  suffixIcon: BlocBuilder<AuthBloc, AuthState>(
+                    buildWhen: (previous, current) => current is AuthSuffixShownState,
+                    builder: (context, state) {
+                      if (state is AuthSuffixShownState && state.isShownSuffix) {
+                        return IconButton(
+                          onPressed: () => bloc.add(AuthOnClearNameEvent()),
+                          icon: Assets.icons.clear.svg(),
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                  onChanged: (value) => bloc.add(AuthOnInputNameEvent()),
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(20),
+                    FilteringTextInputFormatter.allow(RegExp(r'[\p{L}\p{N}_]', unicode: true)),
+                  ],
+                  validator: (value) {
+                    if (value == null || value.length < 2) {
+                      return locale.nameNotValid;
                     }
-                    return const SizedBox.shrink();
+
+                    return null;
                   },
                 ),
-                onChanged: (value) => bloc.add(AuthOnInputNameEvent()),
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(20),
-                  FilteringTextInputFormatter.allow(RegExp(r'[\p{L}\p{N}_]', unicode: true)),
-                ],
-                validator: (value) {
-                  if (value == null || value.length < 2) {
-                    return locale.nameNotValid;
-                  }
-                  return null;
-                },
               ),
               ButtonWidget(
                 padding: const EdgeInsets.only(top: 16, bottom: 16),

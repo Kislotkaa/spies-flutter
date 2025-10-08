@@ -26,6 +26,10 @@ class AuthSuffixShownState extends AuthState {
 
 class AuthUpdatedState extends AuthState {
   final TextEditingController nameController;
+  final GlobalKey formKey;
 
-  AuthUpdatedState(this.nameController);
+  AuthUpdatedState({
+    required this.nameController,
+    required this.formKey,
+  });
 }

@@ -19,12 +19,11 @@ class UserRepository {
 
   bool get isAuth => user != null;
   UserModel? get user {
-    _user = _localDataProvider.getUser();
+    _user ??= _localDataProvider.getUser();
     return _user;
   }
 
-  Future<AppResponse<UserResponse, GatewayError>> signIn(
-      SignInRequest model) async {
+  Future<AppResponse<UserResponse, GatewayError>> signIn(SignInRequest model) async {
     final result = await _remoteDataProvider.signIn(model);
 
     if (result.isSuccess) {

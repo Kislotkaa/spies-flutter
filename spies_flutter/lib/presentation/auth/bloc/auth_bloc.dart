@@ -24,15 +24,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   final _nameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   FutureOr<void> _init(AuthInitialEvent event, emit) {
-    emit(AuthUpdatedState(_nameController));
+    emit(
+      AuthUpdatedState(
+        nameController: _nameController,
+        formKey: _formKey,
+      ),
+    );
   }
 
   Future<void> _signIn(AuthSignInEvent event, emit) async {
     emit(AuthLoadingState());
 
-    if (_nameController.text.isEmpty || _nameController.text.length < 2) {
+    if (!_formKey.currentState!.validate()) {
       emit(AuthNameValidationFailedState(title: S.current.nameNotValid));
       return;
     }

@@ -9,10 +9,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: AppBarWidget(title: 'Main Screen'),
-      body: Center(
-        child: Text('Main page'),
-      ),
+      appBar: AppBarWidget(title: 'Main Page'),
     );
   }
 }
