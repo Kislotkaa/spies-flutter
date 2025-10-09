@@ -48,6 +48,7 @@ class MainPage extends StatelessWidget {
                   onTap: () => router.push(const CreateGameRoute()),
                   text: S.of(context).mainCreateGame,
                   padding: const EdgeInsets.only(bottom: 16),
+                  withHapticFeedback: true,
                 ),
                 ButtonWidget(
                   onTap: () => router.push(
@@ -73,6 +74,7 @@ class MainPage extends StatelessWidget {
                   ),
                   text: S.of(context).mainConnectGame,
                   state: ButtonStateEnum.outline,
+                  withHapticFeedback: true,
                 ),
               ],
             ),

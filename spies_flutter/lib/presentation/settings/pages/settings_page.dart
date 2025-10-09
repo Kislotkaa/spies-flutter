@@ -25,6 +25,7 @@ class SettingsPage extends StatelessWidget {
             onTap: () => router.push(const SuggestWordRoute()),
             text: S.of(context).settingsSuggest,
             leftWidget: Assets.icons.faceScreaming.svg(),
+            withHapticFeedback: true,
           ),
         ],
       ),

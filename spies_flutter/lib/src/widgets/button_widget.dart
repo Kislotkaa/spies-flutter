@@ -14,6 +14,7 @@ class ButtonWidget extends StatelessWidget {
     this.padding,
     this.height = 50,
     this.isChips = false,
+    this.withHapticFeedback = false,
     this.state = ButtonStateEnum.fill,
   });
 
@@ -25,6 +26,7 @@ class ButtonWidget extends StatelessWidget {
   final ButtonStateEnum state;
   final EdgeInsets? padding;
   final bool isChips;
+  final bool withHapticFeedback;
 
   @override
   Widget build(BuildContext context) {
@@ -46,19 +48,17 @@ class ButtonWidget extends StatelessWidget {
 
     return FeedbackWidget(
       scalePattern: 0.9,
+      withHapticFeedback: withHapticFeedback,
       child: Padding(
         padding: padding ?? EdgeInsets.zero,
         child: ElevatedButton(
           style: switch (state) {
             ButtonStateEnum.fill => defaultButtnStyle.copyWith(
-                backgroundColor:
-                    WidgetStatePropertyAll(colorTheme.primaryColor),
-                overlayColor:
-                    WidgetStatePropertyAll(colorTheme.revertBasicColor),
+                backgroundColor: WidgetStatePropertyAll(colorTheme.primaryColor),
+                overlayColor: WidgetStatePropertyAll(colorTheme.revertBasicColor),
               ),
             ButtonStateEnum.outline => defaultButtnStyle.copyWith(
-                backgroundColor:
-                    const WidgetStatePropertyAll(Colors.transparent),
+                backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
                 overlayColor: WidgetStatePropertyAll(colorTheme.cardColor),
                 side: WidgetStatePropertyAll(
                   BorderSide(color: colorTheme.textGrayColor),

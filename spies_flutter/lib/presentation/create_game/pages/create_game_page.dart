@@ -23,6 +23,7 @@ class CreateGamePage extends StatelessWidget {
           ButtonWidget(
             onTap: () => router.push(const GameRoute()),
             text: S.of(context).createGameCreate,
+            withHapticFeedback: true,
           ),
         ],
       ),
