@@ -12,17 +12,26 @@ class UserEndpoint extends Endpoint {
   }
 
   Future<UserResponse> signIn(Session session, SignInRequest model) async {
-    final user = await UserData.db.findFirstRow(
-          session,
-          where: (e) => e.deviceId.equals(model.deviceId),
-        ) ??
-        await UserData.db.insertRow(
-          session,
-          UserData(
-            deviceId: model.deviceId,
-            name: model.name,
-          ),
-        );
+    UserData? user = await UserData.db.findFirstRow(
+      session,
+      where: (e) => e.deviceId.equals(model.deviceId),
+    );
+
+    if (user == null) {
+      user = await UserData.db.insertRow(
+        session,
+        UserData(
+          deviceId: model.deviceId,
+          name: model.name,
+        ),
+      );
+    } else {
+      user.updateAt = DateTime.now();
+      await UserData.db.updateRow(
+        session,
+        user,
+      );
+    }
 
     return user.toResponse();
   }

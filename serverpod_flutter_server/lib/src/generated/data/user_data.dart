@@ -17,12 +17,15 @@ abstract class UserData
     _i1.UuidValue? id,
     required this.deviceId,
     required this.name,
-  }) : id = id ?? _i1.Uuid().v4obj();
+    DateTime? updateAt,
+  })  : id = id ?? _i1.Uuid().v4obj(),
+        updateAt = updateAt ?? DateTime.now();
 
   factory UserData({
     _i1.UuidValue? id,
     required String deviceId,
     required String name,
+    DateTime? updateAt,
   }) = _UserDataImpl;
 
   factory UserData.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -30,6 +33,8 @@ abstract class UserData
       id: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['id']),
       deviceId: jsonSerialization['deviceId'] as String,
       name: jsonSerialization['name'] as String,
+      updateAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updateAt']),
     );
   }
 
@@ -44,6 +49,8 @@ abstract class UserData
 
   String name;
 
+  DateTime updateAt;
+
   @override
   _i1.Table<_i1.UuidValue> get table => t;
 
@@ -54,6 +61,7 @@ abstract class UserData
     _i1.UuidValue? id,
     String? deviceId,
     String? name,
+    DateTime? updateAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -61,6 +69,7 @@ abstract class UserData
       'id': id.toJson(),
       'deviceId': deviceId,
       'name': name,
+      'updateAt': updateAt.toJson(),
     };
   }
 
@@ -70,6 +79,7 @@ abstract class UserData
       'id': id.toJson(),
       'deviceId': deviceId,
       'name': name,
+      'updateAt': updateAt.toJson(),
     };
   }
 
@@ -108,10 +118,12 @@ class _UserDataImpl extends UserData {
     _i1.UuidValue? id,
     required String deviceId,
     required String name,
+    DateTime? updateAt,
   }) : super._(
           id: id,
           deviceId: deviceId,
           name: name,
+          updateAt: updateAt,
         );
 
   /// Returns a shallow copy of this [UserData]
@@ -122,11 +134,13 @@ class _UserDataImpl extends UserData {
     _i1.UuidValue? id,
     String? deviceId,
     String? name,
+    DateTime? updateAt,
   }) {
     return UserData(
       id: id ?? this.id,
       deviceId: deviceId ?? this.deviceId,
       name: name ?? this.name,
+      updateAt: updateAt ?? this.updateAt,
     );
   }
 }
@@ -141,17 +155,25 @@ class UserDataTable extends _i1.Table<_i1.UuidValue> {
       'name',
       this,
     );
+    updateAt = _i1.ColumnDateTime(
+      'updateAt',
+      this,
+      hasDefault: true,
+    );
   }
 
   late final _i1.ColumnString deviceId;
 
   late final _i1.ColumnString name;
 
+  late final _i1.ColumnDateTime updateAt;
+
   @override
   List<_i1.Column> get columns => [
         id,
         deviceId,
         name,
+        updateAt,
       ];
 }
 
