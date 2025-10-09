@@ -14,14 +14,14 @@ import '../response/word_category_response.dart' as _i2;
 
 abstract class WordResponse implements _i1.SerializableModel {
   WordResponse._({
-    _i1.UuidValue? id,
+    required this.id,
     required this.word,
     this.hint,
     this.wordCategory,
-  }) : id = id ?? _i1.Uuid().v4obj();
+  });
 
   factory WordResponse({
-    _i1.UuidValue? id,
+    required _i1.UuidValue id,
     required String word,
     String? hint,
     _i2.WordCategoryResponse? wordCategory,
@@ -76,7 +76,7 @@ class _Undefined {}
 
 class _WordResponseImpl extends WordResponse {
   _WordResponseImpl({
-    _i1.UuidValue? id,
+    required _i1.UuidValue id,
     required String word,
     String? hint,
     _i2.WordCategoryResponse? wordCategory,

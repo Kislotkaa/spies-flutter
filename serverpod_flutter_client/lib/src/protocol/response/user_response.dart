@@ -13,13 +13,13 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class UserResponse implements _i1.SerializableModel {
   UserResponse._({
-    _i1.UuidValue? id,
+    required this.id,
     required this.deviceId,
     required this.name,
-  }) : id = id ?? _i1.Uuid().v4obj();
+  });
 
   factory UserResponse({
-    _i1.UuidValue? id,
+    required _i1.UuidValue id,
     required String deviceId,
     required String name,
   }) = _UserResponseImpl;
@@ -63,7 +63,7 @@ abstract class UserResponse implements _i1.SerializableModel {
 
 class _UserResponseImpl extends UserResponse {
   _UserResponseImpl({
-    _i1.UuidValue? id,
+    required _i1.UuidValue id,
     required String deviceId,
     required String name,
   }) : super._(

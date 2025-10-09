@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-
-extension Separated on List<Widget> {
-  List<Widget> separatedBy(Widget separator) {
+extension Separated<T> on List<T> {
+  List<T> separatedBy(T separator) {
     if (length < 2) return this;
     return [
       for (int i = 0; i < length; i++) ...[

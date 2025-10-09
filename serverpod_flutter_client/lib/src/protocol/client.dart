@@ -38,19 +38,17 @@ import 'package:serverpod_flutter_client/src/protocol/request/get_user_request.d
     as _i15;
 import 'package:serverpod_flutter_client/src/protocol/request/sign_in_request.dart'
     as _i16;
-import 'package:serverpod_flutter_client/src/protocol/request/sign_out_request.dart'
-    as _i17;
 import 'package:serverpod_flutter_client/src/protocol/request/change_name_request.dart'
-    as _i18;
+    as _i17;
 import 'package:serverpod_flutter_client/src/protocol/response/word_response.dart'
-    as _i19;
+    as _i18;
 import 'package:serverpod_flutter_client/src/protocol/request/add_word_request.dart'
-    as _i20;
+    as _i19;
 import 'package:serverpod_flutter_client/src/protocol/response/word_category_response.dart'
-    as _i21;
+    as _i20;
 import 'package:serverpod_flutter_client/src/protocol/request/add_category_request.dart'
-    as _i22;
-import 'protocol.dart' as _i23;
+    as _i21;
+import 'protocol.dart' as _i22;
 
 /// {@category Endpoint}
 class EndpointGame extends _i1.EndpointRef {
@@ -161,14 +159,14 @@ class EndpointUser extends _i1.EndpointRef {
         {'model': model},
       );
 
-  _i2.Future<void> signOut(_i17.SignOutRequest model) =>
+  _i2.Future<void> signOut(_i4.UuidValue? userId) =>
       caller.callServerEndpoint<void>(
         'user',
         'signOut',
-        {'model': model},
+        {'userId': userId},
       );
 
-  _i2.Future<void> changeName(_i18.ChangeNameRequest model) =>
+  _i2.Future<void> changeName(_i17.ChangeNameRequest model) =>
       caller.callServerEndpoint<void>(
         'user',
         'changeName',
@@ -183,30 +181,30 @@ class EndpointWord extends _i1.EndpointRef {
   @override
   String get name => 'word';
 
-  _i2.Future<List<_i19.WordResponse>> getWords() =>
-      caller.callServerEndpoint<List<_i19.WordResponse>>(
+  _i2.Future<List<_i18.WordResponse>> getWords() =>
+      caller.callServerEndpoint<List<_i18.WordResponse>>(
         'word',
         'getWords',
         {},
       );
 
-  _i2.Future<_i19.WordResponse> addWord(_i20.AddWordRequest model) =>
-      caller.callServerEndpoint<_i19.WordResponse>(
+  _i2.Future<_i18.WordResponse> addWord(_i19.AddWordRequest model) =>
+      caller.callServerEndpoint<_i18.WordResponse>(
         'word',
         'addWord',
         {'model': model},
       );
 
-  _i2.Future<List<_i21.WordCategoryResponse>> getCategories() =>
-      caller.callServerEndpoint<List<_i21.WordCategoryResponse>>(
+  _i2.Future<List<_i20.WordCategoryResponse>> getCategories() =>
+      caller.callServerEndpoint<List<_i20.WordCategoryResponse>>(
         'word',
         'getCategories',
         {},
       );
 
-  _i2.Future<_i21.WordCategoryResponse> addCategory(
-          _i22.AddCategoryRequest model) =>
-      caller.callServerEndpoint<_i21.WordCategoryResponse>(
+  _i2.Future<_i20.WordCategoryResponse> addCategory(
+          _i21.AddCategoryRequest model) =>
+      caller.callServerEndpoint<_i20.WordCategoryResponse>(
         'word',
         'addCategory',
         {'model': model},
@@ -229,7 +227,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i23.Protocol(),
+          _i22.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,

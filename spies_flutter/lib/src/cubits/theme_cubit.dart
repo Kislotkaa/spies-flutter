@@ -68,11 +68,12 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   void switchTheme() {
-    if (state.isDarkMode) {
-      _themeRepository.saveTheme(ThemeMode.light);
-    } else {
-      _themeRepository.saveTheme(ThemeMode.dark);
-    }
+    final themeMode = switch (state.isDarkMode) {
+      true => ThemeMode.light,
+      false => ThemeMode.dark,
+    };
+    _themeRepository.saveTheme(themeMode);
+    _onListen(themeMode);
   }
 
   void rebuildAllChildren(BuildContext context) {

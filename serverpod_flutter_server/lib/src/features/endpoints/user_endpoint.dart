@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:serverpod/serverpod.dart';
+import 'package:serverpod_flutter_server/src/extends/data_extends.dart';
 import 'package:serverpod_flutter_server/src/generated/protocol.dart';
 
 class UserEndpoint extends Endpoint {
@@ -17,6 +20,8 @@ class UserEndpoint extends Endpoint {
       where: (e) => e.deviceId.equals(model.deviceId),
     );
 
+    log(user.toString());
+
     if (user == null) {
       user = await UserData.db.insertRow(
         session,
@@ -27,7 +32,7 @@ class UserEndpoint extends Endpoint {
       );
     } else {
       user.updateAt = DateTime.now();
-      await UserData.db.updateRow(
+      user = await UserData.db.updateRow(
         session,
         user,
       );
@@ -36,8 +41,10 @@ class UserEndpoint extends Endpoint {
     return user.toResponse();
   }
 
-  Future<void> signOut(Session session, SignOutRequest model) async {
-    UserData? user = await UserData.db.findById(session, model.userId);
+  Future<void> signOut(Session session, UuidValue? userId) async {
+    if (userId == null) return;
+
+    UserData? user = await UserData.db.findById(session, userId);
 
     if (user != null) await UserData.db.deleteRow(session, user);
   }
@@ -59,12 +66,4 @@ class UserEndpoint extends Endpoint {
       user,
     );
   }
-}
-
-extension on UserData {
-  UserResponse toResponse() => UserResponse(
-        id: id,
-        deviceId: deviceId,
-        name: name,
-      );
 }

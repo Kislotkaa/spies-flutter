@@ -25,6 +25,12 @@ class _SwitcherWidgetState extends State<SwitcherWidget> {
     super.initState();
   }
 
+  @override
+  void didChangeDependencies() {
+    isPressed = widget.initialActive;
+    super.didChangeDependencies();
+  }
+
   void _onPress() {
     setState(() {
       isPressed = !isPressed;

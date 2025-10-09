@@ -8,6 +8,7 @@ class SettingsItemWidget extends StatelessWidget {
   final SvgGenImage icon;
   final Widget? action;
   final VoidCallback onTap;
+  final Color? color;
 
   const SettingsItemWidget({
     super.key,
@@ -15,6 +16,7 @@ class SettingsItemWidget extends StatelessWidget {
     required this.icon,
     required this.onTap,
     this.action,
+    this.color,
   });
 
   @override
@@ -39,13 +41,13 @@ class SettingsItemWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              icon.svg(colorFilter: ColorFilter.mode(colorTheme.textColor, BlendMode.srcIn)),
+              icon.svg(colorFilter: ColorFilter.mode(color ?? colorTheme.textColor, BlendMode.srcIn)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     title,
-                    style: textTheme.semi14,
+                    style: textTheme.semi14.copyWith(color: color),
                   ),
                 ),
               ),

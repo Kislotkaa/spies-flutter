@@ -36,14 +36,12 @@ import 'package:serverpod_flutter_server/src/generated/request/get_user_request.
     as _i15;
 import 'package:serverpod_flutter_server/src/generated/request/sign_in_request.dart'
     as _i16;
-import 'package:serverpod_flutter_server/src/generated/request/sign_out_request.dart'
-    as _i17;
 import 'package:serverpod_flutter_server/src/generated/request/change_name_request.dart'
-    as _i18;
+    as _i17;
 import 'package:serverpod_flutter_server/src/generated/request/add_word_request.dart'
-    as _i19;
+    as _i18;
 import 'package:serverpod_flutter_server/src/generated/request/add_category_request.dart'
-    as _i20;
+    as _i19;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -318,10 +316,10 @@ class Endpoints extends _i1.EndpointDispatch {
         'signOut': _i1.MethodConnector(
           name: 'signOut',
           params: {
-            'model': _i1.ParameterDescription(
-              name: 'model',
-              type: _i1.getType<_i17.SignOutRequest>(),
-              nullable: false,
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<_i14.UuidValue?>(),
+              nullable: true,
             )
           },
           call: (
@@ -330,7 +328,7 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['user'] as _i3.UserEndpoint).signOut(
             session,
-            params['model'],
+            params['userId'],
           ),
         ),
         'changeName': _i1.MethodConnector(
@@ -338,7 +336,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'model': _i1.ParameterDescription(
               name: 'model',
-              type: _i1.getType<_i18.ChangeNameRequest>(),
+              type: _i1.getType<_i17.ChangeNameRequest>(),
               nullable: false,
             )
           },
@@ -371,7 +369,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'model': _i1.ParameterDescription(
               name: 'model',
-              type: _i1.getType<_i19.AddWordRequest>(),
+              type: _i1.getType<_i18.AddWordRequest>(),
               nullable: false,
             )
           },
@@ -398,7 +396,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'model': _i1.ParameterDescription(
               name: 'model',
-              type: _i1.getType<_i20.AddCategoryRequest>(),
+              type: _i1.getType<_i19.AddCategoryRequest>(),
               nullable: false,
             )
           },

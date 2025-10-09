@@ -2,4 +2,3 @@ class: SignOutRequest
 
 fields:
   userId: UuidValue
-  deviceId: String

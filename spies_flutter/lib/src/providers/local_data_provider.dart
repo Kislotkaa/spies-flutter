@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:sample/core/utils/constants.dart';
-import 'package:sample/core/models/user_model.dart';
+import 'package:serverpod_flutter_client/serverpod_flutter_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalDataProvider {
@@ -7,20 +9,20 @@ class LocalDataProvider {
 
   LocalDataProvider(this._prefs);
 
-  void saveUser(UserModel? user) {
+  void saveUser(UserResponse? user) {
     if (user == null) {
       _prefs.remove(SPrefsKeys.USER);
       return;
     }
 
-    _prefs.setString(SPrefsKeys.USER, user.toJson());
+    _prefs.setString(SPrefsKeys.USER, jsonEncode(user.toJson()));
   }
 
-  UserModel? getUser() {
+  UserResponse? getUser() {
     final result = _prefs.getString(SPrefsKeys.USER);
     if (result == null) return null;
 
-    return UserModel.fromJson(result);
+    return UserResponse.fromJson(jsonDecode(result));
   }
 
   String? getLocal() => _prefs.getString(SPrefsKeys.INTL);

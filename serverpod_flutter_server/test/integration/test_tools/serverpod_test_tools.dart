@@ -41,18 +41,16 @@ import 'package:serverpod_flutter_server/src/generated/request/get_user_request.
     as _i16;
 import 'package:serverpod_flutter_server/src/generated/request/sign_in_request.dart'
     as _i17;
-import 'package:serverpod_flutter_server/src/generated/request/sign_out_request.dart'
-    as _i18;
 import 'package:serverpod_flutter_server/src/generated/request/change_name_request.dart'
-    as _i19;
+    as _i18;
 import 'package:serverpod_flutter_server/src/generated/response/word_response.dart'
-    as _i20;
+    as _i19;
 import 'package:serverpod_flutter_server/src/generated/request/add_word_request.dart'
-    as _i21;
+    as _i20;
 import 'package:serverpod_flutter_server/src/generated/response/word_category_response.dart'
-    as _i22;
+    as _i21;
 import 'package:serverpod_flutter_server/src/generated/request/add_category_request.dart'
-    as _i23;
+    as _i22;
 import 'package:serverpod_flutter_server/src/generated/protocol.dart';
 import 'package:serverpod_flutter_server/src/generated/endpoints.dart';
 export 'package:serverpod_test/serverpod_test_public_exports.dart';
@@ -571,7 +569,7 @@ class _UserEndpoint {
 
   _i3.Future<void> signOut(
     _i1.TestSessionBuilder sessionBuilder,
-    _i18.SignOutRequest model,
+    _i5.UuidValue? userId,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
@@ -584,7 +582,7 @@ class _UserEndpoint {
           createSessionCallback: (_) => _localUniqueSession,
           endpointPath: 'user',
           methodName: 'signOut',
-          parameters: _i1.testObjectToJson({'model': model}),
+          parameters: _i1.testObjectToJson({'userId': userId}),
           serializationManager: _serializationManager,
         );
         var _localReturnValue = await (_localCallContext.method.call(
@@ -600,7 +598,7 @@ class _UserEndpoint {
 
   _i3.Future<void> changeName(
     _i1.TestSessionBuilder sessionBuilder,
-    _i19.ChangeNameRequest model,
+    _i18.ChangeNameRequest model,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
@@ -638,7 +636,7 @@ class _WordEndpoint {
 
   final _i2.SerializationManager _serializationManager;
 
-  _i3.Future<List<_i20.WordResponse>> getWords(
+  _i3.Future<List<_i19.WordResponse>> getWords(
       _i1.TestSessionBuilder sessionBuilder) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
@@ -657,7 +655,7 @@ class _WordEndpoint {
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
-        ) as _i3.Future<List<_i20.WordResponse>>);
+        ) as _i3.Future<List<_i19.WordResponse>>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -665,9 +663,9 @@ class _WordEndpoint {
     });
   }
 
-  _i3.Future<_i20.WordResponse> addWord(
+  _i3.Future<_i19.WordResponse> addWord(
     _i1.TestSessionBuilder sessionBuilder,
-    _i21.AddWordRequest model,
+    _i20.AddWordRequest model,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
@@ -686,7 +684,7 @@ class _WordEndpoint {
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
-        ) as _i3.Future<_i20.WordResponse>);
+        ) as _i3.Future<_i19.WordResponse>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -694,7 +692,7 @@ class _WordEndpoint {
     });
   }
 
-  _i3.Future<List<_i22.WordCategoryResponse>> getCategories(
+  _i3.Future<List<_i21.WordCategoryResponse>> getCategories(
       _i1.TestSessionBuilder sessionBuilder) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
@@ -713,7 +711,7 @@ class _WordEndpoint {
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
-        ) as _i3.Future<List<_i22.WordCategoryResponse>>);
+        ) as _i3.Future<List<_i21.WordCategoryResponse>>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -721,9 +719,9 @@ class _WordEndpoint {
     });
   }
 
-  _i3.Future<_i22.WordCategoryResponse> addCategory(
+  _i3.Future<_i21.WordCategoryResponse> addCategory(
     _i1.TestSessionBuilder sessionBuilder,
-    _i23.AddCategoryRequest model,
+    _i22.AddCategoryRequest model,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
@@ -742,7 +740,7 @@ class _WordEndpoint {
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
-        ) as _i3.Future<_i22.WordCategoryResponse>);
+        ) as _i3.Future<_i21.WordCategoryResponse>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();

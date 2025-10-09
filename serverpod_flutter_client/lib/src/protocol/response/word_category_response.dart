@@ -13,12 +13,12 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class WordCategoryResponse implements _i1.SerializableModel {
   WordCategoryResponse._({
-    _i1.UuidValue? id,
+    required this.id,
     required this.name,
-  }) : id = id ?? _i1.Uuid().v4obj();
+  });
 
   factory WordCategoryResponse({
-    _i1.UuidValue? id,
+    required _i1.UuidValue id,
     required String name,
   }) = _WordCategoryResponseImpl;
 
@@ -57,7 +57,7 @@ abstract class WordCategoryResponse implements _i1.SerializableModel {
 
 class _WordCategoryResponseImpl extends WordCategoryResponse {
   _WordCategoryResponseImpl({
-    _i1.UuidValue? id,
+    required _i1.UuidValue id,
     required String name,
   }) : super._(
           id: id,

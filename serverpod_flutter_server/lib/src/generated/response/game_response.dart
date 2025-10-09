@@ -18,7 +18,7 @@ import '../response/word_category_response.dart' as _i5;
 abstract class GameResponse
     implements _i1.SerializableModel, _i1.ProtocolSerialization {
   GameResponse._({
-    _i1.UuidValue? id,
+    required this.id,
     required this.owner,
     required this.name,
     required this.code,
@@ -30,11 +30,10 @@ abstract class GameResponse
     required this.isShowWordHint,
     required this.isSubmittedUserWord,
     _i2.GameStatus? status,
-  })  : id = id ?? _i1.Uuid().v4obj(),
-        status = status ?? _i2.GameStatus.created;
+  }) : status = status ?? _i2.GameStatus.created;
 
   factory GameResponse({
-    _i1.UuidValue? id,
+    required _i1.UuidValue id,
     required _i3.UserResponse owner,
     required String name,
     required String code,
@@ -170,7 +169,7 @@ class _Undefined {}
 
 class _GameResponseImpl extends GameResponse {
   _GameResponseImpl({
-    _i1.UuidValue? id,
+    required _i1.UuidValue id,
     required _i3.UserResponse owner,
     required String name,
     required String code,

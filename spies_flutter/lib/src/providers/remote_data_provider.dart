@@ -16,17 +16,19 @@ class RemoteDataProvider {
 
   Future<AppResponse<UserResponse, GatewayError>> signIn(SignInRequest model) async {
     try {
-      await _client?.user.signIn(model);
+      final result = await _client?.user.signIn(model);
 
-      return AppResponse.success();
+      if (result == null) AppResponse.error(GatewayError.somethingWrong);
+
+      return AppResponse.success(data: result);
     } catch (e) {
       return _errorHandler(e);
     }
   }
 
-  Future<AppResponse<void, GatewayError>> signOut(SignOutRequest model) async {
+  Future<AppResponse<void, GatewayError>> signOut(UuidValue? userId) async {
     try {
-      await _client?.user.signOut(model);
+      await _client?.user.signOut(userId);
 
       return AppResponse.success();
     } catch (e) {

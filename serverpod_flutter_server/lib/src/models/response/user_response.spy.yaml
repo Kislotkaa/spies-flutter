@@ -1,7 +1,7 @@
 class: UserResponse
 
 fields:
-  id: UuidValue, defaultModel=random
+  id: UuidValue
   deviceId: String
   name: String
 

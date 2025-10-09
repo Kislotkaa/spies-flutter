@@ -1,4 +1,5 @@
 import 'package:serverpod/serverpod.dart';
+import 'package:serverpod_flutter_server/src/extends/data_extends.dart';
 
 import 'package:serverpod_flutter_server/src/generated/protocol.dart';
 
@@ -31,19 +32,4 @@ class WordEndpoint extends Endpoint {
     final category = await WordCategoryData.db.insertRow(session, WordCategoryData(name: model.name));
     return category.toResponse();
   }
-}
-
-extension on WordCategoryData {
-  WordCategoryResponse toResponse() => WordCategoryResponse(
-        id: id,
-        name: name,
-      );
-}
-
-extension on WordData {
-  WordResponse toResponse() => WordResponse(
-        id: id,
-        word: word,
-        wordCategory: wordCategory?.toResponse(),
-      );
 }

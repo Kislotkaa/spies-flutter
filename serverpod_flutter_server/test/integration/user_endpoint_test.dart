@@ -56,10 +56,7 @@ void main() {
 
         await endpoints.user.signOut(
           sessionBuilder,
-          SignOutRequest(
-            deviceId: result.deviceId,
-            userId: result.id,
-          ),
+          SignOutRequest(userId: result.id),
         );
 
         final user = await endpoints.user.getUser(
