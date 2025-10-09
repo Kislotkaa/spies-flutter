@@ -8,7 +8,17 @@
   "name": "Никнейм",
   "youAreYours": "Ты свой?",
   "enter": "Войти",
+  "cancel": "Отмена",
   "nameNotValid": "Длина никнейма должна быть не меньше 2-х символов",
   "politPart1": "Войдя, вы соглашаетесь с настоящей ",
-  "politPart2": "политикой конфиденциальности."
+  "politPart2": "политикой конфиденциальности.",
+  "mainCreateGame": "Создать игру",
+  "mainConnectGame": "Подключиться",
+  "mainTitle": "Главная",
+  "settingsTitle": "Настройки",
+  "settingsSuggest": "Предложить",
+  "suggestWordTitle": "Предложить слово",
+  "createGameTitle": "Создание игры",
+  "createGameCreate": "Создать",
+  "gameTitle": "Игра"
 }

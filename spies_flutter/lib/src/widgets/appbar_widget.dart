@@ -21,36 +21,44 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
+    final colorTheme = context.colorTheme;
 
-    return AppBar(
-      elevation: 0.0,
-      titleSpacing: 20,
-      leading: leadingWidget ??
-          (needClose
-              ? Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: IconWidget(
-                    onTap: () => router.removeLast(),
-                    icon: Assets.icons.arrowLeft,
-                  ),
-                )
-              : null),
-      centerTitle: false,
-      title: Text(
-        title,
-        style: textTheme.semi20,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: Row(children: actions),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AppBar(
+          elevation: 0.0,
+          titleSpacing: 20,
+          leading: leadingWidget ??
+              (needClose
+                  ? IconWidget(
+                      onTap: router.maybePopTop,
+                      icon: Assets.icons.arrowLeft,
+                      padding: const EdgeInsets.only(left: 12),
+                    )
+                  : null),
+          centerTitle: false,
+          title: Text(
+            title,
+            style: textTheme.semi20,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Row(children: actions),
+            ),
+          ],
+        ),
+        Container(
+          height: 1,
+          color: colorTheme.cardColor,
         ),
       ],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 1);
 }

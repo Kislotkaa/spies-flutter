@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppStaticColors {
   const AppStaticColors._();
 
+  static const barierColor = Color.fromRGBO(0, 0, 0, 0.3);
   static const black = Color.fromRGBO(0, 0, 0, 1);
   static const white = Color.fromRGBO(255, 255, 255, 1);
   static const primary = Color.fromRGBO(34, 33, 48, 1);

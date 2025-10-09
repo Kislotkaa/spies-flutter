@@ -7,8 +7,8 @@ part 'main_state.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc() : super(MainInitialState()) {
-    on<HomeInitialEvent>(_init);
+    on<MainInitialEvent>(_init);
   }
 
-  FutureOr<void> _init(HomeInitialEvent event, emit) {}
+  FutureOr<void> _init(MainInitialEvent event, emit) {}
 }

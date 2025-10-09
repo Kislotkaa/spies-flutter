@@ -75,23 +75,27 @@ class SnackbarWidget {
                         switch (status) {
                           case SnackbarStatus.error:
                             return Assets.icons.alertDiamond.svg(
-                              colorFilter: ColorFilter.mode(colorTheme.redColor, BlendMode.srcIn),
+                              colorFilter: ColorFilter.mode(
+                                  colorTheme.redColor, BlendMode.srcIn),
                               height: 32,
                             );
                           case SnackbarStatus.warning:
                             return Assets.icons.alert.svg(
-                              colorFilter: ColorFilter.mode(colorTheme.yellowColor, BlendMode.srcIn),
+                              colorFilter: ColorFilter.mode(
+                                  colorTheme.yellowColor, BlendMode.srcIn),
                               height: 32,
                             );
                           case SnackbarStatus.access:
                             return Assets.icons.tickDouble.svg(
-                              colorFilter: ColorFilter.mode(colorTheme.greenColor, BlendMode.srcIn),
+                              colorFilter: ColorFilter.mode(
+                                  colorTheme.greenColor, BlendMode.srcIn),
                               height: 32,
                             );
 
                           case SnackbarStatus.info:
                             return Assets.icons.informationSquare.svg(
-                              colorFilter: ColorFilter.mode(colorTheme.revertTextColor, BlendMode.srcIn),
+                              colorFilter: ColorFilter.mode(
+                                  colorTheme.revertTextColor, BlendMode.srcIn),
                               height: 32,
                             );
 
@@ -115,7 +119,8 @@ class SnackbarWidget {
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
                                 subTitle,
-                                style: textTheme.semi14.copyWith(color: colorTheme.textGrayColor),
+                                style: textTheme.semi14
+                                    .copyWith(color: colorTheme.textGrayColor),
                               ),
                             ),
                         ],
@@ -179,7 +184,8 @@ class _AppFloatingSnackBarWidget extends StatefulWidget {
   _AppFloatingSnackBarState createState() => _AppFloatingSnackBarState();
 }
 
-class _AppFloatingSnackBarState extends State<_AppFloatingSnackBarWidget> with SingleTickerProviderStateMixin {
+class _AppFloatingSnackBarState extends State<_AppFloatingSnackBarWidget>
+    with SingleTickerProviderStateMixin {
   late final Animation<Offset> _offsetAnimation;
   late final AnimationController _animationController;
   late final Tween<Offset> _offsetTween;
@@ -239,8 +245,12 @@ class _AppFloatingSnackBarState extends State<_AppFloatingSnackBarWidget> with S
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: widget.snackBarPosition == SnackbarPosition.TOP ? widget.margin.top : null,
-      bottom: widget.snackBarPosition == SnackbarPosition.BOTTOM ? widget.margin.bottom : null,
+      top: widget.snackBarPosition == SnackbarPosition.TOP
+          ? widget.margin.top
+          : null,
+      bottom: widget.snackBarPosition == SnackbarPosition.BOTTOM
+          ? widget.margin.bottom
+          : null,
       left: widget.margin.left,
       right: widget.margin.right,
       child: SlideTransition(

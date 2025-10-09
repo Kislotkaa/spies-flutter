@@ -9,6 +9,8 @@ class ButtonWidget extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.text,
+    this.leftWidget,
+    this.rightWidget,
     this.padding,
     this.height = 50,
     this.isChips = false,
@@ -17,6 +19,8 @@ class ButtonWidget extends StatelessWidget {
 
   final Function() onTap;
   final String text;
+  final Widget? leftWidget;
+  final Widget? rightWidget;
   final double height;
   final ButtonStateEnum state;
   final EdgeInsets? padding;
@@ -47,11 +51,14 @@ class ButtonWidget extends StatelessWidget {
         child: ElevatedButton(
           style: switch (state) {
             ButtonStateEnum.fill => defaultButtnStyle.copyWith(
-                backgroundColor: WidgetStatePropertyAll(colorTheme.primaryColor),
-                overlayColor: WidgetStatePropertyAll(colorTheme.revertBasicColor),
+                backgroundColor:
+                    WidgetStatePropertyAll(colorTheme.primaryColor),
+                overlayColor:
+                    WidgetStatePropertyAll(colorTheme.revertBasicColor),
               ),
             ButtonStateEnum.outline => defaultButtnStyle.copyWith(
-                backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+                backgroundColor:
+                    const WidgetStatePropertyAll(Colors.transparent),
                 overlayColor: WidgetStatePropertyAll(colorTheme.cardColor),
                 side: WidgetStatePropertyAll(
                   BorderSide(color: colorTheme.textGrayColor),
@@ -59,14 +66,21 @@ class ButtonWidget extends StatelessWidget {
               ),
           },
           onPressed: onTap,
-          child: Text(
-            text,
-            style: switch (state) {
-              ButtonStateEnum.fill => defaultTextStyle.copyWith(
-                  color: colorTheme.alwaysWhiteColor,
-                ),
-              ButtonStateEnum.outline => defaultTextStyle,
-            },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              leftWidget ?? const SizedBox.square(dimension: 24),
+              Text(
+                text,
+                style: switch (state) {
+                  ButtonStateEnum.fill => defaultTextStyle.copyWith(
+                      color: colorTheme.alwaysWhiteColor,
+                    ),
+                  ButtonStateEnum.outline => defaultTextStyle,
+                },
+              ),
+              rightWidget ?? const SizedBox.square(dimension: 24),
+            ],
           ),
         ),
       ),

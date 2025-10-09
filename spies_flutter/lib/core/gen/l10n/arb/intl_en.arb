@@ -8,7 +8,17 @@
   "name": "Nickname",
   "youAreYours": "Are you your own?",
   "enter": "Enter",
+  "cancel": "Cancel",
   "nameNotValid": "The length of the nickname should be at least 2 characters",
   "politPart1": "Entering, you agree with the present ",
-  "politPart2": "privacy policy."
+  "politPart2": "privacy policy.",
+  "mainCreateGame": "Create game",
+  "mainConnectGame": "Connect",
+  "mainTitle": "Main",
+  "settingsTitle": "Settings",
+  "settingsSuggest": "Offer",
+  "suggestWordTitle": "Suggest a word",
+  "createGameTitle": "Game creation",
+  "createGameCreate": "Create",
+  "gameTitle": "Game"
 }

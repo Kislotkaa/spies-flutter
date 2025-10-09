@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:sample/core/models/theme/colors.dart';
 import 'package:sample/core/router/app_router.gr.dart';
 
 final router = AppRouter();
@@ -22,16 +23,37 @@ class AppRouter extends RootStackRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
         CustomRoute(
-          path: '/home',
-          page: HomeRoute.page,
-          transitionsBuilder: TransitionsBuilders.noTransition,
-          children: [
-            CustomRoute(
-              path: 'main',
-              page: MainRoute.page,
-              transitionsBuilder: TransitionsBuilders.fadeIn,
-            ),
-          ],
+          path: '/appDialog',
+          page: AppDialogRoute.page,
+          barrierColor: AppStaticColors.barierColor,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          opaque: false,
+          barrierDismissible: true,
+        ),
+        CustomRoute(
+          path: '/main',
+          page: MainRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute(
+          path: '/settings',
+          page: SettingsRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+        ),
+        CustomRoute(
+          path: '/suggestWord',
+          page: SuggestWordRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute(
+          path: '/createGame',
+          page: CreateGameRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute(
+          path: '/game',
+          page: GameRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
       ];
 

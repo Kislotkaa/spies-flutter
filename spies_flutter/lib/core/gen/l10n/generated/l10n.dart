@@ -130,6 +130,16 @@ class S {
     );
   }
 
+  /// `Отмена`
+  String get cancel {
+    return Intl.message(
+      'Отмена',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Длина никнейма должна быть не меньше 2-х символов`
   String get nameNotValid {
     return Intl.message(
@@ -155,6 +165,96 @@ class S {
     return Intl.message(
       'политикой конфиденциальности.',
       name: 'politPart2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Создать игру`
+  String get mainCreateGame {
+    return Intl.message(
+      'Создать игру',
+      name: 'mainCreateGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Подключиться`
+  String get mainConnectGame {
+    return Intl.message(
+      'Подключиться',
+      name: 'mainConnectGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Главная`
+  String get mainTitle {
+    return Intl.message(
+      'Главная',
+      name: 'mainTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Настройки`
+  String get settingsTitle {
+    return Intl.message(
+      'Настройки',
+      name: 'settingsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Предложить`
+  String get settingsSuggest {
+    return Intl.message(
+      'Предложить',
+      name: 'settingsSuggest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Предложить слово`
+  String get suggestWordTitle {
+    return Intl.message(
+      'Предложить слово',
+      name: 'suggestWordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Создание игры`
+  String get createGameTitle {
+    return Intl.message(
+      'Создание игры',
+      name: 'createGameTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Создать`
+  String get createGameCreate {
+    return Intl.message(
+      'Создать',
+      name: 'createGameCreate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Игра`
+  String get gameTitle {
+    return Intl.message(
+      'Игра',
+      name: 'gameTitle',
       desc: '',
       args: [],
     );

@@ -25,7 +25,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "appName": MessageLookupByLibrary.simpleMessage("Spy"),
         "authFailedToSignIn": MessageLookupByLibrary.simpleMessage(
             "Failed to log in, please try again later"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "createGameCreate": MessageLookupByLibrary.simpleMessage("Create"),
+        "createGameTitle":
+            MessageLookupByLibrary.simpleMessage("Game creation"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
+        "gameTitle": MessageLookupByLibrary.simpleMessage("Game"),
+        "mainConnectGame": MessageLookupByLibrary.simpleMessage("Connect"),
+        "mainCreateGame": MessageLookupByLibrary.simpleMessage("Create game"),
+        "mainTitle": MessageLookupByLibrary.simpleMessage("Main"),
         "name": MessageLookupByLibrary.simpleMessage("Nickname"),
         "nameNotValid": MessageLookupByLibrary.simpleMessage(
             "The length of the nickname should be at least 2 characters"),
@@ -36,8 +44,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "A server error occurred, please try again later"),
         "serverUnavailable": MessageLookupByLibrary.simpleMessage(
             "The server is currently not available"),
+        "settingsSuggest": MessageLookupByLibrary.simpleMessage("Offer"),
+        "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Something went wrong"),
+        "suggestWordTitle":
+            MessageLookupByLibrary.simpleMessage("Suggest a word"),
         "youAreYours": MessageLookupByLibrary.simpleMessage("Are you your own?")
       };
 }

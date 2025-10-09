@@ -17,8 +17,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   FutureOr<void> _init(SplashInitialEvent event, emit) async {
-    await Future.delayed(const Duration(seconds: 1));
-
     if (_userRepository.isAuth && _userRepository.user != null) {
       _userRepository.signIn(
         SignInRequest(

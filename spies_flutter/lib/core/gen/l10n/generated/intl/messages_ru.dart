@@ -25,7 +25,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "appName": MessageLookupByLibrary.simpleMessage("Шпион"),
         "authFailedToSignIn": MessageLookupByLibrary.simpleMessage(
             "Не удалось авторизироваться, повторите попытку позже"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "createGameCreate": MessageLookupByLibrary.simpleMessage("Создать"),
+        "createGameTitle":
+            MessageLookupByLibrary.simpleMessage("Создание игры"),
         "enter": MessageLookupByLibrary.simpleMessage("Войти"),
+        "gameTitle": MessageLookupByLibrary.simpleMessage("Игра"),
+        "mainConnectGame": MessageLookupByLibrary.simpleMessage("Подключиться"),
+        "mainCreateGame": MessageLookupByLibrary.simpleMessage("Создать игру"),
+        "mainTitle": MessageLookupByLibrary.simpleMessage("Главная"),
         "name": MessageLookupByLibrary.simpleMessage("Никнейм"),
         "nameNotValid": MessageLookupByLibrary.simpleMessage(
             "Длина никнейма должна быть не меньше 2-х символов"),
@@ -37,8 +45,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Произошла серверная ошибка, повторите попытку позже"),
         "serverUnavailable": MessageLookupByLibrary.simpleMessage(
             "Сервер в данный момент не доступен"),
+        "settingsSuggest": MessageLookupByLibrary.simpleMessage("Предложить"),
+        "settingsTitle": MessageLookupByLibrary.simpleMessage("Настройки"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Что-то пошло не так"),
+        "suggestWordTitle":
+            MessageLookupByLibrary.simpleMessage("Предложить слово"),
         "youAreYours": MessageLookupByLibrary.simpleMessage("Ты свой?")
       };
 }

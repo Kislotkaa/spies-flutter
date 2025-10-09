@@ -98,6 +98,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/icons/eye.svg');
 
+  /// File path: assets/icons/face-screaming.svg
+  SvgGenImage get faceScreaming =>
+      const SvgGenImage('assets/icons/face-screaming.svg');
+
   /// File path: assets/icons/favourite-fill.svg
   SvgGenImage get favouriteFill =>
       const SvgGenImage('assets/icons/favourite-fill.svg');
@@ -201,6 +205,7 @@ class $AssetsIconsGen {
         edit,
         eye1,
         eye,
+        faceScreaming,
         favouriteFill,
         favourite,
         flashFill,

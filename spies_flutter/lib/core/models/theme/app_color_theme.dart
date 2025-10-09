@@ -57,7 +57,8 @@ class AppColorTheme extends ThemeExtension<AppColorTheme> {
 
     return AppColorTheme(
       basicColor: Color.lerp(basicColor, other?.basicColor, t)!,
-      revertBasicColor: Color.lerp(revertBasicColor, other?.revertBasicColor, t)!,
+      revertBasicColor:
+          Color.lerp(revertBasicColor, other?.revertBasicColor, t)!,
       textGrayColor: Color.lerp(textGrayColor, other?.textGrayColor, t)!,
       textColor: Color.lerp(textColor, other?.textColor, t)!,
       revertTextColor: Color.lerp(revertTextColor, other?.revertTextColor, t)!,
