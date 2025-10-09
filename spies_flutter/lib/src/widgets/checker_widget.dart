@@ -46,8 +46,7 @@ class _CheckerWidgetState extends State<CheckerWidget> {
           width: 55,
           decoration: BoxDecoration(
             border: Border.all(
-              color:
-                  isPressed ? colorTheme.textColor : colorTheme.textGrayColor,
+              color: isPressed ? colorTheme.textColor : colorTheme.textGrayColor,
               width: isPressed ? 6 : 3,
             ),
             shape: BoxShape.circle,

@@ -8,7 +8,7 @@ import 'package:sample/core/utils/constants.dart';
 import 'package:sample/core/utils/context_extension.dart';
 import 'package:sample/presentation/auth/bloc/auth_bloc.dart';
 import 'package:sample/src/widgets/button_widget.dart';
-import 'package:sample/src/widgets/icon_button_widget.dart';
+import 'package:sample/src/widgets/icon_widget.dart';
 import 'package:sample/src/widgets/text_field_widget.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 

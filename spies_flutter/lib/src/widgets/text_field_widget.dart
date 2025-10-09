@@ -67,8 +67,7 @@ class TextFieldWidget extends StatelessWidget {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment:
-          titleCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: titleCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         if (titleText != null)
           Padding(
@@ -112,10 +111,8 @@ class TextFieldWidget extends StatelessWidget {
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             alignLabelWithHint: true,
-            hintStyle:
-                textTheme.semi14.copyWith(color: colorTheme.textGrayColor),
-            labelStyle:
-                textTheme.semi14.copyWith(color: colorTheme.textGrayColor),
+            hintStyle: textTheme.semi14.copyWith(color: colorTheme.textGrayColor),
+            labelStyle: textTheme.semi14.copyWith(color: colorTheme.textGrayColor),
             errorStyle: textTheme.semi14.copyWith(color: colorTheme.redColor),
             errorMaxLines: 4,
             errorBorder: OutlineInputBorder(

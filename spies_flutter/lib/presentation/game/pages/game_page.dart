@@ -4,7 +4,7 @@ import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/gen/l10n/generated/l10n.dart';
 import 'package:sample/core/router/app_router.dart';
 import 'package:sample/src/widgets/appbar_widget.dart';
-import 'package:sample/src/widgets/icon_button_widget.dart';
+import 'package:sample/src/widgets/icon_widget.dart';
 
 @RoutePage()
 class GamePage extends StatelessWidget {

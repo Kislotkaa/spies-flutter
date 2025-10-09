@@ -10,50 +10,35 @@ class IntlRepository {
   IntlRepository(
     this._localDataProvider,
   ) {
-    _init();
+    final result = _localDataProvider.getLocal();
+
+    _currentLocale = switch (result) {
+      null => _getLocale(Platform.localeName.substring(0, 2)),
+      _ => _getLocale(result),
+    };
+
+    saveLocale(_currentLocale);
   }
 
   final _controller = StreamController<String>();
 
-  void _init() {
-    try {
-      final locale = _localDataProvider.getLocal();
+  String? _currentLocale;
 
-      if (locale == null) {
-        final systemLocale = Platform.localeName;
+  Stream<String> get getLocaleStream => _controller.stream;
+  String get getCurrnetLocale => _currentLocale ?? IntlLocales.ru;
 
-        late final String locale;
+  Future<void> saveLocale([String? locale]) async {
+    final newLocale = locale ?? getCurrnetLocale;
 
-        if (systemLocale.substring(0, 2) == IntlLocales.ru) {
-          locale = IntlLocales.ru;
-        } else {
-          locale = IntlLocales.en;
-        }
-
-        _controller.add(locale);
-        saveLocale(locale);
-        return;
-      }
-
-      if (locale == IntlLocales.en) {
-        _controller.add(IntlLocales.en);
-        return;
-      }
-
-      _controller.add(IntlLocales.ru);
-    } catch (_) {
-      saveLocale(IntlLocales.ru);
-    }
-  }
-
-  Stream<String> getStream() async* {
-    yield* _controller.stream;
-  }
-
-  Future<void> saveLocale(String locale) async {
-    _controller.add(locale);
-    _localDataProvider.saveLocale(locale);
+    _currentLocale = newLocale;
+    _controller.add(newLocale);
+    _localDataProvider.saveLocale(newLocale);
   }
 
   void dispose() => _controller.close();
+
+  String _getLocale(String localeName) => switch (localeName) {
+        'en' => IntlLocales.en,
+        _ => IntlLocales.ru,
+      };
 }

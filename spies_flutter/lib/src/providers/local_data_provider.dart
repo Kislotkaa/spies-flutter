@@ -29,6 +29,5 @@ class LocalDataProvider {
 
   String? getTheme() => _prefs.getString(SPrefsKeys.THEME);
 
-  void saveTheme(String themeName) =>
-      _prefs.setString(SPrefsKeys.THEME, themeName);
+  void saveTheme(String themeName) => _prefs.setString(SPrefsKeys.THEME, themeName);
 }

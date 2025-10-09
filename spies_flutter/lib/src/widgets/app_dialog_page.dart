@@ -46,8 +46,7 @@ class AppDialogPage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Text(
                   model.subTitle!,
-                  style: textTheme.semi14
-                      .copyWith(color: colorTheme.textGrayColor),
+                  style: textTheme.semi14.copyWith(color: colorTheme.textGrayColor),
                 ),
               ),
             Column(

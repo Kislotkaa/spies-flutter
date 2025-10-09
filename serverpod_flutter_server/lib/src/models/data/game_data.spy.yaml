@@ -13,5 +13,6 @@ fields:
   playerList: List<UserData>
   isShowWordHint: bool
   isSubmittedUserWord: bool
+  createAt: DateTime, default=now
   status: GameStatus, default=created
 

@@ -8,7 +8,7 @@ import 'package:sample/core/router/app_router.gr.dart';
 import 'package:sample/core/utils/context_extension.dart';
 import 'package:sample/src/widgets/appbar_widget.dart';
 import 'package:sample/src/widgets/button_widget.dart';
-import 'package:sample/src/widgets/icon_button_widget.dart';
+import 'package:sample/src/widgets/icon_widget.dart';
 
 @RoutePage()
 class MainPage extends StatelessWidget {

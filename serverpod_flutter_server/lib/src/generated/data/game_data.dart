@@ -34,8 +34,10 @@ abstract class GameData
     required this.playerList,
     required this.isShowWordHint,
     required this.isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
   })  : id = id ?? _i1.Uuid().v4obj(),
+        createAt = createAt ?? DateTime.now(),
         status = status ?? _i2.GameStatus.created;
 
   factory GameData({
@@ -53,6 +55,7 @@ abstract class GameData
     required List<_i3.UserData> playerList,
     required bool isShowWordHint,
     required bool isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
   }) = _GameDataImpl;
 
@@ -96,6 +99,8 @@ abstract class GameData
           .toList(),
       isShowWordHint: jsonSerialization['isShowWordHint'] as bool,
       isSubmittedUserWord: jsonSerialization['isSubmittedUserWord'] as bool,
+      createAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createAt']),
       status: _i2.GameStatus.fromJson((jsonSerialization['status'] as int)),
     );
   }
@@ -133,6 +138,8 @@ abstract class GameData
 
   bool isSubmittedUserWord;
 
+  DateTime createAt;
+
   _i2.GameStatus status;
 
   @override
@@ -156,6 +163,7 @@ abstract class GameData
     List<_i3.UserData>? playerList,
     bool? isShowWordHint,
     bool? isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
   });
   @override
@@ -176,6 +184,7 @@ abstract class GameData
       'playerList': playerList.toJson(valueToJson: (v) => v.toJson()),
       'isShowWordHint': isShowWordHint,
       'isSubmittedUserWord': isSubmittedUserWord,
+      'createAt': createAt.toJson(),
       'status': status.toJson(),
     };
   }
@@ -199,6 +208,7 @@ abstract class GameData
           playerList.toJson(valueToJson: (v) => v.toJsonForProtocol()),
       'isShowWordHint': isShowWordHint,
       'isSubmittedUserWord': isSubmittedUserWord,
+      'createAt': createAt.toJson(),
       'status': status.toJson(),
     };
   }
@@ -259,6 +269,7 @@ class _GameDataImpl extends GameData {
     required List<_i3.UserData> playerList,
     required bool isShowWordHint,
     required bool isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
   }) : super._(
           id: id,
@@ -275,6 +286,7 @@ class _GameDataImpl extends GameData {
           playerList: playerList,
           isShowWordHint: isShowWordHint,
           isSubmittedUserWord: isSubmittedUserWord,
+          createAt: createAt,
           status: status,
         );
 
@@ -297,6 +309,7 @@ class _GameDataImpl extends GameData {
     List<_i3.UserData>? playerList,
     bool? isShowWordHint,
     bool? isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
   }) {
     return GameData(
@@ -323,6 +336,7 @@ class _GameDataImpl extends GameData {
           playerList ?? this.playerList.map((e0) => e0.copyWith()).toList(),
       isShowWordHint: isShowWordHint ?? this.isShowWordHint,
       isSubmittedUserWord: isSubmittedUserWord ?? this.isSubmittedUserWord,
+      createAt: createAt ?? this.createAt,
       status: status ?? this.status,
     );
   }
@@ -370,6 +384,11 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
       'isSubmittedUserWord',
       this,
     );
+    createAt = _i1.ColumnDateTime(
+      'createAt',
+      this,
+      hasDefault: true,
+    );
     status = _i1.ColumnEnum(
       'status',
       this,
@@ -403,6 +422,8 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
   late final _i1.ColumnBool isShowWordHint;
 
   late final _i1.ColumnBool isSubmittedUserWord;
+
+  late final _i1.ColumnDateTime createAt;
 
   late final _i1.ColumnEnum<_i2.GameStatus> status;
 
@@ -458,6 +479,7 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
         playerList,
         isShowWordHint,
         isSubmittedUserWord,
+        createAt,
         status,
       ];
 

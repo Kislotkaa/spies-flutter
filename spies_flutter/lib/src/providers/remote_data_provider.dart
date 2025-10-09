@@ -14,8 +14,7 @@ class RemoteDataProvider {
 
   Client? _client;
 
-  Future<AppResponse<UserResponse, GatewayError>> signIn(
-      SignInRequest model) async {
+  Future<AppResponse<UserResponse, GatewayError>> signIn(SignInRequest model) async {
     try {
       await _client?.user.signIn(model);
 

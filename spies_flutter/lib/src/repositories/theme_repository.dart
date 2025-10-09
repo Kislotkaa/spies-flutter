@@ -6,38 +6,29 @@ class ThemeRepository {
   final LocalDataProvider _localDataProvider;
 
   ThemeRepository(this._localDataProvider) {
-    _init();
+    final result = _localDataProvider.getTheme();
+
+    _themeMode = switch (result) {
+      'light' => ThemeMode.light,
+      'dark' => ThemeMode.dark,
+      _ => ThemeMode.light,
+    };
+
+    saveTheme();
   }
 
   final _controller = StreamController<ThemeMode>();
+  ThemeMode? _themeMode;
 
-  void _init() {
-    try {
-      final theme = _localDataProvider.getTheme();
+  ThemeMode get getThemeMode => _themeMode ?? ThemeMode.system;
+  Stream<ThemeMode> get getThemeStream => _controller.stream;
 
-      if (theme == ThemeMode.light.name) {
-        _controller.add(ThemeMode.light);
-        return;
-      }
+  Future<void> saveTheme([ThemeMode? theme]) async {
+    final newTheme = theme ?? getThemeMode;
 
-      if (theme == ThemeMode.dark.name) {
-        _controller.add(ThemeMode.dark);
-        return;
-      }
-
-      _controller.add(ThemeMode.system);
-    } catch (_) {
-      saveTheme(ThemeMode.system);
-    }
-  }
-
-  Stream<ThemeMode> getTheme() async* {
-    yield* _controller.stream;
-  }
-
-  Future<void> saveTheme(ThemeMode theme) async {
-    _controller.add(theme);
-    _localDataProvider.saveTheme(theme.name);
+    _themeMode = newTheme;
+    _controller.add(newTheme);
+    _localDataProvider.saveTheme(newTheme.name);
   }
 
   void dispose() => _controller.close();

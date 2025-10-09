@@ -11,7 +11,8 @@ class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit(
     this._themeRepository,
   ) : super(const ThemeState()) {
-    _listenTheme();
+    _subscribeTheme();
+    _onListen(_themeRepository.getThemeMode);
   }
 
   StreamSubscription<ThemeMode>? _themeSubscription;
@@ -23,48 +24,46 @@ class ThemeCubit extends Cubit<ThemeState> {
     return super.close();
   }
 
-  void _listenTheme() {
-    _themeSubscription = _themeRepository.getTheme().listen(
-      (customTheme) {
-        if (customTheme.name == ThemeMode.light.name) {
-          emit(
-            const ThemeState(
-              themeMode: ThemeMode.light,
-              isDarkMode: false,
-            ),
-          );
+  void _subscribeTheme() => _themeSubscription = _themeRepository.getThemeStream.listen(_onListen);
 
-          return;
-        }
+  void _onListen(ThemeMode customTheme) {
+    if (customTheme.name == ThemeMode.light.name) {
+      emit(
+        const ThemeState(
+          themeMode: ThemeMode.light,
+          isDarkMode: false,
+        ),
+      );
 
-        if (customTheme.name == ThemeMode.dark.name) {
-          emit(
-            const ThemeState(
-              themeMode: ThemeMode.dark,
-              isDarkMode: true,
-            ),
-          );
-          return;
-        }
+      return;
+    }
 
-        final brightness = PlatformDispatcher.instance.platformBrightness;
-        if (brightness == Brightness.dark) {
-          emit(
-            const ThemeState(
-              themeMode: ThemeMode.dark,
-              isDarkMode: true,
-            ),
-          );
-          return;
-        }
+    if (customTheme.name == ThemeMode.dark.name) {
+      emit(
+        const ThemeState(
+          themeMode: ThemeMode.dark,
+          isDarkMode: true,
+        ),
+      );
+      return;
+    }
 
-        emit(
-          const ThemeState(
-            themeMode: ThemeMode.light,
-            isDarkMode: false,
-          ),
-        );
-      },
+    final brightness = PlatformDispatcher.instance.platformBrightness;
+    if (brightness == Brightness.dark) {
+      emit(
+        const ThemeState(
+          themeMode: ThemeMode.dark,
+          isDarkMode: true,
+        ),
+      );
+      return;
+    }
+
+    emit(
+      const ThemeState(
+        themeMode: ThemeMode.light,
+        isDarkMode: false,
+      ),
     );
   }
 

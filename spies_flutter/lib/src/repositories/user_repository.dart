@@ -23,8 +23,7 @@ class UserRepository {
     return _user;
   }
 
-  Future<AppResponse<UserResponse, GatewayError>> signIn(
-      SignInRequest model) async {
+  Future<AppResponse<UserResponse, GatewayError>> signIn(SignInRequest model) async {
     final result = await _remoteDataProvider.signIn(model);
 
     if (result.isSuccess) {
