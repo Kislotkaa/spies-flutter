@@ -10,113 +10,152 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import '../enums/game_status.dart' as _i2;
-import '../response/user_response.dart' as _i3;
-import '../response/word_response.dart' as _i4;
-import '../response/word_category_response.dart' as _i5;
+import '../../../core/models/enums/game_status.dart' as _i2;
+import '../../../core/models/data/user_data.dart' as _i3;
+import '../../../core/models/data/word_data.dart' as _i4;
+import '../../../core/models/data/suggest_word_data.dart' as _i5;
+import '../../../core/models/data/word_category_data.dart' as _i6;
 
-abstract class GameResponse implements _i1.SerializableModel {
-  GameResponse._({
-    required this.id,
+abstract class GameData implements _i1.SerializableModel {
+  GameData._({
+    _i1.UuidValue? id,
     required this.owner,
     required this.name,
     required this.code,
+    this.spyUserId,
+    this.currentWordId,
     this.currentWord,
+    this.nextWordId,
     this.nextWord,
     this.suggestWord,
     required this.wordCategoryList,
     required this.playerList,
     required this.isShowWordHint,
     required this.isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
-  }) : status = status ?? _i2.GameStatus.created;
+  })  : id = id ?? _i1.Uuid().v4obj(),
+        createAt = createAt ?? DateTime.now(),
+        status = status ?? _i2.GameStatus.created;
 
-  factory GameResponse({
-    required _i1.UuidValue id,
-    required _i3.UserResponse owner,
+  factory GameData({
+    _i1.UuidValue? id,
+    required _i3.UserData owner,
     required String name,
     required String code,
-    _i4.WordResponse? currentWord,
-    _i4.WordResponse? nextWord,
-    _i4.WordResponse? suggestWord,
-    required List<_i5.WordCategoryResponse> wordCategoryList,
-    required List<_i3.UserResponse> playerList,
+    _i1.UuidValue? spyUserId,
+    _i1.UuidValue? currentWordId,
+    _i4.WordData? currentWord,
+    _i1.UuidValue? nextWordId,
+    _i4.WordData? nextWord,
+    _i5.SuggestWordData? suggestWord,
+    required List<_i6.WordCategoryData> wordCategoryList,
+    required List<_i3.UserData> playerList,
     required bool isShowWordHint,
     required bool isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
-  }) = _GameResponseImpl;
+  }) = _GameDataImpl;
 
-  factory GameResponse.fromJson(Map<String, dynamic> jsonSerialization) {
-    return GameResponse(
+  factory GameData.fromJson(Map<String, dynamic> jsonSerialization) {
+    return GameData(
       id: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['id']),
-      owner: _i3.UserResponse.fromJson(
+      owner: _i3.UserData.fromJson(
           (jsonSerialization['owner'] as Map<String, dynamic>)),
       name: jsonSerialization['name'] as String,
       code: jsonSerialization['code'] as String,
+      spyUserId: jsonSerialization['spyUserId'] == null
+          ? null
+          : _i1.UuidValueJsonExtension.fromJson(jsonSerialization['spyUserId']),
+      currentWordId: jsonSerialization['currentWordId'] == null
+          ? null
+          : _i1.UuidValueJsonExtension.fromJson(
+              jsonSerialization['currentWordId']),
       currentWord: jsonSerialization['currentWord'] == null
           ? null
-          : _i4.WordResponse.fromJson(
+          : _i4.WordData.fromJson(
               (jsonSerialization['currentWord'] as Map<String, dynamic>)),
+      nextWordId: jsonSerialization['nextWordId'] == null
+          ? null
+          : _i1.UuidValueJsonExtension.fromJson(
+              jsonSerialization['nextWordId']),
       nextWord: jsonSerialization['nextWord'] == null
           ? null
-          : _i4.WordResponse.fromJson(
+          : _i4.WordData.fromJson(
               (jsonSerialization['nextWord'] as Map<String, dynamic>)),
       suggestWord: jsonSerialization['suggestWord'] == null
           ? null
-          : _i4.WordResponse.fromJson(
+          : _i5.SuggestWordData.fromJson(
               (jsonSerialization['suggestWord'] as Map<String, dynamic>)),
       wordCategoryList: (jsonSerialization['wordCategoryList'] as List)
-          .map((e) =>
-              _i5.WordCategoryResponse.fromJson((e as Map<String, dynamic>)))
+          .map(
+              (e) => _i6.WordCategoryData.fromJson((e as Map<String, dynamic>)))
           .toList(),
       playerList: (jsonSerialization['playerList'] as List)
-          .map((e) => _i3.UserResponse.fromJson((e as Map<String, dynamic>)))
+          .map((e) => _i3.UserData.fromJson((e as Map<String, dynamic>)))
           .toList(),
       isShowWordHint: jsonSerialization['isShowWordHint'] as bool,
       isSubmittedUserWord: jsonSerialization['isSubmittedUserWord'] as bool,
+      createAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createAt']),
       status: _i2.GameStatus.fromJson((jsonSerialization['status'] as int)),
     );
   }
 
+  /// The database id, set if the object has been inserted into the
+  /// database or if it has been fetched from the database. Otherwise,
+  /// the id will be null.
   _i1.UuidValue id;
 
-  _i3.UserResponse owner;
+  _i3.UserData owner;
 
   String name;
 
   String code;
 
-  _i4.WordResponse? currentWord;
+  _i1.UuidValue? spyUserId;
 
-  _i4.WordResponse? nextWord;
+  _i1.UuidValue? currentWordId;
 
-  _i4.WordResponse? suggestWord;
+  _i4.WordData? currentWord;
 
-  List<_i5.WordCategoryResponse> wordCategoryList;
+  _i1.UuidValue? nextWordId;
 
-  List<_i3.UserResponse> playerList;
+  _i4.WordData? nextWord;
+
+  _i5.SuggestWordData? suggestWord;
+
+  List<_i6.WordCategoryData> wordCategoryList;
+
+  List<_i3.UserData> playerList;
 
   bool isShowWordHint;
 
   bool isSubmittedUserWord;
 
+  DateTime createAt;
+
   _i2.GameStatus status;
 
-  /// Returns a shallow copy of this [GameResponse]
+  /// Returns a shallow copy of this [GameData]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
-  GameResponse copyWith({
+  GameData copyWith({
     _i1.UuidValue? id,
-    _i3.UserResponse? owner,
+    _i3.UserData? owner,
     String? name,
     String? code,
-    _i4.WordResponse? currentWord,
-    _i4.WordResponse? nextWord,
-    _i4.WordResponse? suggestWord,
-    List<_i5.WordCategoryResponse>? wordCategoryList,
-    List<_i3.UserResponse>? playerList,
+    _i1.UuidValue? spyUserId,
+    _i1.UuidValue? currentWordId,
+    _i4.WordData? currentWord,
+    _i1.UuidValue? nextWordId,
+    _i4.WordData? nextWord,
+    _i5.SuggestWordData? suggestWord,
+    List<_i6.WordCategoryData>? wordCategoryList,
+    List<_i3.UserData>? playerList,
     bool? isShowWordHint,
     bool? isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
   });
   @override
@@ -126,7 +165,10 @@ abstract class GameResponse implements _i1.SerializableModel {
       'owner': owner.toJson(),
       'name': name,
       'code': code,
+      if (spyUserId != null) 'spyUserId': spyUserId?.toJson(),
+      if (currentWordId != null) 'currentWordId': currentWordId?.toJson(),
       if (currentWord != null) 'currentWord': currentWord?.toJson(),
+      if (nextWordId != null) 'nextWordId': nextWordId?.toJson(),
       if (nextWord != null) 'nextWord': nextWord?.toJson(),
       if (suggestWord != null) 'suggestWord': suggestWord?.toJson(),
       'wordCategoryList':
@@ -134,6 +176,7 @@ abstract class GameResponse implements _i1.SerializableModel {
       'playerList': playerList.toJson(valueToJson: (v) => v.toJson()),
       'isShowWordHint': isShowWordHint,
       'isSubmittedUserWord': isSubmittedUserWord,
+      'createAt': createAt.toJson(),
       'status': status.toJson(),
     };
   }
@@ -146,64 +189,80 @@ abstract class GameResponse implements _i1.SerializableModel {
 
 class _Undefined {}
 
-class _GameResponseImpl extends GameResponse {
-  _GameResponseImpl({
-    required _i1.UuidValue id,
-    required _i3.UserResponse owner,
+class _GameDataImpl extends GameData {
+  _GameDataImpl({
+    _i1.UuidValue? id,
+    required _i3.UserData owner,
     required String name,
     required String code,
-    _i4.WordResponse? currentWord,
-    _i4.WordResponse? nextWord,
-    _i4.WordResponse? suggestWord,
-    required List<_i5.WordCategoryResponse> wordCategoryList,
-    required List<_i3.UserResponse> playerList,
+    _i1.UuidValue? spyUserId,
+    _i1.UuidValue? currentWordId,
+    _i4.WordData? currentWord,
+    _i1.UuidValue? nextWordId,
+    _i4.WordData? nextWord,
+    _i5.SuggestWordData? suggestWord,
+    required List<_i6.WordCategoryData> wordCategoryList,
+    required List<_i3.UserData> playerList,
     required bool isShowWordHint,
     required bool isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
   }) : super._(
           id: id,
           owner: owner,
           name: name,
           code: code,
+          spyUserId: spyUserId,
+          currentWordId: currentWordId,
           currentWord: currentWord,
+          nextWordId: nextWordId,
           nextWord: nextWord,
           suggestWord: suggestWord,
           wordCategoryList: wordCategoryList,
           playerList: playerList,
           isShowWordHint: isShowWordHint,
           isSubmittedUserWord: isSubmittedUserWord,
+          createAt: createAt,
           status: status,
         );
 
-  /// Returns a shallow copy of this [GameResponse]
+  /// Returns a shallow copy of this [GameData]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
   @override
-  GameResponse copyWith({
+  GameData copyWith({
     _i1.UuidValue? id,
-    _i3.UserResponse? owner,
+    _i3.UserData? owner,
     String? name,
     String? code,
+    Object? spyUserId = _Undefined,
+    Object? currentWordId = _Undefined,
     Object? currentWord = _Undefined,
+    Object? nextWordId = _Undefined,
     Object? nextWord = _Undefined,
     Object? suggestWord = _Undefined,
-    List<_i5.WordCategoryResponse>? wordCategoryList,
-    List<_i3.UserResponse>? playerList,
+    List<_i6.WordCategoryData>? wordCategoryList,
+    List<_i3.UserData>? playerList,
     bool? isShowWordHint,
     bool? isSubmittedUserWord,
+    DateTime? createAt,
     _i2.GameStatus? status,
   }) {
-    return GameResponse(
+    return GameData(
       id: id ?? this.id,
       owner: owner ?? this.owner.copyWith(),
       name: name ?? this.name,
       code: code ?? this.code,
-      currentWord: currentWord is _i4.WordResponse?
+      spyUserId: spyUserId is _i1.UuidValue? ? spyUserId : this.spyUserId,
+      currentWordId:
+          currentWordId is _i1.UuidValue? ? currentWordId : this.currentWordId,
+      currentWord: currentWord is _i4.WordData?
           ? currentWord
           : this.currentWord?.copyWith(),
+      nextWordId: nextWordId is _i1.UuidValue? ? nextWordId : this.nextWordId,
       nextWord:
-          nextWord is _i4.WordResponse? ? nextWord : this.nextWord?.copyWith(),
-      suggestWord: suggestWord is _i4.WordResponse?
+          nextWord is _i4.WordData? ? nextWord : this.nextWord?.copyWith(),
+      suggestWord: suggestWord is _i5.SuggestWordData?
           ? suggestWord
           : this.suggestWord?.copyWith(),
       wordCategoryList: wordCategoryList ??
@@ -212,6 +271,7 @@ class _GameResponseImpl extends GameResponse {
           playerList ?? this.playerList.map((e0) => e0.copyWith()).toList(),
       isShowWordHint: isShowWordHint ?? this.isShowWordHint,
       isSubmittedUserWord: isSubmittedUserWord ?? this.isSubmittedUserWord,
+      createAt: createAt ?? this.createAt,
       status: status ?? this.status,
     );
   }

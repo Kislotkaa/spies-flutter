@@ -10,10 +10,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../enums/game_status.dart' as _i2;
-import '../response/user_response.dart' as _i3;
-import '../response/word_response.dart' as _i4;
-import '../response/word_category_response.dart' as _i5;
+import '../../../core/models/enums/game_status.dart' as _i2;
+import '../../../core/models/response/user_response.dart' as _i3;
+import '../../../core/models/response/word_response.dart' as _i4;
+import '../../../core/models/response/word_category_response.dart' as _i5;
 
 abstract class GameResponse
     implements _i1.SerializableModel, _i1.ProtocolSerialization {

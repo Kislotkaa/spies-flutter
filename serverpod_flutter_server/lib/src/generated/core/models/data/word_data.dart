@@ -12,7 +12,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../data/word_category_data.dart' as _i2;
+import '../../../core/models/data/word_category_data.dart' as _i2;
 
 abstract class WordData
     implements _i1.TableRow<_i1.UuidValue>, _i1.ProtocolSerialization {

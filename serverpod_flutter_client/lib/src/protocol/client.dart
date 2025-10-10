@@ -11,42 +11,42 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:serverpod_flutter_client/src/protocol/response/game_response.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/response/game_response.dart'
     as _i3;
 import 'package:uuid/uuid_value.dart' as _i4;
-import 'package:serverpod_flutter_client/src/protocol/request/create_game_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/create_game_request.dart'
     as _i5;
-import 'package:serverpod_flutter_client/src/protocol/request/start_game_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/start_game_request.dart'
     as _i6;
-import 'package:serverpod_flutter_client/src/protocol/request/finish_game_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/finish_game_request.dart'
     as _i7;
-import 'package:serverpod_flutter_client/src/protocol/request/disconnect_game_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/disconnect_game_request.dart'
     as _i8;
-import 'package:serverpod_flutter_client/src/protocol/request/connect_game_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/connect_game_request.dart'
     as _i9;
-import 'package:serverpod_flutter_client/src/protocol/request/change_game_settings_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/change_game_settings_request.dart'
     as _i10;
-import 'package:serverpod_flutter_client/src/protocol/request/suggest_word_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/suggest_word_request.dart'
     as _i11;
-import 'package:serverpod_flutter_client/src/protocol/request/suggest_word_accepted_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/suggest_word_accepted_request.dart'
     as _i12;
-import 'package:serverpod_flutter_client/src/protocol/request/next_word_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/next_word_request.dart'
     as _i13;
-import 'package:serverpod_flutter_client/src/protocol/response/user_response.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/response/user_response.dart'
     as _i14;
-import 'package:serverpod_flutter_client/src/protocol/request/get_user_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/get_user_request.dart'
     as _i15;
-import 'package:serverpod_flutter_client/src/protocol/request/sign_in_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/sign_in_request.dart'
     as _i16;
-import 'package:serverpod_flutter_client/src/protocol/request/change_name_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/change_name_request.dart'
     as _i17;
-import 'package:serverpod_flutter_client/src/protocol/response/word_response.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/response/word_response.dart'
     as _i18;
-import 'package:serverpod_flutter_client/src/protocol/request/add_word_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/add_word_request.dart'
     as _i19;
-import 'package:serverpod_flutter_client/src/protocol/response/word_category_response.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/response/word_category_response.dart'
     as _i20;
-import 'package:serverpod_flutter_client/src/protocol/request/add_category_request.dart'
+import 'package:serverpod_flutter_client/src/protocol/core/models/request/add_category_request.dart'
     as _i21;
 import 'protocol.dart' as _i22;
 

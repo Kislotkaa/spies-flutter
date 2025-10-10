@@ -10,51 +10,63 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import '../response/word_category_response.dart' as _i2;
+import '../../../core/models/data/word_category_data.dart' as _i2;
 
-abstract class WordResponse implements _i1.SerializableModel {
-  WordResponse._({
-    required this.id,
+abstract class WordData implements _i1.SerializableModel {
+  WordData._({
+    _i1.UuidValue? id,
     required this.word,
     this.hint,
+    this.wordCategoryId,
     this.wordCategory,
-  });
+  }) : id = id ?? _i1.Uuid().v4obj();
 
-  factory WordResponse({
-    required _i1.UuidValue id,
+  factory WordData({
+    _i1.UuidValue? id,
     required String word,
     String? hint,
-    _i2.WordCategoryResponse? wordCategory,
-  }) = _WordResponseImpl;
+    _i1.UuidValue? wordCategoryId,
+    _i2.WordCategoryData? wordCategory,
+  }) = _WordDataImpl;
 
-  factory WordResponse.fromJson(Map<String, dynamic> jsonSerialization) {
-    return WordResponse(
+  factory WordData.fromJson(Map<String, dynamic> jsonSerialization) {
+    return WordData(
       id: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['id']),
       word: jsonSerialization['word'] as String,
       hint: jsonSerialization['hint'] as String?,
+      wordCategoryId: jsonSerialization['wordCategoryId'] == null
+          ? null
+          : _i1.UuidValueJsonExtension.fromJson(
+              jsonSerialization['wordCategoryId']),
       wordCategory: jsonSerialization['wordCategory'] == null
           ? null
-          : _i2.WordCategoryResponse.fromJson(
+          : _i2.WordCategoryData.fromJson(
               (jsonSerialization['wordCategory'] as Map<String, dynamic>)),
     );
   }
 
+  /// The database id, set if the object has been inserted into the
+  /// database or if it has been fetched from the database. Otherwise,
+  /// the id will be null.
   _i1.UuidValue id;
 
   String word;
 
   String? hint;
 
-  _i2.WordCategoryResponse? wordCategory;
+  _i1.UuidValue? wordCategoryId;
 
-  /// Returns a shallow copy of this [WordResponse]
+  _i2.WordCategoryData? wordCategory;
+
+  /// Returns a shallow copy of this [WordData]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
-  WordResponse copyWith({
+  WordData copyWith({
     _i1.UuidValue? id,
     String? word,
     String? hint,
-    _i2.WordCategoryResponse? wordCategory,
+    _i1.UuidValue? wordCategoryId,
+    _i2.WordCategoryData? wordCategory,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -62,6 +74,7 @@ abstract class WordResponse implements _i1.SerializableModel {
       'id': id.toJson(),
       'word': word,
       if (hint != null) 'hint': hint,
+      if (wordCategoryId != null) 'wordCategoryId': wordCategoryId?.toJson(),
       if (wordCategory != null) 'wordCategory': wordCategory?.toJson(),
     };
   }
@@ -74,34 +87,40 @@ abstract class WordResponse implements _i1.SerializableModel {
 
 class _Undefined {}
 
-class _WordResponseImpl extends WordResponse {
-  _WordResponseImpl({
-    required _i1.UuidValue id,
+class _WordDataImpl extends WordData {
+  _WordDataImpl({
+    _i1.UuidValue? id,
     required String word,
     String? hint,
-    _i2.WordCategoryResponse? wordCategory,
+    _i1.UuidValue? wordCategoryId,
+    _i2.WordCategoryData? wordCategory,
   }) : super._(
           id: id,
           word: word,
           hint: hint,
+          wordCategoryId: wordCategoryId,
           wordCategory: wordCategory,
         );
 
-  /// Returns a shallow copy of this [WordResponse]
+  /// Returns a shallow copy of this [WordData]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
   @override
-  WordResponse copyWith({
+  WordData copyWith({
     _i1.UuidValue? id,
     String? word,
     Object? hint = _Undefined,
+    Object? wordCategoryId = _Undefined,
     Object? wordCategory = _Undefined,
   }) {
-    return WordResponse(
+    return WordData(
       id: id ?? this.id,
       word: word ?? this.word,
       hint: hint is String? ? hint : this.hint,
-      wordCategory: wordCategory is _i2.WordCategoryResponse?
+      wordCategoryId: wordCategoryId is _i1.UuidValue?
+          ? wordCategoryId
+          : this.wordCategoryId,
+      wordCategory: wordCategory is _i2.WordCategoryData?
           ? wordCategory
           : this.wordCategory?.copyWith(),
     );
