@@ -1,5 +1,5 @@
 import 'package:serverpod/serverpod.dart';
-import 'package:serverpod_flutter_server/src/features/endpoints/game_endpoint.dart';
+import 'package:serverpod_flutter_server/core/features/endpoints/game_endpoint.dart';
 import 'package:serverpod_flutter_server/src/generated/protocol.dart';
 
 class GameEndedSheduller extends FutureCall<GameUuidEntity> {

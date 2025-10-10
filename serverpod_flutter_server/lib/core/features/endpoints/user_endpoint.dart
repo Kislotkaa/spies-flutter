@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:serverpod/serverpod.dart';
-import 'package:serverpod_flutter_server/src/extends/data_extends.dart';
+import 'package:serverpod_flutter_server/core/extends/data_extends.dart';
 import 'package:serverpod_flutter_server/src/generated/protocol.dart';
 
 class UserEndpoint extends Endpoint {
@@ -19,8 +17,6 @@ class UserEndpoint extends Endpoint {
       session,
       where: (e) => e.deviceId.equals(model.deviceId),
     );
-
-    log(user.toString());
 
     if (user == null) {
       user = await UserData.db.insertRow(

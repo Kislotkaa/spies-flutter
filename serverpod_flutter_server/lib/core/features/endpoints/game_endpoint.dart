@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:serverpod/serverpod.dart';
-import 'package:serverpod_flutter_server/src/extends/data_extends.dart';
-import 'package:serverpod_flutter_server/src/extends/random_extends.dart';
-import 'package:serverpod_flutter_server/src/features/moduls/game_session.dart';
+import 'package:serverpod_flutter_server/core/extends/data_extends.dart';
+import 'package:serverpod_flutter_server/core/extends/random_extends.dart';
+import 'package:serverpod_flutter_server/core/features/moduls/game_session.dart';
 import 'package:serverpod_flutter_server/src/generated/protocol.dart';
 
 class GameEndpoint extends Endpoint {
@@ -193,17 +193,12 @@ class GameEndpoint extends Endpoint {
   ) async {
     final gameSession = _getGameSessionWithId(model.gameId);
 
-    final word = await WordData.db.insertRow(
-      session,
-      WordData(
-        word: model.word,
-      ),
-    );
-
     gameSession.suggestWord(
       SuggestWordData(
         userId: model.userId,
-        word: word,
+        word: WordData(
+          word: model.word,
+        ),
       ),
     );
 

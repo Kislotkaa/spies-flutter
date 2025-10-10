@@ -1,5 +1,5 @@
 import 'package:serverpod/serverpod.dart';
-import 'package:serverpod_flutter_server/src/extends/data_extends.dart';
+import 'package:serverpod_flutter_server/core/extends/data_extends.dart';
 
 import 'package:serverpod_flutter_server/src/generated/protocol.dart';
 

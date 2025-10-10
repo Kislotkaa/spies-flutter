@@ -1,5 +1,5 @@
 import 'package:serverpod/serverpod.dart';
-import 'package:serverpod_flutter_server/src/features/shedullers/game_ended_sheduller.dart';
+import 'package:serverpod_flutter_server/core/features/shedullers/game_ended_sheduller.dart';
 
 void initModules() {}
 
