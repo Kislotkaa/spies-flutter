@@ -40,11 +40,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(SettingsLogoutSuccessState());
   }
 
-  FutureOr<void> _input(SettingsInputEvent event, emit) => emit(
-        SettingsSuffixShownState(
-          _nameController.text.isNotEmpty,
-        ),
-      );
+  FutureOr<void> _input(SettingsInputEvent event, emit) {
+    emit(
+      SettingsSuffixShownState(
+        _userRepository.name != _nameController.text,
+      ),
+    );
+  }
 
   FutureOr<void> _changeName(SettingsChangeNameEvent event, emit) async {
     if (_formKey.currentState?.validate() == false) {

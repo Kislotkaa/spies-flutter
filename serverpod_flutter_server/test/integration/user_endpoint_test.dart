@@ -56,7 +56,7 @@ void main() {
 
         await endpoints.user.signOut(
           sessionBuilder,
-          SignOutRequest(userId: result.id),
+          result.id,
         );
 
         final user = await endpoints.user.getUser(
@@ -86,7 +86,6 @@ void main() {
         await endpoints.user.changeName(
           sessionBuilder,
           ChangeNameRequest(
-            deviceId: result.deviceId,
             userId: result.id,
             newName: newName,
           ),
