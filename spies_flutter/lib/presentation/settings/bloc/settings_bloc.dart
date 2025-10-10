@@ -72,6 +72,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       ),
     );
 
+    emit(
+      SettingsSuffixShownState(
+        isShownSuffix: false,
+        isLoading: false,
+      ),
+    );
+
     if (result.isError) {
       _nameController.text = _userRepository.name ?? '';
       return emit(
@@ -84,13 +91,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         ),
       );
     }
-
-    emit(
-      SettingsSuffixShownState(
-        isShownSuffix: false,
-        isLoading: false,
-      ),
-    );
 
     emit(
       SettingsSnackBarShownState(

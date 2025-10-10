@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/gen/l10n/generated/l10n.dart';
 import 'package:sample/core/utils/context_extension.dart';
+import 'package:sample/src/widgets/logo_widget.dart';
 
 class AuthContentWidget extends StatelessWidget {
   const AuthContentWidget({
@@ -16,13 +16,7 @@ class AuthContentWidget extends StatelessWidget {
 
     return Column(
       children: [
-        Assets.icons.logo.svg(
-          height: 288,
-          colorFilter: ColorFilter.mode(
-            colorTheme.primaryColor,
-            BlendMode.srcIn,
-          ),
-        ),
+        const LogoWidget(),
         Padding(
           padding: const EdgeInsets.only(bottom: 12, top: 24),
           child: Text(

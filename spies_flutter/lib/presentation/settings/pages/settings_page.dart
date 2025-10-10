@@ -15,7 +15,6 @@ import 'package:sample/presentation/settings/widgets/settings_item_widget.dart';
 import 'package:sample/src/cubits/theme_cubit.dart';
 import 'package:sample/src/repositories/user_repository.dart';
 import 'package:sample/src/widgets/appbar_widget.dart';
-import 'package:sample/src/widgets/button_widget.dart';
 import 'package:sample/src/widgets/icon_widget.dart';
 import 'package:sample/src/widgets/snackbar_widget.dart';
 import 'package:sample/src/widgets/switcher_widget.dart';
@@ -78,8 +77,7 @@ class _SettingsView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: BlocBuilder<SettingsBloc, SettingsState>(
-                        buildWhen: (previous, current) =>
-                            current is SettingsUpdateState,
+                        buildWhen: (previous, current) => current is SettingsUpdateState,
                         builder: (context, state) {
                           if (state is SettingsUpdateState) {
                             return Form(
@@ -90,12 +88,10 @@ class _SettingsView extends StatelessWidget {
                                 prefixIcon: IconWidget(
                                   icon: Assets.icons.userSquare,
                                 ),
-                                onChanged: (value) =>
-                                    bloc.add(SettingsInputEvent()),
+                                onChanged: (value) => bloc.add(SettingsInputEvent()),
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(20),
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[\p{L}\p{N}_]', unicode: true)),
+                                  FilteringTextInputFormatter.allow(RegExp(r'[\p{L}\p{N}_]', unicode: true)),
                                 ],
                                 validator: (value) {
                                   if (value == null || value.length < 2) {
@@ -113,11 +109,9 @@ class _SettingsView extends StatelessWidget {
                       ),
                     ),
                     BlocBuilder<SettingsBloc, SettingsState>(
-                      buildWhen: (previous, current) =>
-                          current is SettingsSuffixShownState,
+                      buildWhen: (previous, current) => current is SettingsSuffixShownState,
                       builder: (context, state) {
-                        if (state is SettingsSuffixShownState &&
-                            state.isShownSuffix) {
+                        if (state is SettingsSuffixShownState && state.isShownSuffix) {
                           return SettingsNameConfirmWidget(
                             isLoading: state.isLoading,
                             onTap: () => bloc.add(SettingsChangeNameEvent()),
@@ -128,12 +122,12 @@ class _SettingsView extends StatelessWidget {
                     ),
                   ],
                 ),
-                ButtonWidget(
-                  onTap: () => router.push(const SuggestWordRoute()),
-                  text: locale.settingsSuggestWord,
-                  leftWidget: Assets.icons.faceScreaming.svg(),
-                  withHapticFeedback: true,
-                ),
+                // ButtonWidget(
+                //   onTap: () => router.push(const SuggestWordRoute()),
+                //   text: locale.settingsSuggestWord,
+                //   leftWidget: Assets.icons.faceScreaming.svg(),
+                //   withHapticFeedback: true,
+                // ),
               ],
             ),
             SettingsGroupWidget(

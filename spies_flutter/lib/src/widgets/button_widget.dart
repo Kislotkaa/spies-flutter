@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample/core/utils/context_extension.dart';
 import 'package:sample/src/widgets/feedback_widget.dart';
+import 'package:sample/src/widgets/progess_indicator_widget.dart';
 
 enum ButtonStateEnum { fill, outline }
 
@@ -13,7 +14,7 @@ class ButtonWidget extends StatelessWidget {
     this.rightWidget,
     this.padding,
     this.height = 50,
-    this.isChips = false,
+    this.isLoading = false,
     this.withHapticFeedback = false,
     this.state = ButtonStateEnum.fill,
   });
@@ -25,7 +26,7 @@ class ButtonWidget extends StatelessWidget {
   final double height;
   final ButtonStateEnum state;
   final EdgeInsets? padding;
-  final bool isChips;
+  final bool isLoading;
   final bool withHapticFeedback;
 
   @override
@@ -41,7 +42,7 @@ class ButtonWidget extends StatelessWidget {
       elevation: const WidgetStatePropertyAll(0),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(isChips ? 36 : 12),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     );
@@ -66,22 +67,24 @@ class ButtonWidget extends StatelessWidget {
               ),
           },
           onPressed: onTap,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              leftWidget ?? const SizedBox.square(dimension: 24),
-              Text(
-                text,
-                style: switch (state) {
-                  ButtonStateEnum.fill => defaultTextStyle.copyWith(
-                      color: colorTheme.alwaysWhiteColor,
+          child: isLoading
+              ? const ProgressIndicatorWidget(size: 24)
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    leftWidget ?? const SizedBox.square(dimension: 24),
+                    Text(
+                      text,
+                      style: switch (state) {
+                        ButtonStateEnum.fill => defaultTextStyle.copyWith(
+                            color: colorTheme.alwaysWhiteColor,
+                          ),
+                        ButtonStateEnum.outline => defaultTextStyle,
+                      },
                     ),
-                  ButtonStateEnum.outline => defaultTextStyle,
-                },
-              ),
-              rightWidget ?? const SizedBox.square(dimension: 24),
-            ],
-          ),
+                    rightWidget ?? const SizedBox.square(dimension: 24),
+                  ],
+                ),
         ),
       ),
     );

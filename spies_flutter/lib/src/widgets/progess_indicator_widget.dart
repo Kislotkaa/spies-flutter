@@ -10,11 +10,13 @@ class ProgressIndicatorWidget extends StatelessWidget {
     this.state = ProgressIndicatorEnum.circular,
     this.shimmerChild,
     this.padding,
+    this.size = 24,
   });
 
   final ProgressIndicatorEnum state;
   final Widget? shimmerChild;
   final EdgeInsets? padding;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,9 @@ class ProgressIndicatorWidget extends StatelessWidget {
     return Padding(
       padding: padding ?? EdgeInsets.zero,
       child: switch (state) {
-        ProgressIndicatorEnum.circular => const SizedBox.square(
-            dimension: 24,
-            child: CircularProgressIndicator(),
+        ProgressIndicatorEnum.circular => SizedBox.square(
+            dimension: size,
+            child: const CircularProgressIndicator(),
           ),
         ProgressIndicatorEnum.linear => const LinearProgressIndicator(),
         ProgressIndicatorEnum.shimmer => Shimmer.fromColors(

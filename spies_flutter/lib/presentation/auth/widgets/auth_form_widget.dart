@@ -40,11 +40,9 @@ class AuthFormWidget extends StatelessWidget {
                     icon: Assets.icons.userSquare,
                   ),
                   suffixIcon: BlocBuilder<AuthBloc, AuthState>(
-                    buildWhen: (previous, current) =>
-                        current is AuthSuffixShownState,
+                    buildWhen: (previous, current) => current is AuthSuffixShownState,
                     builder: (context, state) {
-                      if (state is AuthSuffixShownState &&
-                          state.isShownSuffix) {
+                      if (state is AuthSuffixShownState && state.isShownSuffix) {
                         return IconWidget(
                           onTap: () => bloc.add(AuthOnClearNameEvent()),
                           icon: Assets.icons.clear,
@@ -56,8 +54,7 @@ class AuthFormWidget extends StatelessWidget {
                   onChanged: (value) => bloc.add(AuthOnInputNameEvent()),
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(20),
-                    FilteringTextInputFormatter.allow(
-                        RegExp(r'[\p{L}\p{N}_]', unicode: true)),
+                    FilteringTextInputFormatter.allow(RegExp(r'[\p{L}\p{N}_]', unicode: true)),
                   ],
                   validator: (value) {
                     if (value == null || value.length < 2) {
@@ -68,16 +65,18 @@ class AuthFormWidget extends StatelessWidget {
                   },
                 ),
               ),
-              ButtonWidget(
-                padding: const EdgeInsets.only(top: 16, bottom: 16),
-                onTap: () => bloc.add(AuthSignInEvent()),
-                text: locale.enter,
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) => ButtonWidget(
+                  padding: const EdgeInsets.only(top: 16, bottom: 16),
+                  onTap: () => bloc.add(AuthSignInEvent()),
+                  text: locale.enter,
+                  isLoading: state is AuthLoadingState,
+                ),
               ),
               Text.rich(
                 textAlign: TextAlign.center,
                 TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => launchUrlString(Constants.politUrl),
+                  recognizer: TapGestureRecognizer()..onTap = () => launchUrlString(Constants.politUrl),
                   children: [
                     TextSpan(
                       text: locale.politPart1,

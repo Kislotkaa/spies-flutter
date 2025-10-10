@@ -5,10 +5,10 @@ import 'package:sample/core/gen/l10n/generated/l10n.dart';
 import 'package:sample/core/models/dialog_model.dart';
 import 'package:sample/core/router/app_router.dart';
 import 'package:sample/core/router/app_router.gr.dart';
-import 'package:sample/core/utils/context_extension.dart';
 import 'package:sample/src/widgets/appbar_widget.dart';
 import 'package:sample/src/widgets/button_widget.dart';
 import 'package:sample/src/widgets/icon_widget.dart';
+import 'package:sample/src/widgets/logo_widget.dart';
 
 @RoutePage()
 class MainPage extends StatelessWidget {
@@ -16,8 +16,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorTheme = context.colorTheme;
-
     return Scaffold(
       appBar: AppBarWidget(
         title: S.of(context).mainTitle,
@@ -34,13 +32,8 @@ class MainPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Spacer(flex: 1),
-            Assets.icons.logo.svg(
-              colorFilter: ColorFilter.mode(
-                colorTheme.primaryColor,
-                BlendMode.srcIn,
-              ),
-            ),
-            const Spacer(flex: 1),
+            const LogoWidget(),
+            const Spacer(flex: 2),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
