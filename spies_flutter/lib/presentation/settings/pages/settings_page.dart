@@ -114,6 +114,7 @@ class _SettingsView extends StatelessWidget {
                       builder: (context, state) {
                         if (state is SettingsSuffixShownState && state.isShownSuffix) {
                           return SettingsNameConfirmWidget(
+                            isLoading: state.isLoading,
                             onTap: () => bloc.add(SettingsChangeNameEvent()),
                           );
                         }

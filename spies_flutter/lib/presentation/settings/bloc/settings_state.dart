@@ -16,12 +16,14 @@ class SettingsSnackBarShownState extends SettingsState {
   });
 }
 
-class SettingsNameLoadingState extends SettingsState {}
-
 class SettingsSuffixShownState extends SettingsState {
   final bool isShownSuffix;
+  final bool isLoading;
 
-  SettingsSuffixShownState(this.isShownSuffix);
+  SettingsSuffixShownState({
+    required this.isShownSuffix,
+    this.isLoading = false,
+  });
 }
 
 class SettingsLogoutSuccessState extends SettingsState {}

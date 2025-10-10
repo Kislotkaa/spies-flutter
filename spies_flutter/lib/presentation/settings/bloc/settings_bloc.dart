@@ -43,7 +43,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   FutureOr<void> _input(SettingsInputEvent event, emit) {
     emit(
       SettingsSuffixShownState(
-        _userRepository.name != _nameController.text,
+        isShownSuffix: _userRepository.name != _nameController.text,
       ),
     );
   }
@@ -58,7 +58,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       );
     }
 
-    emit(SettingsNameLoadingState());
+    emit(
+      SettingsSuffixShownState(
+        isShownSuffix: true,
+        isLoading: true,
+      ),
+    );
 
     final result = await _userRepository.changeName(
       ChangeNameRequest(
@@ -80,7 +85,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       );
     }
 
-    emit(SettingsSuffixShownState(false));
+    emit(
+      SettingsSuffixShownState(
+        isShownSuffix: false,
+        isLoading: false,
+      ),
+    );
 
     emit(
       SettingsSnackBarShownState(
