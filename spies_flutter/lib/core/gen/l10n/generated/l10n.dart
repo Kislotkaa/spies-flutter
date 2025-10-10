@@ -260,11 +260,121 @@ class S {
     );
   }
 
+  /// `Понятно`
+  String get gameRulesConfirm {
+    return Intl.message(
+      'Понятно',
+      name: 'gameRulesConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Правила игры`
-  String get settingsGameRules {
+  String get gameRulesTitle {
     return Intl.message(
       'Правила игры',
-      name: 'settingsGameRules',
+      name: 'gameRulesTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `· Начало игры ·`
+  String get gameRulesStartGame {
+    return Intl.message(
+      '· Начало игры ·',
+      name: 'gameRulesStartGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Игру начинает лидер комнаты. Каждое новое слово - одна игра!`
+  String get gameRulesStartGame1 {
+    return Intl.message(
+      'Игру начинает лидер комнаты. Каждое новое слово - одна игра!',
+      name: 'gameRulesStartGame1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `После начала игры, каждый игрок, за исключением 'Шпиона', узнает загаданного персонажа.`
+  String get gameRulesStartGame2 {
+    return Intl.message(
+      'После начала игры, каждый игрок, за исключением \'Шпиона\', узнает загаданного персонажа.',
+      name: 'gameRulesStartGame2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Задача 'Шпиона' не раскрыть себя. Задача остальных игроков раскрыть 'Шпиона'.`
+  String get gameRulesStartGame3 {
+    return Intl.message(
+      'Задача \'Шпиона\' не раскрыть себя. Задача остальных игроков раскрыть \'Шпиона\'.',
+      name: 'gameRulesStartGame3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `· Процесс игры ·`
+  String get gameRulesProcessGame {
+    return Intl.message(
+      '· Процесс игры ·',
+      name: 'gameRulesProcessGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Каждый игрок, по очереди называет факт о персонаже. Очерёдность, игроки, выбирают сами.`
+  String get gameRulesProcessGame1 {
+    return Intl.message(
+      'Каждый игрок, по очереди называет факт о персонаже. Очерёдность, игроки, выбирают сами.',
+      name: 'gameRulesProcessGame1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Пройдя 2-а полных круга, игроки голосуют против игрока, кто по их мнению является 'Шпионом'.`
+  String get gameRulesProcessGame2 {
+    return Intl.message(
+      'Пройдя 2-а полных круга, игроки голосуют против игрока, кто по их мнению является \'Шпионом\'.',
+      name: 'gameRulesProcessGame2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `· Конец игры ·`
+  String get gameRulesEndGame {
+    return Intl.message(
+      '· Конец игры ·',
+      name: 'gameRulesEndGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Игроки голосуют по очереди, не обосновывая свои предположения (что бы игра была честной).`
+  String get gameRulesEndGame1 {
+    return Intl.message(
+      'Игроки голосуют по очереди, не обосновывая свои предположения (что бы игра была честной).',
+      name: 'gameRulesEndGame1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `После голосования, игрок, набравший наибольшее количество голосов, раскрывается.`
+  String get gameRulesEndGame2 {
+    return Intl.message(
+      'После голосования, игрок, набравший наибольшее количество голосов, раскрывается.',
+      name: 'gameRulesEndGame2',
       desc: '',
       args: [],
     );

@@ -30,6 +30,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "createGameTitle":
             MessageLookupByLibrary.simpleMessage("Создание игры"),
         "enter": MessageLookupByLibrary.simpleMessage("Войти"),
+        "gameRulesConfirm": MessageLookupByLibrary.simpleMessage("Понятно"),
+        "gameRulesEndGame":
+            MessageLookupByLibrary.simpleMessage("· Конец игры ·"),
+        "gameRulesEndGame1": MessageLookupByLibrary.simpleMessage(
+            "Игроки голосуют по очереди, не обосновывая свои предположения (что бы игра была честной)."),
+        "gameRulesEndGame2": MessageLookupByLibrary.simpleMessage(
+            "После голосования, игрок, набравший наибольшее количество голосов, раскрывается."),
+        "gameRulesProcessGame":
+            MessageLookupByLibrary.simpleMessage("· Процесс игры ·"),
+        "gameRulesProcessGame1": MessageLookupByLibrary.simpleMessage(
+            "Каждый игрок, по очереди называет факт о персонаже. Очерёдность, игроки, выбирают сами."),
+        "gameRulesProcessGame2": MessageLookupByLibrary.simpleMessage(
+            "Пройдя 2-а полных круга, игроки голосуют против игрока, кто по их мнению является \'Шпионом\'."),
+        "gameRulesStartGame":
+            MessageLookupByLibrary.simpleMessage("· Начало игры ·"),
+        "gameRulesStartGame1": MessageLookupByLibrary.simpleMessage(
+            "Игру начинает лидер комнаты. Каждое новое слово - одна игра!"),
+        "gameRulesStartGame2": MessageLookupByLibrary.simpleMessage(
+            "После начала игры, каждый игрок, за исключением \'Шпиона\', узнает загаданного персонажа."),
+        "gameRulesStartGame3": MessageLookupByLibrary.simpleMessage(
+            "Задача \'Шпиона\' не раскрыть себя. Задача остальных игроков раскрыть \'Шпиона\'."),
+        "gameRulesTitle": MessageLookupByLibrary.simpleMessage("Правила игры"),
         "gameTitle": MessageLookupByLibrary.simpleMessage("Игра"),
         "mainConnectGame": MessageLookupByLibrary.simpleMessage("Подключиться"),
         "mainCreateGame": MessageLookupByLibrary.simpleMessage("Создать игру"),
@@ -54,8 +76,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Сменить имя"),
         "settingsDarkTheme":
             MessageLookupByLibrary.simpleMessage("Тёмная тема"),
-        "settingsGameRules":
-            MessageLookupByLibrary.simpleMessage("Правила игры"),
         "settingsMain": MessageLookupByLibrary.simpleMessage("Основные"),
         "settingsNameChanged":
             MessageLookupByLibrary.simpleMessage("Ваш ник успешно изменён!"),

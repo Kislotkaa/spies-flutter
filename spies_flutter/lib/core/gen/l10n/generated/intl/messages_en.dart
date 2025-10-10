@@ -30,6 +30,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "createGameTitle":
             MessageLookupByLibrary.simpleMessage("Game creation"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
+        "gameRulesConfirm": MessageLookupByLibrary.simpleMessage("It\'s clear"),
+        "gameRulesEndGame":
+            MessageLookupByLibrary.simpleMessage("· End of the game ·"),
+        "gameRulesEndGame1": MessageLookupByLibrary.simpleMessage(
+            "Players vote one by one, without justifying their guesses (so that the game is fair)."),
+        "gameRulesEndGame2": MessageLookupByLibrary.simpleMessage(
+            "After voting, the player with the most votes is revealed."),
+        "gameRulesProcessGame":
+            MessageLookupByLibrary.simpleMessage("· Game process ·"),
+        "gameRulesProcessGame1": MessageLookupByLibrary.simpleMessage(
+            "Each player takes turns naming a fact about the character. The players choose the order themselves."),
+        "gameRulesProcessGame2": MessageLookupByLibrary.simpleMessage(
+            "After going through 2 full circles, players vote against the player who they think is the \'Spy\'."),
+        "gameRulesStartGame":
+            MessageLookupByLibrary.simpleMessage("· Start of the game ·"),
+        "gameRulesStartGame1": MessageLookupByLibrary.simpleMessage(
+            "The leader of the room starts the game. Each new word is one game!"),
+        "gameRulesStartGame2": MessageLookupByLibrary.simpleMessage(
+            "After the start of the game, each player, with the exception of the \'Spy\', recognizes the hidden character."),
+        "gameRulesStartGame3": MessageLookupByLibrary.simpleMessage(
+            "The task of the \'Spy\' is not to reveal himself. The task of the other players is to reveal the \'Spy\'."),
+        "gameRulesTitle":
+            MessageLookupByLibrary.simpleMessage("Rules of the game"),
         "gameTitle": MessageLookupByLibrary.simpleMessage("Game"),
         "mainConnectGame": MessageLookupByLibrary.simpleMessage("Connect"),
         "mainCreateGame": MessageLookupByLibrary.simpleMessage("Create game"),
@@ -52,8 +75,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsChangeNameTitle":
             MessageLookupByLibrary.simpleMessage("Change name"),
         "settingsDarkTheme": MessageLookupByLibrary.simpleMessage("Dark theme"),
-        "settingsGameRules":
-            MessageLookupByLibrary.simpleMessage("Rules of the game"),
         "settingsMain": MessageLookupByLibrary.simpleMessage("Basic"),
         "settingsNameChanged": MessageLookupByLibrary.simpleMessage(
             "Your nickname has been successfully changed!"),

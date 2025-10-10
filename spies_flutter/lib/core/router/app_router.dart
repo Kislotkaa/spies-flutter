@@ -55,6 +55,11 @@ class AppRouter extends RootStackRouter {
           page: GameRoute.page,
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
+        CustomRoute(
+          path: '/gameRules',
+          page: GameRulesRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
       ];
 
   @override
