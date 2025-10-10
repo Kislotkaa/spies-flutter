@@ -16,7 +16,7 @@ extension ResponseGameData on GameData {
         status: status,
         owner: owner.toResponse(),
         currentWord: currentWord?.toResponse(),
-        suggestWord: suggestWord?.toResponse(),
+        suggestWord: suggestWord?.word.toResponse(),
         nextWord: nextWord?.toResponse(),
         wordCategoryList: wordCategoryList.map((e) => e.toResponse()).toList(),
         playerList: playerList.map((e) => e.toResponse()).toList(),

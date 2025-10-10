@@ -407,6 +407,7 @@ void main() {
           SuggestWordRequest(
             gameId: result.id,
             word: suggestWord,
+            userId: user.id,
           ),
         );
 
@@ -454,6 +455,7 @@ void main() {
           SuggestWordRequest(
             gameId: result.id,
             word: suggestWord,
+            userId: user.id,
           ),
         );
 
@@ -522,6 +524,7 @@ void main() {
           SuggestWordRequest(
             gameId: result.id,
             word: suggestWord,
+            userId: user.id,
           ),
         );
 

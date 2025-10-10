@@ -1,0 +1,5 @@
+class: SuggestWordData
+
+fields:
+  userId: UuidValue
+  word: WordData

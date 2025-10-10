@@ -33,6 +33,12 @@
           "dartType": "String"
         },
         {
+          "name": "spyUserId",
+          "columnType": 7,
+          "isNullable": true,
+          "dartType": "UuidValue?"
+        },
+        {
           "name": "currentWordId",
           "columnType": 7,
           "isNullable": true,
@@ -45,10 +51,10 @@
           "dartType": "UuidValue?"
         },
         {
-          "name": "suggestWordId",
-          "columnType": 7,
+          "name": "suggestWord",
+          "columnType": 8,
           "isNullable": true,
-          "dartType": "UuidValue?"
+          "dartType": "protocol:SuggestWordData?"
         },
         {
           "name": "wordCategoryList",
@@ -73,6 +79,13 @@
           "columnType": 1,
           "isNullable": false,
           "dartType": "bool"
+        },
+        {
+          "name": "createAt",
+          "columnType": 4,
+          "isNullable": false,
+          "columnDefault": "CURRENT_TIMESTAMP",
+          "dartType": "DateTime"
         },
         {
           "name": "status",
@@ -100,19 +113,6 @@
           "constraintName": "games_fk_1",
           "columns": [
             "nextWordId"
-          ],
-          "referenceTable": "words",
-          "referenceTableSchema": "public",
-          "referenceColumns": [
-            "id"
-          ],
-          "onUpdate": 3,
-          "onDelete": 3
-        },
-        {
-          "constraintName": "games_fk_2",
-          "columns": [
-            "suggestWordId"
           ],
           "referenceTable": "words",
           "referenceTableSchema": "public",

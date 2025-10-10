@@ -12,36 +12,38 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'data/game_data.dart' as _i3;
-import 'data/user_data.dart' as _i4;
-import 'data/word_category_data.dart' as _i5;
-import 'data/word_data.dart' as _i6;
-import 'entity/game_uuid_entity.dart' as _i7;
-import 'enums/game_status.dart' as _i8;
-import 'exception_response.dart' as _i9;
-import 'request/add_category_request.dart' as _i10;
-import 'request/add_word_request.dart' as _i11;
-import 'request/change_game_settings_request.dart' as _i12;
-import 'request/change_name_request.dart' as _i13;
-import 'request/connect_game_request.dart' as _i14;
-import 'request/create_game_request.dart' as _i15;
-import 'request/disconnect_game_request.dart' as _i16;
-import 'request/finish_game_request.dart' as _i17;
-import 'request/get_user_request.dart' as _i18;
-import 'request/next_word_request.dart' as _i19;
-import 'request/sign_in_request.dart' as _i20;
-import 'request/sign_out_request.dart' as _i21;
-import 'request/start_game_request.dart' as _i22;
-import 'request/suggest_word_accepted_request.dart' as _i23;
-import 'request/suggest_word_request.dart' as _i24;
-import 'response/game_response.dart' as _i25;
-import 'response/user_response.dart' as _i26;
-import 'response/word_category_response.dart' as _i27;
-import 'response/word_response.dart' as _i28;
+import 'data/suggest_word_data.dart' as _i4;
+import 'data/user_data.dart' as _i5;
+import 'data/word_category_data.dart' as _i6;
+import 'data/word_data.dart' as _i7;
+import 'entity/game_uuid_entity.dart' as _i8;
+import 'enums/game_status.dart' as _i9;
+import 'exception_response.dart' as _i10;
+import 'request/add_category_request.dart' as _i11;
+import 'request/add_word_request.dart' as _i12;
+import 'request/change_game_settings_request.dart' as _i13;
+import 'request/change_name_request.dart' as _i14;
+import 'request/connect_game_request.dart' as _i15;
+import 'request/create_game_request.dart' as _i16;
+import 'request/disconnect_game_request.dart' as _i17;
+import 'request/finish_game_request.dart' as _i18;
+import 'request/get_user_request.dart' as _i19;
+import 'request/next_word_request.dart' as _i20;
+import 'request/sign_in_request.dart' as _i21;
+import 'request/sign_out_request.dart' as _i22;
+import 'request/start_game_request.dart' as _i23;
+import 'request/suggest_word_accepted_request.dart' as _i24;
+import 'request/suggest_word_request.dart' as _i25;
+import 'response/game_response.dart' as _i26;
+import 'response/user_response.dart' as _i27;
+import 'response/word_category_response.dart' as _i28;
+import 'response/word_response.dart' as _i29;
 import 'package:serverpod_flutter_server/src/generated/response/word_response.dart'
-    as _i29;
-import 'package:serverpod_flutter_server/src/generated/response/word_category_response.dart'
     as _i30;
+import 'package:serverpod_flutter_server/src/generated/response/word_category_response.dart'
+    as _i31;
 export 'data/game_data.dart';
+export 'data/suggest_word_data.dart';
 export 'data/user_data.dart';
 export 'data/word_category_data.dart';
 export 'data/word_data.dart';
@@ -108,6 +110,12 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String',
         ),
         _i2.ColumnDefinition(
+          name: 'spyUserId',
+          columnType: _i2.ColumnType.uuid,
+          isNullable: true,
+          dartType: 'UuidValue?',
+        ),
+        _i2.ColumnDefinition(
           name: 'currentWordId',
           columnType: _i2.ColumnType.uuid,
           isNullable: true,
@@ -120,10 +128,10 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'UuidValue?',
         ),
         _i2.ColumnDefinition(
-          name: 'suggestWordId',
-          columnType: _i2.ColumnType.uuid,
+          name: 'suggestWord',
+          columnType: _i2.ColumnType.json,
           isNullable: true,
-          dartType: 'UuidValue?',
+          dartType: 'protocol:SuggestWordData?',
         ),
         _i2.ColumnDefinition(
           name: 'wordCategoryList',
@@ -178,16 +186,6 @@ class Protocol extends _i1.SerializationManagerServer {
         _i2.ForeignKeyDefinition(
           constraintName: 'games_fk_1',
           columns: ['nextWordId'],
-          referenceTable: 'words',
-          referenceTableSchema: 'public',
-          referenceColumns: ['id'],
-          onUpdate: _i2.ForeignKeyAction.noAction,
-          onDelete: _i2.ForeignKeyAction.noAction,
-          matchType: null,
-        ),
-        _i2.ForeignKeyDefinition(
-          constraintName: 'games_fk_2',
-          columns: ['suggestWordId'],
           referenceTable: 'words',
           referenceTableSchema: 'public',
           referenceColumns: ['id'],
@@ -375,175 +373,181 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i3.GameData) {
       return _i3.GameData.fromJson(data) as T;
     }
-    if (t == _i4.UserData) {
-      return _i4.UserData.fromJson(data) as T;
+    if (t == _i4.SuggestWordData) {
+      return _i4.SuggestWordData.fromJson(data) as T;
     }
-    if (t == _i5.WordCategoryData) {
-      return _i5.WordCategoryData.fromJson(data) as T;
+    if (t == _i5.UserData) {
+      return _i5.UserData.fromJson(data) as T;
     }
-    if (t == _i6.WordData) {
-      return _i6.WordData.fromJson(data) as T;
+    if (t == _i6.WordCategoryData) {
+      return _i6.WordCategoryData.fromJson(data) as T;
     }
-    if (t == _i7.GameUuidEntity) {
-      return _i7.GameUuidEntity.fromJson(data) as T;
+    if (t == _i7.WordData) {
+      return _i7.WordData.fromJson(data) as T;
     }
-    if (t == _i8.GameStatus) {
-      return _i8.GameStatus.fromJson(data) as T;
+    if (t == _i8.GameUuidEntity) {
+      return _i8.GameUuidEntity.fromJson(data) as T;
     }
-    if (t == _i9.ExceptionResponse) {
-      return _i9.ExceptionResponse.fromJson(data) as T;
+    if (t == _i9.GameStatus) {
+      return _i9.GameStatus.fromJson(data) as T;
     }
-    if (t == _i10.AddCategoryRequest) {
-      return _i10.AddCategoryRequest.fromJson(data) as T;
+    if (t == _i10.ExceptionResponse) {
+      return _i10.ExceptionResponse.fromJson(data) as T;
     }
-    if (t == _i11.AddWordRequest) {
-      return _i11.AddWordRequest.fromJson(data) as T;
+    if (t == _i11.AddCategoryRequest) {
+      return _i11.AddCategoryRequest.fromJson(data) as T;
     }
-    if (t == _i12.ChangeGameSettingsRequest) {
-      return _i12.ChangeGameSettingsRequest.fromJson(data) as T;
+    if (t == _i12.AddWordRequest) {
+      return _i12.AddWordRequest.fromJson(data) as T;
     }
-    if (t == _i13.ChangeNameRequest) {
-      return _i13.ChangeNameRequest.fromJson(data) as T;
+    if (t == _i13.ChangeGameSettingsRequest) {
+      return _i13.ChangeGameSettingsRequest.fromJson(data) as T;
     }
-    if (t == _i14.ConnectGameRequest) {
-      return _i14.ConnectGameRequest.fromJson(data) as T;
+    if (t == _i14.ChangeNameRequest) {
+      return _i14.ChangeNameRequest.fromJson(data) as T;
     }
-    if (t == _i15.CreateGameRequest) {
-      return _i15.CreateGameRequest.fromJson(data) as T;
+    if (t == _i15.ConnectGameRequest) {
+      return _i15.ConnectGameRequest.fromJson(data) as T;
     }
-    if (t == _i16.DisconnectGameRequest) {
-      return _i16.DisconnectGameRequest.fromJson(data) as T;
+    if (t == _i16.CreateGameRequest) {
+      return _i16.CreateGameRequest.fromJson(data) as T;
     }
-    if (t == _i17.FinishGameRequest) {
-      return _i17.FinishGameRequest.fromJson(data) as T;
+    if (t == _i17.DisconnectGameRequest) {
+      return _i17.DisconnectGameRequest.fromJson(data) as T;
     }
-    if (t == _i18.GetUserRequest) {
-      return _i18.GetUserRequest.fromJson(data) as T;
+    if (t == _i18.FinishGameRequest) {
+      return _i18.FinishGameRequest.fromJson(data) as T;
     }
-    if (t == _i19.NextWordRequest) {
-      return _i19.NextWordRequest.fromJson(data) as T;
+    if (t == _i19.GetUserRequest) {
+      return _i19.GetUserRequest.fromJson(data) as T;
     }
-    if (t == _i20.SignInRequest) {
-      return _i20.SignInRequest.fromJson(data) as T;
+    if (t == _i20.NextWordRequest) {
+      return _i20.NextWordRequest.fromJson(data) as T;
     }
-    if (t == _i21.SignOutRequest) {
-      return _i21.SignOutRequest.fromJson(data) as T;
+    if (t == _i21.SignInRequest) {
+      return _i21.SignInRequest.fromJson(data) as T;
     }
-    if (t == _i22.StartGameRequest) {
-      return _i22.StartGameRequest.fromJson(data) as T;
+    if (t == _i22.SignOutRequest) {
+      return _i22.SignOutRequest.fromJson(data) as T;
     }
-    if (t == _i23.SuggestWordAcceptedRequest) {
-      return _i23.SuggestWordAcceptedRequest.fromJson(data) as T;
+    if (t == _i23.StartGameRequest) {
+      return _i23.StartGameRequest.fromJson(data) as T;
     }
-    if (t == _i24.SuggestWordRequest) {
-      return _i24.SuggestWordRequest.fromJson(data) as T;
+    if (t == _i24.SuggestWordAcceptedRequest) {
+      return _i24.SuggestWordAcceptedRequest.fromJson(data) as T;
     }
-    if (t == _i25.GameResponse) {
-      return _i25.GameResponse.fromJson(data) as T;
+    if (t == _i25.SuggestWordRequest) {
+      return _i25.SuggestWordRequest.fromJson(data) as T;
     }
-    if (t == _i26.UserResponse) {
-      return _i26.UserResponse.fromJson(data) as T;
+    if (t == _i26.GameResponse) {
+      return _i26.GameResponse.fromJson(data) as T;
     }
-    if (t == _i27.WordCategoryResponse) {
-      return _i27.WordCategoryResponse.fromJson(data) as T;
+    if (t == _i27.UserResponse) {
+      return _i27.UserResponse.fromJson(data) as T;
     }
-    if (t == _i28.WordResponse) {
-      return _i28.WordResponse.fromJson(data) as T;
+    if (t == _i28.WordCategoryResponse) {
+      return _i28.WordCategoryResponse.fromJson(data) as T;
+    }
+    if (t == _i29.WordResponse) {
+      return _i29.WordResponse.fromJson(data) as T;
     }
     if (t == _i1.getType<_i3.GameData?>()) {
       return (data != null ? _i3.GameData.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i4.UserData?>()) {
-      return (data != null ? _i4.UserData.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i4.SuggestWordData?>()) {
+      return (data != null ? _i4.SuggestWordData.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i5.WordCategoryData?>()) {
-      return (data != null ? _i5.WordCategoryData.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i5.UserData?>()) {
+      return (data != null ? _i5.UserData.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i6.WordData?>()) {
-      return (data != null ? _i6.WordData.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i6.WordCategoryData?>()) {
+      return (data != null ? _i6.WordCategoryData.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i7.GameUuidEntity?>()) {
-      return (data != null ? _i7.GameUuidEntity.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i7.WordData?>()) {
+      return (data != null ? _i7.WordData.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i8.GameStatus?>()) {
-      return (data != null ? _i8.GameStatus.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i8.GameUuidEntity?>()) {
+      return (data != null ? _i8.GameUuidEntity.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i9.ExceptionResponse?>()) {
-      return (data != null ? _i9.ExceptionResponse.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i9.GameStatus?>()) {
+      return (data != null ? _i9.GameStatus.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i10.AddCategoryRequest?>()) {
-      return (data != null ? _i10.AddCategoryRequest.fromJson(data) : null)
+    if (t == _i1.getType<_i10.ExceptionResponse?>()) {
+      return (data != null ? _i10.ExceptionResponse.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i11.AddCategoryRequest?>()) {
+      return (data != null ? _i11.AddCategoryRequest.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i11.AddWordRequest?>()) {
-      return (data != null ? _i11.AddWordRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i12.AddWordRequest?>()) {
+      return (data != null ? _i12.AddWordRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i12.ChangeGameSettingsRequest?>()) {
+    if (t == _i1.getType<_i13.ChangeGameSettingsRequest?>()) {
       return (data != null
-          ? _i12.ChangeGameSettingsRequest.fromJson(data)
+          ? _i13.ChangeGameSettingsRequest.fromJson(data)
           : null) as T;
     }
-    if (t == _i1.getType<_i13.ChangeNameRequest?>()) {
-      return (data != null ? _i13.ChangeNameRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i14.ChangeNameRequest?>()) {
+      return (data != null ? _i14.ChangeNameRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i14.ConnectGameRequest?>()) {
-      return (data != null ? _i14.ConnectGameRequest.fromJson(data) : null)
+    if (t == _i1.getType<_i15.ConnectGameRequest?>()) {
+      return (data != null ? _i15.ConnectGameRequest.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i15.CreateGameRequest?>()) {
-      return (data != null ? _i15.CreateGameRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i16.CreateGameRequest?>()) {
+      return (data != null ? _i16.CreateGameRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i16.DisconnectGameRequest?>()) {
-      return (data != null ? _i16.DisconnectGameRequest.fromJson(data) : null)
+    if (t == _i1.getType<_i17.DisconnectGameRequest?>()) {
+      return (data != null ? _i17.DisconnectGameRequest.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i17.FinishGameRequest?>()) {
-      return (data != null ? _i17.FinishGameRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i18.FinishGameRequest?>()) {
+      return (data != null ? _i18.FinishGameRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i18.GetUserRequest?>()) {
-      return (data != null ? _i18.GetUserRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i19.GetUserRequest?>()) {
+      return (data != null ? _i19.GetUserRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i19.NextWordRequest?>()) {
-      return (data != null ? _i19.NextWordRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i20.NextWordRequest?>()) {
+      return (data != null ? _i20.NextWordRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i20.SignInRequest?>()) {
-      return (data != null ? _i20.SignInRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i21.SignInRequest?>()) {
+      return (data != null ? _i21.SignInRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i21.SignOutRequest?>()) {
-      return (data != null ? _i21.SignOutRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i22.SignOutRequest?>()) {
+      return (data != null ? _i22.SignOutRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i22.StartGameRequest?>()) {
-      return (data != null ? _i22.StartGameRequest.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i23.StartGameRequest?>()) {
+      return (data != null ? _i23.StartGameRequest.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i23.SuggestWordAcceptedRequest?>()) {
+    if (t == _i1.getType<_i24.SuggestWordAcceptedRequest?>()) {
       return (data != null
-          ? _i23.SuggestWordAcceptedRequest.fromJson(data)
+          ? _i24.SuggestWordAcceptedRequest.fromJson(data)
           : null) as T;
     }
-    if (t == _i1.getType<_i24.SuggestWordRequest?>()) {
-      return (data != null ? _i24.SuggestWordRequest.fromJson(data) : null)
+    if (t == _i1.getType<_i25.SuggestWordRequest?>()) {
+      return (data != null ? _i25.SuggestWordRequest.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i25.GameResponse?>()) {
-      return (data != null ? _i25.GameResponse.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i26.GameResponse?>()) {
+      return (data != null ? _i26.GameResponse.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i26.UserResponse?>()) {
-      return (data != null ? _i26.UserResponse.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i27.UserResponse?>()) {
+      return (data != null ? _i27.UserResponse.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i27.WordCategoryResponse?>()) {
-      return (data != null ? _i27.WordCategoryResponse.fromJson(data) : null)
+    if (t == _i1.getType<_i28.WordCategoryResponse?>()) {
+      return (data != null ? _i28.WordCategoryResponse.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i28.WordResponse?>()) {
-      return (data != null ? _i28.WordResponse.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i29.WordResponse?>()) {
+      return (data != null ? _i29.WordResponse.fromJson(data) : null) as T;
     }
-    if (t == List<_i5.WordCategoryData>) {
+    if (t == List<_i6.WordCategoryData>) {
       return (data as List)
-          .map((e) => deserialize<_i5.WordCategoryData>(e))
+          .map((e) => deserialize<_i6.WordCategoryData>(e))
           .toList() as T;
     }
-    if (t == List<_i4.UserData>) {
-      return (data as List).map((e) => deserialize<_i4.UserData>(e)).toList()
+    if (t == List<_i5.UserData>) {
+      return (data as List).map((e) => deserialize<_i5.UserData>(e)).toList()
           as T;
     }
     if (t == _i1.getType<List<_i1.UuidValue>?>()) {
@@ -555,24 +559,24 @@ class Protocol extends _i1.SerializationManagerServer {
       return (data as List).map((e) => deserialize<_i1.UuidValue>(e)).toList()
           as T;
     }
-    if (t == List<_i27.WordCategoryResponse>) {
+    if (t == List<_i28.WordCategoryResponse>) {
       return (data as List)
-          .map((e) => deserialize<_i27.WordCategoryResponse>(e))
+          .map((e) => deserialize<_i28.WordCategoryResponse>(e))
           .toList() as T;
     }
-    if (t == List<_i26.UserResponse>) {
+    if (t == List<_i27.UserResponse>) {
       return (data as List)
-          .map((e) => deserialize<_i26.UserResponse>(e))
+          .map((e) => deserialize<_i27.UserResponse>(e))
           .toList() as T;
     }
-    if (t == List<_i29.WordResponse>) {
+    if (t == List<_i30.WordResponse>) {
       return (data as List)
-          .map((e) => deserialize<_i29.WordResponse>(e))
+          .map((e) => deserialize<_i30.WordResponse>(e))
           .toList() as T;
     }
-    if (t == List<_i30.WordCategoryResponse>) {
+    if (t == List<_i31.WordCategoryResponse>) {
       return (data as List)
-          .map((e) => deserialize<_i30.WordCategoryResponse>(e))
+          .map((e) => deserialize<_i31.WordCategoryResponse>(e))
           .toList() as T;
     }
     try {
@@ -588,79 +592,82 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i3.GameData) {
       return 'GameData';
     }
-    if (data is _i4.UserData) {
+    if (data is _i4.SuggestWordData) {
+      return 'SuggestWordData';
+    }
+    if (data is _i5.UserData) {
       return 'UserData';
     }
-    if (data is _i5.WordCategoryData) {
+    if (data is _i6.WordCategoryData) {
       return 'WordCategoryData';
     }
-    if (data is _i6.WordData) {
+    if (data is _i7.WordData) {
       return 'WordData';
     }
-    if (data is _i7.GameUuidEntity) {
+    if (data is _i8.GameUuidEntity) {
       return 'GameUuidEntity';
     }
-    if (data is _i8.GameStatus) {
+    if (data is _i9.GameStatus) {
       return 'GameStatus';
     }
-    if (data is _i9.ExceptionResponse) {
+    if (data is _i10.ExceptionResponse) {
       return 'ExceptionResponse';
     }
-    if (data is _i10.AddCategoryRequest) {
+    if (data is _i11.AddCategoryRequest) {
       return 'AddCategoryRequest';
     }
-    if (data is _i11.AddWordRequest) {
+    if (data is _i12.AddWordRequest) {
       return 'AddWordRequest';
     }
-    if (data is _i12.ChangeGameSettingsRequest) {
+    if (data is _i13.ChangeGameSettingsRequest) {
       return 'ChangeGameSettingsRequest';
     }
-    if (data is _i13.ChangeNameRequest) {
+    if (data is _i14.ChangeNameRequest) {
       return 'ChangeNameRequest';
     }
-    if (data is _i14.ConnectGameRequest) {
+    if (data is _i15.ConnectGameRequest) {
       return 'ConnectGameRequest';
     }
-    if (data is _i15.CreateGameRequest) {
+    if (data is _i16.CreateGameRequest) {
       return 'CreateGameRequest';
     }
-    if (data is _i16.DisconnectGameRequest) {
+    if (data is _i17.DisconnectGameRequest) {
       return 'DisconnectGameRequest';
     }
-    if (data is _i17.FinishGameRequest) {
+    if (data is _i18.FinishGameRequest) {
       return 'FinishGameRequest';
     }
-    if (data is _i18.GetUserRequest) {
+    if (data is _i19.GetUserRequest) {
       return 'GetUserRequest';
     }
-    if (data is _i19.NextWordRequest) {
+    if (data is _i20.NextWordRequest) {
       return 'NextWordRequest';
     }
-    if (data is _i20.SignInRequest) {
+    if (data is _i21.SignInRequest) {
       return 'SignInRequest';
     }
-    if (data is _i21.SignOutRequest) {
+    if (data is _i22.SignOutRequest) {
       return 'SignOutRequest';
     }
-    if (data is _i22.StartGameRequest) {
+    if (data is _i23.StartGameRequest) {
       return 'StartGameRequest';
     }
-    if (data is _i23.SuggestWordAcceptedRequest) {
+    if (data is _i24.SuggestWordAcceptedRequest) {
       return 'SuggestWordAcceptedRequest';
     }
-    if (data is _i24.SuggestWordRequest) {
+    if (data is _i25.SuggestWordRequest) {
       return 'SuggestWordRequest';
     }
-    if (data is _i25.GameResponse) {
+    if (data is _i26.GameResponse) {
       return 'GameResponse';
     }
-    if (data is _i26.UserResponse) {
+    if (data is _i27.UserResponse) {
       return 'UserResponse';
     }
-    if (data is _i27.WordCategoryResponse) {
+    if (data is _i28.WordCategoryResponse) {
       return 'WordCategoryResponse';
     }
-    if (data is _i28.WordResponse) {
+    if (data is _i29.WordResponse) {
       return 'WordResponse';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -679,80 +686,83 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'GameData') {
       return deserialize<_i3.GameData>(data['data']);
     }
+    if (dataClassName == 'SuggestWordData') {
+      return deserialize<_i4.SuggestWordData>(data['data']);
+    }
     if (dataClassName == 'UserData') {
-      return deserialize<_i4.UserData>(data['data']);
+      return deserialize<_i5.UserData>(data['data']);
     }
     if (dataClassName == 'WordCategoryData') {
-      return deserialize<_i5.WordCategoryData>(data['data']);
+      return deserialize<_i6.WordCategoryData>(data['data']);
     }
     if (dataClassName == 'WordData') {
-      return deserialize<_i6.WordData>(data['data']);
+      return deserialize<_i7.WordData>(data['data']);
     }
     if (dataClassName == 'GameUuidEntity') {
-      return deserialize<_i7.GameUuidEntity>(data['data']);
+      return deserialize<_i8.GameUuidEntity>(data['data']);
     }
     if (dataClassName == 'GameStatus') {
-      return deserialize<_i8.GameStatus>(data['data']);
+      return deserialize<_i9.GameStatus>(data['data']);
     }
     if (dataClassName == 'ExceptionResponse') {
-      return deserialize<_i9.ExceptionResponse>(data['data']);
+      return deserialize<_i10.ExceptionResponse>(data['data']);
     }
     if (dataClassName == 'AddCategoryRequest') {
-      return deserialize<_i10.AddCategoryRequest>(data['data']);
+      return deserialize<_i11.AddCategoryRequest>(data['data']);
     }
     if (dataClassName == 'AddWordRequest') {
-      return deserialize<_i11.AddWordRequest>(data['data']);
+      return deserialize<_i12.AddWordRequest>(data['data']);
     }
     if (dataClassName == 'ChangeGameSettingsRequest') {
-      return deserialize<_i12.ChangeGameSettingsRequest>(data['data']);
+      return deserialize<_i13.ChangeGameSettingsRequest>(data['data']);
     }
     if (dataClassName == 'ChangeNameRequest') {
-      return deserialize<_i13.ChangeNameRequest>(data['data']);
+      return deserialize<_i14.ChangeNameRequest>(data['data']);
     }
     if (dataClassName == 'ConnectGameRequest') {
-      return deserialize<_i14.ConnectGameRequest>(data['data']);
+      return deserialize<_i15.ConnectGameRequest>(data['data']);
     }
     if (dataClassName == 'CreateGameRequest') {
-      return deserialize<_i15.CreateGameRequest>(data['data']);
+      return deserialize<_i16.CreateGameRequest>(data['data']);
     }
     if (dataClassName == 'DisconnectGameRequest') {
-      return deserialize<_i16.DisconnectGameRequest>(data['data']);
+      return deserialize<_i17.DisconnectGameRequest>(data['data']);
     }
     if (dataClassName == 'FinishGameRequest') {
-      return deserialize<_i17.FinishGameRequest>(data['data']);
+      return deserialize<_i18.FinishGameRequest>(data['data']);
     }
     if (dataClassName == 'GetUserRequest') {
-      return deserialize<_i18.GetUserRequest>(data['data']);
+      return deserialize<_i19.GetUserRequest>(data['data']);
     }
     if (dataClassName == 'NextWordRequest') {
-      return deserialize<_i19.NextWordRequest>(data['data']);
+      return deserialize<_i20.NextWordRequest>(data['data']);
     }
     if (dataClassName == 'SignInRequest') {
-      return deserialize<_i20.SignInRequest>(data['data']);
+      return deserialize<_i21.SignInRequest>(data['data']);
     }
     if (dataClassName == 'SignOutRequest') {
-      return deserialize<_i21.SignOutRequest>(data['data']);
+      return deserialize<_i22.SignOutRequest>(data['data']);
     }
     if (dataClassName == 'StartGameRequest') {
-      return deserialize<_i22.StartGameRequest>(data['data']);
+      return deserialize<_i23.StartGameRequest>(data['data']);
     }
     if (dataClassName == 'SuggestWordAcceptedRequest') {
-      return deserialize<_i23.SuggestWordAcceptedRequest>(data['data']);
+      return deserialize<_i24.SuggestWordAcceptedRequest>(data['data']);
     }
     if (dataClassName == 'SuggestWordRequest') {
-      return deserialize<_i24.SuggestWordRequest>(data['data']);
+      return deserialize<_i25.SuggestWordRequest>(data['data']);
     }
     if (dataClassName == 'GameResponse') {
-      return deserialize<_i25.GameResponse>(data['data']);
+      return deserialize<_i26.GameResponse>(data['data']);
     }
     if (dataClassName == 'UserResponse') {
-      return deserialize<_i26.UserResponse>(data['data']);
+      return deserialize<_i27.UserResponse>(data['data']);
     }
     if (dataClassName == 'WordCategoryResponse') {
-      return deserialize<_i27.WordCategoryResponse>(data['data']);
+      return deserialize<_i28.WordCategoryResponse>(data['data']);
     }
     if (dataClassName == 'WordResponse') {
-      return deserialize<_i28.WordResponse>(data['data']);
+      return deserialize<_i29.WordResponse>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -772,12 +782,12 @@ class Protocol extends _i1.SerializationManagerServer {
     switch (t) {
       case _i3.GameData:
         return _i3.GameData.t;
-      case _i4.UserData:
-        return _i4.UserData.t;
-      case _i5.WordCategoryData:
-        return _i5.WordCategoryData.t;
-      case _i6.WordData:
-        return _i6.WordData.t;
+      case _i5.UserData:
+        return _i5.UserData.t;
+      case _i6.WordCategoryData:
+        return _i6.WordCategoryData.t;
+      case _i7.WordData:
+        return _i7.WordData.t;
     }
     return null;
   }

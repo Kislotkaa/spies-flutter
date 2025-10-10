@@ -7,11 +7,10 @@
         "schema": "public",
         "addColumns": [
           {
-            "name": "createAt",
-            "columnType": 4,
-            "isNullable": false,
-            "columnDefault": "CURRENT_TIMESTAMP",
-            "dartType": "DateTime"
+            "name": "spyUserId",
+            "columnType": 7,
+            "isNullable": true,
+            "dartType": "UuidValue?"
           }
         ],
         "deleteColumns": [],

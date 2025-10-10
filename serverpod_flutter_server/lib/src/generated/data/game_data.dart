@@ -15,7 +15,8 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import '../enums/game_status.dart' as _i2;
 import '../data/user_data.dart' as _i3;
 import '../data/word_data.dart' as _i4;
-import '../data/word_category_data.dart' as _i5;
+import '../data/suggest_word_data.dart' as _i5;
+import '../data/word_category_data.dart' as _i6;
 
 abstract class GameData
     implements _i1.TableRow<_i1.UuidValue>, _i1.ProtocolSerialization {
@@ -24,11 +25,11 @@ abstract class GameData
     required this.owner,
     required this.name,
     required this.code,
+    this.spyUserId,
     this.currentWordId,
     this.currentWord,
     this.nextWordId,
     this.nextWord,
-    this.suggestWordId,
     this.suggestWord,
     required this.wordCategoryList,
     required this.playerList,
@@ -45,13 +46,13 @@ abstract class GameData
     required _i3.UserData owner,
     required String name,
     required String code,
+    _i1.UuidValue? spyUserId,
     _i1.UuidValue? currentWordId,
     _i4.WordData? currentWord,
     _i1.UuidValue? nextWordId,
     _i4.WordData? nextWord,
-    _i1.UuidValue? suggestWordId,
-    _i4.WordData? suggestWord,
-    required List<_i5.WordCategoryData> wordCategoryList,
+    _i5.SuggestWordData? suggestWord,
+    required List<_i6.WordCategoryData> wordCategoryList,
     required List<_i3.UserData> playerList,
     required bool isShowWordHint,
     required bool isSubmittedUserWord,
@@ -66,6 +67,9 @@ abstract class GameData
           (jsonSerialization['owner'] as Map<String, dynamic>)),
       name: jsonSerialization['name'] as String,
       code: jsonSerialization['code'] as String,
+      spyUserId: jsonSerialization['spyUserId'] == null
+          ? null
+          : _i1.UuidValueJsonExtension.fromJson(jsonSerialization['spyUserId']),
       currentWordId: jsonSerialization['currentWordId'] == null
           ? null
           : _i1.UuidValueJsonExtension.fromJson(
@@ -82,17 +86,13 @@ abstract class GameData
           ? null
           : _i4.WordData.fromJson(
               (jsonSerialization['nextWord'] as Map<String, dynamic>)),
-      suggestWordId: jsonSerialization['suggestWordId'] == null
-          ? null
-          : _i1.UuidValueJsonExtension.fromJson(
-              jsonSerialization['suggestWordId']),
       suggestWord: jsonSerialization['suggestWord'] == null
           ? null
-          : _i4.WordData.fromJson(
+          : _i5.SuggestWordData.fromJson(
               (jsonSerialization['suggestWord'] as Map<String, dynamic>)),
       wordCategoryList: (jsonSerialization['wordCategoryList'] as List)
           .map(
-              (e) => _i5.WordCategoryData.fromJson((e as Map<String, dynamic>)))
+              (e) => _i6.WordCategoryData.fromJson((e as Map<String, dynamic>)))
           .toList(),
       playerList: (jsonSerialization['playerList'] as List)
           .map((e) => _i3.UserData.fromJson((e as Map<String, dynamic>)))
@@ -118,6 +118,8 @@ abstract class GameData
 
   String code;
 
+  _i1.UuidValue? spyUserId;
+
   _i1.UuidValue? currentWordId;
 
   _i4.WordData? currentWord;
@@ -126,11 +128,9 @@ abstract class GameData
 
   _i4.WordData? nextWord;
 
-  _i1.UuidValue? suggestWordId;
+  _i5.SuggestWordData? suggestWord;
 
-  _i4.WordData? suggestWord;
-
-  List<_i5.WordCategoryData> wordCategoryList;
+  List<_i6.WordCategoryData> wordCategoryList;
 
   List<_i3.UserData> playerList;
 
@@ -153,13 +153,13 @@ abstract class GameData
     _i3.UserData? owner,
     String? name,
     String? code,
+    _i1.UuidValue? spyUserId,
     _i1.UuidValue? currentWordId,
     _i4.WordData? currentWord,
     _i1.UuidValue? nextWordId,
     _i4.WordData? nextWord,
-    _i1.UuidValue? suggestWordId,
-    _i4.WordData? suggestWord,
-    List<_i5.WordCategoryData>? wordCategoryList,
+    _i5.SuggestWordData? suggestWord,
+    List<_i6.WordCategoryData>? wordCategoryList,
     List<_i3.UserData>? playerList,
     bool? isShowWordHint,
     bool? isSubmittedUserWord,
@@ -173,11 +173,11 @@ abstract class GameData
       'owner': owner.toJson(),
       'name': name,
       'code': code,
+      if (spyUserId != null) 'spyUserId': spyUserId?.toJson(),
       if (currentWordId != null) 'currentWordId': currentWordId?.toJson(),
       if (currentWord != null) 'currentWord': currentWord?.toJson(),
       if (nextWordId != null) 'nextWordId': nextWordId?.toJson(),
       if (nextWord != null) 'nextWord': nextWord?.toJson(),
-      if (suggestWordId != null) 'suggestWordId': suggestWordId?.toJson(),
       if (suggestWord != null) 'suggestWord': suggestWord?.toJson(),
       'wordCategoryList':
           wordCategoryList.toJson(valueToJson: (v) => v.toJson()),
@@ -196,11 +196,11 @@ abstract class GameData
       'owner': owner.toJsonForProtocol(),
       'name': name,
       'code': code,
+      if (spyUserId != null) 'spyUserId': spyUserId?.toJson(),
       if (currentWordId != null) 'currentWordId': currentWordId?.toJson(),
       if (currentWord != null) 'currentWord': currentWord?.toJsonForProtocol(),
       if (nextWordId != null) 'nextWordId': nextWordId?.toJson(),
       if (nextWord != null) 'nextWord': nextWord?.toJsonForProtocol(),
-      if (suggestWordId != null) 'suggestWordId': suggestWordId?.toJson(),
       if (suggestWord != null) 'suggestWord': suggestWord?.toJsonForProtocol(),
       'wordCategoryList':
           wordCategoryList.toJson(valueToJson: (v) => v.toJsonForProtocol()),
@@ -216,12 +216,10 @@ abstract class GameData
   static GameDataInclude include({
     _i4.WordDataInclude? currentWord,
     _i4.WordDataInclude? nextWord,
-    _i4.WordDataInclude? suggestWord,
   }) {
     return GameDataInclude._(
       currentWord: currentWord,
       nextWord: nextWord,
-      suggestWord: suggestWord,
     );
   }
 
@@ -259,13 +257,13 @@ class _GameDataImpl extends GameData {
     required _i3.UserData owner,
     required String name,
     required String code,
+    _i1.UuidValue? spyUserId,
     _i1.UuidValue? currentWordId,
     _i4.WordData? currentWord,
     _i1.UuidValue? nextWordId,
     _i4.WordData? nextWord,
-    _i1.UuidValue? suggestWordId,
-    _i4.WordData? suggestWord,
-    required List<_i5.WordCategoryData> wordCategoryList,
+    _i5.SuggestWordData? suggestWord,
+    required List<_i6.WordCategoryData> wordCategoryList,
     required List<_i3.UserData> playerList,
     required bool isShowWordHint,
     required bool isSubmittedUserWord,
@@ -276,11 +274,11 @@ class _GameDataImpl extends GameData {
           owner: owner,
           name: name,
           code: code,
+          spyUserId: spyUserId,
           currentWordId: currentWordId,
           currentWord: currentWord,
           nextWordId: nextWordId,
           nextWord: nextWord,
-          suggestWordId: suggestWordId,
           suggestWord: suggestWord,
           wordCategoryList: wordCategoryList,
           playerList: playerList,
@@ -299,13 +297,13 @@ class _GameDataImpl extends GameData {
     _i3.UserData? owner,
     String? name,
     String? code,
+    Object? spyUserId = _Undefined,
     Object? currentWordId = _Undefined,
     Object? currentWord = _Undefined,
     Object? nextWordId = _Undefined,
     Object? nextWord = _Undefined,
-    Object? suggestWordId = _Undefined,
     Object? suggestWord = _Undefined,
-    List<_i5.WordCategoryData>? wordCategoryList,
+    List<_i6.WordCategoryData>? wordCategoryList,
     List<_i3.UserData>? playerList,
     bool? isShowWordHint,
     bool? isSubmittedUserWord,
@@ -317,6 +315,7 @@ class _GameDataImpl extends GameData {
       owner: owner ?? this.owner.copyWith(),
       name: name ?? this.name,
       code: code ?? this.code,
+      spyUserId: spyUserId is _i1.UuidValue? ? spyUserId : this.spyUserId,
       currentWordId:
           currentWordId is _i1.UuidValue? ? currentWordId : this.currentWordId,
       currentWord: currentWord is _i4.WordData?
@@ -325,9 +324,7 @@ class _GameDataImpl extends GameData {
       nextWordId: nextWordId is _i1.UuidValue? ? nextWordId : this.nextWordId,
       nextWord:
           nextWord is _i4.WordData? ? nextWord : this.nextWord?.copyWith(),
-      suggestWordId:
-          suggestWordId is _i1.UuidValue? ? suggestWordId : this.suggestWordId,
-      suggestWord: suggestWord is _i4.WordData?
+      suggestWord: suggestWord is _i5.SuggestWordData?
           ? suggestWord
           : this.suggestWord?.copyWith(),
       wordCategoryList: wordCategoryList ??
@@ -356,6 +353,10 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
       'code',
       this,
     );
+    spyUserId = _i1.ColumnUuid(
+      'spyUserId',
+      this,
+    );
     currentWordId = _i1.ColumnUuid(
       'currentWordId',
       this,
@@ -364,8 +365,8 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
       'nextWordId',
       this,
     );
-    suggestWordId = _i1.ColumnUuid(
-      'suggestWordId',
+    suggestWord = _i1.ColumnSerializable(
+      'suggestWord',
       this,
     );
     wordCategoryList = _i1.ColumnSerializable(
@@ -403,6 +404,8 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
 
   late final _i1.ColumnString code;
 
+  late final _i1.ColumnUuid spyUserId;
+
   late final _i1.ColumnUuid currentWordId;
 
   _i4.WordDataTable? _currentWord;
@@ -411,9 +414,7 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
 
   _i4.WordDataTable? _nextWord;
 
-  late final _i1.ColumnUuid suggestWordId;
-
-  _i4.WordDataTable? _suggestWord;
+  late final _i1.ColumnSerializable suggestWord;
 
   late final _i1.ColumnSerializable wordCategoryList;
 
@@ -453,28 +454,16 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
     return _nextWord!;
   }
 
-  _i4.WordDataTable get suggestWord {
-    if (_suggestWord != null) return _suggestWord!;
-    _suggestWord = _i1.createRelationTable(
-      relationFieldName: 'suggestWord',
-      field: GameData.t.suggestWordId,
-      foreignField: _i4.WordData.t.id,
-      tableRelation: tableRelation,
-      createTable: (foreignTableRelation) =>
-          _i4.WordDataTable(tableRelation: foreignTableRelation),
-    );
-    return _suggestWord!;
-  }
-
   @override
   List<_i1.Column> get columns => [
         id,
         owner,
         name,
         code,
+        spyUserId,
         currentWordId,
         nextWordId,
-        suggestWordId,
+        suggestWord,
         wordCategoryList,
         playerList,
         isShowWordHint,
@@ -491,9 +480,6 @@ class GameDataTable extends _i1.Table<_i1.UuidValue> {
     if (relationField == 'nextWord') {
       return nextWord;
     }
-    if (relationField == 'suggestWord') {
-      return suggestWord;
-    }
     return null;
   }
 }
@@ -502,24 +488,19 @@ class GameDataInclude extends _i1.IncludeObject {
   GameDataInclude._({
     _i4.WordDataInclude? currentWord,
     _i4.WordDataInclude? nextWord,
-    _i4.WordDataInclude? suggestWord,
   }) {
     _currentWord = currentWord;
     _nextWord = nextWord;
-    _suggestWord = suggestWord;
   }
 
   _i4.WordDataInclude? _currentWord;
 
   _i4.WordDataInclude? _nextWord;
 
-  _i4.WordDataInclude? _suggestWord;
-
   @override
   Map<String, _i1.Include?> get includes => {
         'currentWord': _currentWord,
         'nextWord': _nextWord,
-        'suggestWord': _suggestWord,
       };
 
   @override
@@ -817,29 +798,6 @@ class GameDataAttachRowRepository {
       transaction: transaction,
     );
   }
-
-  /// Creates a relation between the given [GameData] and [WordData]
-  /// by setting the [GameData]'s foreign key `suggestWordId` to refer to the [WordData].
-  Future<void> suggestWord(
-    _i1.Session session,
-    GameData gameData,
-    _i4.WordData suggestWord, {
-    _i1.Transaction? transaction,
-  }) async {
-    if (gameData.id == null) {
-      throw ArgumentError.notNull('gameData.id');
-    }
-    if (suggestWord.id == null) {
-      throw ArgumentError.notNull('suggestWord.id');
-    }
-
-    var $gameData = gameData.copyWith(suggestWordId: suggestWord.id);
-    await session.db.updateRow<GameData>(
-      $gameData,
-      columns: [GameData.t.suggestWordId],
-      transaction: transaction,
-    );
-  }
 }
 
 class GameDataDetachRowRepository {
@@ -885,28 +843,6 @@ class GameDataDetachRowRepository {
     await session.db.updateRow<GameData>(
       $gamedata,
       columns: [GameData.t.nextWordId],
-      transaction: transaction,
-    );
-  }
-
-  /// Detaches the relation between this [GameData] and the [WordData] set in `suggestWord`
-  /// by setting the [GameData]'s foreign key `suggestWordId` to `null`.
-  ///
-  /// This removes the association between the two models without deleting
-  /// the related record.
-  Future<void> suggestWord(
-    _i1.Session session,
-    GameData gamedata, {
-    _i1.Transaction? transaction,
-  }) async {
-    if (gamedata.id == null) {
-      throw ArgumentError.notNull('gamedata.id');
-    }
-
-    var $gamedata = gamedata.copyWith(suggestWordId: null);
-    await session.db.updateRow<GameData>(
-      $gamedata,
-      columns: [GameData.t.suggestWordId],
       transaction: transaction,
     );
   }

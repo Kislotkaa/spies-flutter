@@ -10,11 +10,12 @@ CREATE TABLE "games" (
     "code" text NOT NULL,
     "currentWordId" uuid,
     "nextWordId" uuid,
-    "suggestWordId" uuid,
+    "suggestWord" json,
     "wordCategoryList" json NOT NULL,
     "playerList" json NOT NULL,
     "isShowWordHint" boolean NOT NULL,
     "isSubmittedUserWord" boolean NOT NULL,
+    "createAt" timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" bigint NOT NULL DEFAULT 0
 );
 
@@ -24,7 +25,8 @@ CREATE TABLE "games" (
 CREATE TABLE "users" (
     "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     "deviceId" text NOT NULL,
-    "name" text NOT NULL
+    "name" text NOT NULL,
+    "updateAt" timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 --
@@ -266,12 +268,6 @@ ALTER TABLE ONLY "games"
     REFERENCES "words"("id")
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
-ALTER TABLE ONLY "games"
-    ADD CONSTRAINT "games_fk_2"
-    FOREIGN KEY("suggestWordId")
-    REFERENCES "words"("id")
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION;
 
 --
 -- Foreign relations for "words" table
@@ -318,9 +314,9 @@ ALTER TABLE ONLY "serverpod_query_log"
 -- MIGRATION VERSION FOR serverpod_flutter
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('serverpod_flutter', '20250907142127631', now())
+    VALUES ('serverpod_flutter', '20251010123906858', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20250907142127631', "timestamp" = now();
+    DO UPDATE SET "version" = '20251010123906858', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod

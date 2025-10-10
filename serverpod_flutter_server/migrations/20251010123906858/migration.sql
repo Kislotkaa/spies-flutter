@@ -1,7 +1,7 @@
 BEGIN;
 
 --
--- Class GameData as table games
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "games" (
     "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -10,25 +10,27 @@ CREATE TABLE "games" (
     "code" text NOT NULL,
     "currentWordId" uuid,
     "nextWordId" uuid,
-    "suggestWordId" uuid,
+    "suggestWord" json,
     "wordCategoryList" json NOT NULL,
     "playerList" json NOT NULL,
     "isShowWordHint" boolean NOT NULL,
     "isSubmittedUserWord" boolean NOT NULL,
+    "createAt" timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" bigint NOT NULL DEFAULT 0
 );
 
 --
--- Class UserData as table users
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "users" (
     "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     "deviceId" text NOT NULL,
-    "name" text NOT NULL
+    "name" text NOT NULL,
+    "updateAt" timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 --
--- Class WordCategoryData as table word_categories
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "word_categories" (
     "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -36,7 +38,7 @@ CREATE TABLE "word_categories" (
 );
 
 --
--- Class WordData as table words
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "words" (
     "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -46,7 +48,7 @@ CREATE TABLE "words" (
 );
 
 --
--- Class CloudStorageEntry as table serverpod_cloud_storage
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_cloud_storage" (
     "id" bigserial PRIMARY KEY,
@@ -63,7 +65,7 @@ CREATE UNIQUE INDEX "serverpod_cloud_storage_path_idx" ON "serverpod_cloud_stora
 CREATE INDEX "serverpod_cloud_storage_expiration" ON "serverpod_cloud_storage" USING btree ("expiration");
 
 --
--- Class CloudStorageDirectUploadEntry as table serverpod_cloud_storage_direct_upload
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_cloud_storage_direct_upload" (
     "id" bigserial PRIMARY KEY,
@@ -77,7 +79,7 @@ CREATE TABLE "serverpod_cloud_storage_direct_upload" (
 CREATE UNIQUE INDEX "serverpod_cloud_storage_direct_upload_storage_path" ON "serverpod_cloud_storage_direct_upload" USING btree ("storageId", "path");
 
 --
--- Class FutureCallEntry as table serverpod_future_call
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_future_call" (
     "id" bigserial PRIMARY KEY,
@@ -94,7 +96,7 @@ CREATE INDEX "serverpod_future_call_serverId_idx" ON "serverpod_future_call" USI
 CREATE INDEX "serverpod_future_call_identifier_idx" ON "serverpod_future_call" USING btree ("identifier");
 
 --
--- Class ServerHealthConnectionInfo as table serverpod_health_connection_info
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_health_connection_info" (
     "id" bigserial PRIMARY KEY,
@@ -110,7 +112,7 @@ CREATE TABLE "serverpod_health_connection_info" (
 CREATE UNIQUE INDEX "serverpod_health_connection_info_timestamp_idx" ON "serverpod_health_connection_info" USING btree ("timestamp", "serverId", "granularity");
 
 --
--- Class ServerHealthMetric as table serverpod_health_metric
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_health_metric" (
     "id" bigserial PRIMARY KEY,
@@ -126,7 +128,7 @@ CREATE TABLE "serverpod_health_metric" (
 CREATE UNIQUE INDEX "serverpod_health_metric_timestamp_idx" ON "serverpod_health_metric" USING btree ("timestamp", "serverId", "name", "granularity");
 
 --
--- Class LogEntry as table serverpod_log
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_log" (
     "id" bigserial PRIMARY KEY,
@@ -146,7 +148,7 @@ CREATE TABLE "serverpod_log" (
 CREATE INDEX "serverpod_log_sessionLogId_idx" ON "serverpod_log" USING btree ("sessionLogId");
 
 --
--- Class MessageLogEntry as table serverpod_message_log
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_message_log" (
     "id" bigserial PRIMARY KEY,
@@ -163,7 +165,7 @@ CREATE TABLE "serverpod_message_log" (
 );
 
 --
--- Class MethodInfo as table serverpod_method
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_method" (
     "id" bigserial PRIMARY KEY,
@@ -175,7 +177,7 @@ CREATE TABLE "serverpod_method" (
 CREATE UNIQUE INDEX "serverpod_method_endpoint_method_idx" ON "serverpod_method" USING btree ("endpoint", "method");
 
 --
--- Class DatabaseMigrationVersion as table serverpod_migrations
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_migrations" (
     "id" bigserial PRIMARY KEY,
@@ -188,7 +190,7 @@ CREATE TABLE "serverpod_migrations" (
 CREATE UNIQUE INDEX "serverpod_migrations_ids" ON "serverpod_migrations" USING btree ("module");
 
 --
--- Class QueryLogEntry as table serverpod_query_log
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_query_log" (
     "id" bigserial PRIMARY KEY,
@@ -208,7 +210,7 @@ CREATE TABLE "serverpod_query_log" (
 CREATE INDEX "serverpod_query_log_sessionLogId_idx" ON "serverpod_query_log" USING btree ("sessionLogId");
 
 --
--- Class ReadWriteTestEntry as table serverpod_readwrite_test
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_readwrite_test" (
     "id" bigserial PRIMARY KEY,
@@ -216,7 +218,7 @@ CREATE TABLE "serverpod_readwrite_test" (
 );
 
 --
--- Class RuntimeSettings as table serverpod_runtime_settings
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_runtime_settings" (
     "id" bigserial PRIMARY KEY,
@@ -227,7 +229,7 @@ CREATE TABLE "serverpod_runtime_settings" (
 );
 
 --
--- Class SessionLogEntry as table serverpod_session_log
+-- ACTION CREATE TABLE
 --
 CREATE TABLE "serverpod_session_log" (
     "id" bigserial PRIMARY KEY,
@@ -252,7 +254,7 @@ CREATE INDEX "serverpod_session_log_touched_idx" ON "serverpod_session_log" USIN
 CREATE INDEX "serverpod_session_log_isopen_idx" ON "serverpod_session_log" USING btree ("isOpen");
 
 --
--- Foreign relations for "games" table
+-- ACTION CREATE FOREIGN KEY
 --
 ALTER TABLE ONLY "games"
     ADD CONSTRAINT "games_fk_0"
@@ -266,15 +268,9 @@ ALTER TABLE ONLY "games"
     REFERENCES "words"("id")
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
-ALTER TABLE ONLY "games"
-    ADD CONSTRAINT "games_fk_2"
-    FOREIGN KEY("suggestWordId")
-    REFERENCES "words"("id")
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION;
 
 --
--- Foreign relations for "words" table
+-- ACTION CREATE FOREIGN KEY
 --
 ALTER TABLE ONLY "words"
     ADD CONSTRAINT "words_fk_0"
@@ -284,7 +280,7 @@ ALTER TABLE ONLY "words"
     ON UPDATE NO ACTION;
 
 --
--- Foreign relations for "serverpod_log" table
+-- ACTION CREATE FOREIGN KEY
 --
 ALTER TABLE ONLY "serverpod_log"
     ADD CONSTRAINT "serverpod_log_fk_0"
@@ -294,7 +290,7 @@ ALTER TABLE ONLY "serverpod_log"
     ON UPDATE NO ACTION;
 
 --
--- Foreign relations for "serverpod_message_log" table
+-- ACTION CREATE FOREIGN KEY
 --
 ALTER TABLE ONLY "serverpod_message_log"
     ADD CONSTRAINT "serverpod_message_log_fk_0"
@@ -304,7 +300,7 @@ ALTER TABLE ONLY "serverpod_message_log"
     ON UPDATE NO ACTION;
 
 --
--- Foreign relations for "serverpod_query_log" table
+-- ACTION CREATE FOREIGN KEY
 --
 ALTER TABLE ONLY "serverpod_query_log"
     ADD CONSTRAINT "serverpod_query_log_fk_0"
@@ -318,9 +314,9 @@ ALTER TABLE ONLY "serverpod_query_log"
 -- MIGRATION VERSION FOR serverpod_flutter
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('serverpod_flutter', '20250907140706646', now())
+    VALUES ('serverpod_flutter', '20251010123906858', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20250907140706646', "timestamp" = now();
+    DO UPDATE SET "version" = '20251010123906858', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod

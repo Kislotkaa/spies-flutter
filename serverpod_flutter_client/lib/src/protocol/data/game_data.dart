@@ -13,7 +13,8 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import '../enums/game_status.dart' as _i2;
 import '../data/user_data.dart' as _i3;
 import '../data/word_data.dart' as _i4;
-import '../data/word_category_data.dart' as _i5;
+import '../data/suggest_word_data.dart' as _i5;
+import '../data/word_category_data.dart' as _i6;
 
 abstract class GameData implements _i1.SerializableModel {
   GameData._({
@@ -21,11 +22,11 @@ abstract class GameData implements _i1.SerializableModel {
     required this.owner,
     required this.name,
     required this.code,
+    this.spyUserId,
     this.currentWordId,
     this.currentWord,
     this.nextWordId,
     this.nextWord,
-    this.suggestWordId,
     this.suggestWord,
     required this.wordCategoryList,
     required this.playerList,
@@ -42,13 +43,13 @@ abstract class GameData implements _i1.SerializableModel {
     required _i3.UserData owner,
     required String name,
     required String code,
+    _i1.UuidValue? spyUserId,
     _i1.UuidValue? currentWordId,
     _i4.WordData? currentWord,
     _i1.UuidValue? nextWordId,
     _i4.WordData? nextWord,
-    _i1.UuidValue? suggestWordId,
-    _i4.WordData? suggestWord,
-    required List<_i5.WordCategoryData> wordCategoryList,
+    _i5.SuggestWordData? suggestWord,
+    required List<_i6.WordCategoryData> wordCategoryList,
     required List<_i3.UserData> playerList,
     required bool isShowWordHint,
     required bool isSubmittedUserWord,
@@ -63,6 +64,9 @@ abstract class GameData implements _i1.SerializableModel {
           (jsonSerialization['owner'] as Map<String, dynamic>)),
       name: jsonSerialization['name'] as String,
       code: jsonSerialization['code'] as String,
+      spyUserId: jsonSerialization['spyUserId'] == null
+          ? null
+          : _i1.UuidValueJsonExtension.fromJson(jsonSerialization['spyUserId']),
       currentWordId: jsonSerialization['currentWordId'] == null
           ? null
           : _i1.UuidValueJsonExtension.fromJson(
@@ -79,17 +83,13 @@ abstract class GameData implements _i1.SerializableModel {
           ? null
           : _i4.WordData.fromJson(
               (jsonSerialization['nextWord'] as Map<String, dynamic>)),
-      suggestWordId: jsonSerialization['suggestWordId'] == null
-          ? null
-          : _i1.UuidValueJsonExtension.fromJson(
-              jsonSerialization['suggestWordId']),
       suggestWord: jsonSerialization['suggestWord'] == null
           ? null
-          : _i4.WordData.fromJson(
+          : _i5.SuggestWordData.fromJson(
               (jsonSerialization['suggestWord'] as Map<String, dynamic>)),
       wordCategoryList: (jsonSerialization['wordCategoryList'] as List)
           .map(
-              (e) => _i5.WordCategoryData.fromJson((e as Map<String, dynamic>)))
+              (e) => _i6.WordCategoryData.fromJson((e as Map<String, dynamic>)))
           .toList(),
       playerList: (jsonSerialization['playerList'] as List)
           .map((e) => _i3.UserData.fromJson((e as Map<String, dynamic>)))
@@ -113,6 +113,8 @@ abstract class GameData implements _i1.SerializableModel {
 
   String code;
 
+  _i1.UuidValue? spyUserId;
+
   _i1.UuidValue? currentWordId;
 
   _i4.WordData? currentWord;
@@ -121,11 +123,9 @@ abstract class GameData implements _i1.SerializableModel {
 
   _i4.WordData? nextWord;
 
-  _i1.UuidValue? suggestWordId;
+  _i5.SuggestWordData? suggestWord;
 
-  _i4.WordData? suggestWord;
-
-  List<_i5.WordCategoryData> wordCategoryList;
+  List<_i6.WordCategoryData> wordCategoryList;
 
   List<_i3.UserData> playerList;
 
@@ -145,13 +145,13 @@ abstract class GameData implements _i1.SerializableModel {
     _i3.UserData? owner,
     String? name,
     String? code,
+    _i1.UuidValue? spyUserId,
     _i1.UuidValue? currentWordId,
     _i4.WordData? currentWord,
     _i1.UuidValue? nextWordId,
     _i4.WordData? nextWord,
-    _i1.UuidValue? suggestWordId,
-    _i4.WordData? suggestWord,
-    List<_i5.WordCategoryData>? wordCategoryList,
+    _i5.SuggestWordData? suggestWord,
+    List<_i6.WordCategoryData>? wordCategoryList,
     List<_i3.UserData>? playerList,
     bool? isShowWordHint,
     bool? isSubmittedUserWord,
@@ -165,11 +165,11 @@ abstract class GameData implements _i1.SerializableModel {
       'owner': owner.toJson(),
       'name': name,
       'code': code,
+      if (spyUserId != null) 'spyUserId': spyUserId?.toJson(),
       if (currentWordId != null) 'currentWordId': currentWordId?.toJson(),
       if (currentWord != null) 'currentWord': currentWord?.toJson(),
       if (nextWordId != null) 'nextWordId': nextWordId?.toJson(),
       if (nextWord != null) 'nextWord': nextWord?.toJson(),
-      if (suggestWordId != null) 'suggestWordId': suggestWordId?.toJson(),
       if (suggestWord != null) 'suggestWord': suggestWord?.toJson(),
       'wordCategoryList':
           wordCategoryList.toJson(valueToJson: (v) => v.toJson()),
@@ -195,13 +195,13 @@ class _GameDataImpl extends GameData {
     required _i3.UserData owner,
     required String name,
     required String code,
+    _i1.UuidValue? spyUserId,
     _i1.UuidValue? currentWordId,
     _i4.WordData? currentWord,
     _i1.UuidValue? nextWordId,
     _i4.WordData? nextWord,
-    _i1.UuidValue? suggestWordId,
-    _i4.WordData? suggestWord,
-    required List<_i5.WordCategoryData> wordCategoryList,
+    _i5.SuggestWordData? suggestWord,
+    required List<_i6.WordCategoryData> wordCategoryList,
     required List<_i3.UserData> playerList,
     required bool isShowWordHint,
     required bool isSubmittedUserWord,
@@ -212,11 +212,11 @@ class _GameDataImpl extends GameData {
           owner: owner,
           name: name,
           code: code,
+          spyUserId: spyUserId,
           currentWordId: currentWordId,
           currentWord: currentWord,
           nextWordId: nextWordId,
           nextWord: nextWord,
-          suggestWordId: suggestWordId,
           suggestWord: suggestWord,
           wordCategoryList: wordCategoryList,
           playerList: playerList,
@@ -235,13 +235,13 @@ class _GameDataImpl extends GameData {
     _i3.UserData? owner,
     String? name,
     String? code,
+    Object? spyUserId = _Undefined,
     Object? currentWordId = _Undefined,
     Object? currentWord = _Undefined,
     Object? nextWordId = _Undefined,
     Object? nextWord = _Undefined,
-    Object? suggestWordId = _Undefined,
     Object? suggestWord = _Undefined,
-    List<_i5.WordCategoryData>? wordCategoryList,
+    List<_i6.WordCategoryData>? wordCategoryList,
     List<_i3.UserData>? playerList,
     bool? isShowWordHint,
     bool? isSubmittedUserWord,
@@ -253,6 +253,7 @@ class _GameDataImpl extends GameData {
       owner: owner ?? this.owner.copyWith(),
       name: name ?? this.name,
       code: code ?? this.code,
+      spyUserId: spyUserId is _i1.UuidValue? ? spyUserId : this.spyUserId,
       currentWordId:
           currentWordId is _i1.UuidValue? ? currentWordId : this.currentWordId,
       currentWord: currentWord is _i4.WordData?
@@ -261,9 +262,7 @@ class _GameDataImpl extends GameData {
       nextWordId: nextWordId is _i1.UuidValue? ? nextWordId : this.nextWordId,
       nextWord:
           nextWord is _i4.WordData? ? nextWord : this.nextWord?.copyWith(),
-      suggestWordId:
-          suggestWordId is _i1.UuidValue? ? suggestWordId : this.suggestWordId,
-      suggestWord: suggestWord is _i4.WordData?
+      suggestWord: suggestWord is _i5.SuggestWordData?
           ? suggestWord
           : this.suggestWord?.copyWith(),
       wordCategoryList: wordCategoryList ??

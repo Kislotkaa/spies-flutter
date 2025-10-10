@@ -6,9 +6,10 @@ fields:
   owner: UserData,
   name: String
   code: String
+  spyUserId: UuidValue?,
   currentWord: WordData?, relation(optional)
   nextWord: WordData?, relation(optional)
-  suggestWord: WordData?, relation(optional)
+  suggestWord: SuggestWordData?
   wordCategoryList: List<WordCategoryData>
   playerList: List<UserData>
   isShowWordHint: bool

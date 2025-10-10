@@ -1,4 +1,5 @@
 import 'package:serverpod/serverpod.dart';
+import 'package:serverpod_flutter_server/src/extends/random_extends.dart';
 import 'package:serverpod_flutter_server/src/generated/protocol.dart';
 
 class GameSession {
@@ -32,14 +33,19 @@ class GameSession {
     game.isSubmittedUserWord = isSubmittedUserWord ?? game.isSubmittedUserWord;
   }
 
-  void suggestWord(WordData word) => game.suggestWord = word;
+  void suggestWord(SuggestWordData word) => game.suggestWord = word;
 
   void suggestAccepted() {
-    game.nextWord = game.suggestWord;
+    if (game.suggestWord == null) return;
+
+    game.nextWord = game.suggestWord?.word;
     game.suggestWord = null;
   }
 
   void nextWord(WordData word) {
+    final playersIds = [...game.playerList.map((e) => e.id)]..removeWhere((e) => e == game.suggestWord?.userId);
+    game.spyUserId = playersIds[RandomExtends.nextInt(playersIds.length)];
+
     game.currentWord = game.nextWord;
     game.suggestWord = null;
     game.nextWord = word;

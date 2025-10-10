@@ -10,48 +10,43 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import '../data/word_data.dart' as _i2;
 
-abstract class SuggestWordRequest implements _i1.SerializableModel {
-  SuggestWordRequest._({
+abstract class SuggestWordData implements _i1.SerializableModel {
+  SuggestWordData._({
     required this.userId,
-    required this.gameId,
     required this.word,
   });
 
-  factory SuggestWordRequest({
+  factory SuggestWordData({
     required _i1.UuidValue userId,
-    required _i1.UuidValue gameId,
-    required String word,
-  }) = _SuggestWordRequestImpl;
+    required _i2.WordData word,
+  }) = _SuggestWordDataImpl;
 
-  factory SuggestWordRequest.fromJson(Map<String, dynamic> jsonSerialization) {
-    return SuggestWordRequest(
+  factory SuggestWordData.fromJson(Map<String, dynamic> jsonSerialization) {
+    return SuggestWordData(
       userId: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['userId']),
-      gameId: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['gameId']),
-      word: jsonSerialization['word'] as String,
+      word: _i2.WordData.fromJson(
+          (jsonSerialization['word'] as Map<String, dynamic>)),
     );
   }
 
   _i1.UuidValue userId;
 
-  _i1.UuidValue gameId;
+  _i2.WordData word;
 
-  String word;
-
-  /// Returns a shallow copy of this [SuggestWordRequest]
+  /// Returns a shallow copy of this [SuggestWordData]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
-  SuggestWordRequest copyWith({
+  SuggestWordData copyWith({
     _i1.UuidValue? userId,
-    _i1.UuidValue? gameId,
-    String? word,
+    _i2.WordData? word,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       'userId': userId.toJson(),
-      'gameId': gameId.toJson(),
-      'word': word,
+      'word': word.toJson(),
     };
   }
 
@@ -61,30 +56,26 @@ abstract class SuggestWordRequest implements _i1.SerializableModel {
   }
 }
 
-class _SuggestWordRequestImpl extends SuggestWordRequest {
-  _SuggestWordRequestImpl({
+class _SuggestWordDataImpl extends SuggestWordData {
+  _SuggestWordDataImpl({
     required _i1.UuidValue userId,
-    required _i1.UuidValue gameId,
-    required String word,
+    required _i2.WordData word,
   }) : super._(
           userId: userId,
-          gameId: gameId,
           word: word,
         );
 
-  /// Returns a shallow copy of this [SuggestWordRequest]
+  /// Returns a shallow copy of this [SuggestWordData]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
   @override
-  SuggestWordRequest copyWith({
+  SuggestWordData copyWith({
     _i1.UuidValue? userId,
-    _i1.UuidValue? gameId,
-    String? word,
+    _i2.WordData? word,
   }) {
-    return SuggestWordRequest(
+    return SuggestWordData(
       userId: userId ?? this.userId,
-      gameId: gameId ?? this.gameId,
-      word: word ?? this.word,
+      word: word ?? this.word.copyWith(),
     );
   }
 }

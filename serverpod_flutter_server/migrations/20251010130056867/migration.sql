@@ -3,15 +3,15 @@ BEGIN;
 --
 -- ACTION ALTER TABLE
 --
-ALTER TABLE "users" ADD COLUMN "updateAt" timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE "games" ADD COLUMN "spyUserId" uuid;
 
 --
 -- MIGRATION VERSION FOR serverpod_flutter
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('serverpod_flutter', '20251009122646590', now())
+    VALUES ('serverpod_flutter', '20251010130056867', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20251009122646590', "timestamp" = now();
+    DO UPDATE SET "version" = '20251010130056867', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod

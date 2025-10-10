@@ -200,7 +200,12 @@ class GameEndpoint extends Endpoint {
       ),
     );
 
-    gameSession.suggestWord(word);
+    gameSession.suggestWord(
+      SuggestWordData(
+        userId: model.userId,
+        word: word,
+      ),
+    );
 
     await GameData.db.updateRow(session, gameSession.game);
 
