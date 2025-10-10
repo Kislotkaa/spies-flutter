@@ -18,14 +18,14 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   FutureOr<void> _init(SplashInitialEvent event, emit) async {
     if (_userRepository.isAuth && _userRepository.user != null) {
-      _userRepository.signIn(
+      final result = await _userRepository.signIn(
         SignInRequest(
           deviceId: _userRepository.user!.deviceId,
           name: _userRepository.user!.name,
         ),
       );
-      emit(SplashToMainState());
-      return;
+
+      if (result.isSuccess) return emit(SplashToMainState());
     }
 
     emit(SplashToAuthState());

@@ -1,5 +1,5 @@
 class Constants {
-  static const politUrl = '';
+  static const politUrl = 'https://yandex.ru';
 }
 
 class IntlLocales {

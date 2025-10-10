@@ -24,7 +24,8 @@ class ThemeCubit extends Cubit<ThemeState> {
     return super.close();
   }
 
-  void _subscribeTheme() => _themeSubscription = _themeRepository.getThemeStream.listen(_onListen);
+  void _subscribeTheme() =>
+      _themeSubscription = _themeRepository.getThemeStream.listen(_onListen);
 
   void _onListen(ThemeMode customTheme) {
     if (customTheme.name == ThemeMode.light.name) {

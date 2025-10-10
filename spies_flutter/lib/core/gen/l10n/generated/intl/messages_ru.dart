@@ -45,12 +45,27 @@ class MessageLookup extends MessageLookupByLibrary {
             "Произошла серверная ошибка, повторите попытку позже"),
         "serverUnavailable": MessageLookupByLibrary.simpleMessage(
             "Сервер в данный момент не доступен"),
-        "settingsSuggest": MessageLookupByLibrary.simpleMessage("Предложить"),
+        "settingsAccount": MessageLookupByLibrary.simpleMessage("Аккаунт"),
+        "settingsAccountDelete":
+            MessageLookupByLibrary.simpleMessage("Удалить аккаунт"),
+        "settingsAdditional":
+            MessageLookupByLibrary.simpleMessage("Дополнительные"),
+        "settingsChangeNameTitle":
+            MessageLookupByLibrary.simpleMessage("Сменить имя"),
+        "settingsDarkTheme":
+            MessageLookupByLibrary.simpleMessage("Тёмная тема"),
+        "settingsGameRules":
+            MessageLookupByLibrary.simpleMessage("Правила игры"),
+        "settingsMain": MessageLookupByLibrary.simpleMessage("Основные"),
+        "settingsNameChanged":
+            MessageLookupByLibrary.simpleMessage("Ваш ник успешно изменён!"),
+        "settingsPolit": MessageLookupByLibrary.simpleMessage(
+            "Политика конфинденциальности"),
+        "settingsSuggestWord":
+            MessageLookupByLibrary.simpleMessage("Предложить слово"),
         "settingsTitle": MessageLookupByLibrary.simpleMessage("Настройки"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Что-то пошло не так"),
-        "suggestWordTitle":
-            MessageLookupByLibrary.simpleMessage("Предложить слово"),
         "youAreYours": MessageLookupByLibrary.simpleMessage("Ты свой?")
       };
 }

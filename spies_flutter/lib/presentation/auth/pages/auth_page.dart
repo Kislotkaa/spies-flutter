@@ -33,7 +33,7 @@ class _AuthView extends StatelessWidget {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccessState) router.replace(const MainRoute());
-          if (state is AuthNameValidationFailedState) {
+          if (state is AuthNameInvalidState) {
             SnackbarWidget.show(
               title: state.title,
               subTitle: state.subTitle,

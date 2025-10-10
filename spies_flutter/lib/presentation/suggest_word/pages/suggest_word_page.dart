@@ -11,7 +11,7 @@ class SuggestWordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: S.of(context).suggestWordTitle,
+        title: S.of(context).settingsSuggestWord,
         needClose: true,
       ),
       body: ListView(

@@ -14,7 +14,8 @@ class RemoteDataProvider {
 
   Client? _client;
 
-  Future<AppResponse<UserResponse, GatewayError>> signIn(SignInRequest model) async {
+  Future<AppResponse<UserResponse, GatewayError>> signIn(
+      SignInRequest model) async {
     try {
       final result = await _client?.user.signIn(model);
 
@@ -29,6 +30,17 @@ class RemoteDataProvider {
   Future<AppResponse<void, GatewayError>> signOut(UuidValue? userId) async {
     try {
       await _client?.user.signOut(userId);
+
+      return AppResponse.success();
+    } catch (e) {
+      return _errorHandler(e);
+    }
+  }
+
+  Future<AppResponse<void, GatewayError>> changeName(
+      ChangeNameRequest model) async {
+    try {
+      await _client?.user.changeName(model);
 
       return AppResponse.success();
     } catch (e) {

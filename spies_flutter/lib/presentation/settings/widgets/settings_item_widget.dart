@@ -41,7 +41,9 @@ class SettingsItemWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              icon.svg(colorFilter: ColorFilter.mode(color ?? colorTheme.textColor, BlendMode.srcIn)),
+              icon.svg(
+                  colorFilter: ColorFilter.mode(
+                      color ?? colorTheme.textColor, BlendMode.srcIn)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),

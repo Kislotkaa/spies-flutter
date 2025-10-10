@@ -14,27 +14,22 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 abstract class ChangeNameRequest implements _i1.SerializableModel {
   ChangeNameRequest._({
     required this.userId,
-    required this.deviceId,
     required this.newName,
   });
 
   factory ChangeNameRequest({
     required _i1.UuidValue userId,
-    required String deviceId,
     required String newName,
   }) = _ChangeNameRequestImpl;
 
   factory ChangeNameRequest.fromJson(Map<String, dynamic> jsonSerialization) {
     return ChangeNameRequest(
       userId: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['userId']),
-      deviceId: jsonSerialization['deviceId'] as String,
       newName: jsonSerialization['newName'] as String,
     );
   }
 
   _i1.UuidValue userId;
-
-  String deviceId;
 
   String newName;
 
@@ -43,14 +38,12 @@ abstract class ChangeNameRequest implements _i1.SerializableModel {
   @_i1.useResult
   ChangeNameRequest copyWith({
     _i1.UuidValue? userId,
-    String? deviceId,
     String? newName,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       'userId': userId.toJson(),
-      'deviceId': deviceId,
       'newName': newName,
     };
   }
@@ -64,11 +57,9 @@ abstract class ChangeNameRequest implements _i1.SerializableModel {
 class _ChangeNameRequestImpl extends ChangeNameRequest {
   _ChangeNameRequestImpl({
     required _i1.UuidValue userId,
-    required String deviceId,
     required String newName,
   }) : super._(
           userId: userId,
-          deviceId: deviceId,
           newName: newName,
         );
 
@@ -78,12 +69,10 @@ class _ChangeNameRequestImpl extends ChangeNameRequest {
   @override
   ChangeNameRequest copyWith({
     _i1.UuidValue? userId,
-    String? deviceId,
     String? newName,
   }) {
     return ChangeNameRequest(
       userId: userId ?? this.userId,
-      deviceId: deviceId ?? this.deviceId,
       newName: newName ?? this.newName,
     );
   }

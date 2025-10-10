@@ -13,7 +13,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ThemeCubit, ThemeState>(
-      listener: (context, themeState) => context.read<ThemeCubit>().rebuildAllChildren(context),
+      listener: (context, themeState) =>
+          context.read<ThemeCubit>().rebuildAllChildren(context),
       listenWhen: (prev, current) => prev.isDarkMode != current.isDarkMode,
       builder: (context, themeState) => BlocBuilder<IntlCubit, IntlState>(
         builder: (_, intlState) => MaterialApp.router(

@@ -17,13 +17,17 @@ class UserRepository {
 
   UserResponse? _user;
 
+  UuidValue? get userId => _user?.id;
+  String? get name => _user?.name;
+
   bool get isAuth => user != null;
   UserResponse? get user {
     _user ??= _localDataProvider.getUser();
     return _user;
   }
 
-  Future<AppResponse<UserResponse, GatewayError>> signIn(SignInRequest model) async {
+  Future<AppResponse<UserResponse, GatewayError>> signIn(
+      SignInRequest model) async {
     final result = await _remoteDataProvider.signIn(model);
 
     if (result.isSuccess) {
@@ -40,6 +44,18 @@ class UserRepository {
     if (result.isSuccess) {
       _user = null;
       _localDataProvider.saveUser(null);
+    }
+
+    return result;
+  }
+
+  Future<AppResponse<void, GatewayError>> changeName(
+      ChangeNameRequest model) async {
+    final result = await _remoteDataProvider.changeName(model);
+
+    if (result.isSuccess) {
+      _user?.name = model.newName;
+      _localDataProvider.saveUser(_user);
     }
 
     return result;

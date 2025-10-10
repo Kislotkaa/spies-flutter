@@ -44,12 +44,25 @@ class MessageLookup extends MessageLookupByLibrary {
             "A server error occurred, please try again later"),
         "serverUnavailable": MessageLookupByLibrary.simpleMessage(
             "The server is currently not available"),
-        "settingsSuggest": MessageLookupByLibrary.simpleMessage("Offer"),
+        "settingsAccount": MessageLookupByLibrary.simpleMessage("Account"),
+        "settingsAccountDelete":
+            MessageLookupByLibrary.simpleMessage("Delete account"),
+        "settingsAdditional":
+            MessageLookupByLibrary.simpleMessage("Additional"),
+        "settingsChangeNameTitle":
+            MessageLookupByLibrary.simpleMessage("Change name"),
+        "settingsDarkTheme": MessageLookupByLibrary.simpleMessage("Dark theme"),
+        "settingsGameRules":
+            MessageLookupByLibrary.simpleMessage("Rules of the game"),
+        "settingsMain": MessageLookupByLibrary.simpleMessage("Basic"),
+        "settingsNameChanged": MessageLookupByLibrary.simpleMessage(
+            "Your nickname has been successfully changed!"),
+        "settingsPolit": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "settingsSuggestWord":
+            MessageLookupByLibrary.simpleMessage("Suggest a word"),
         "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Something went wrong"),
-        "suggestWordTitle":
-            MessageLookupByLibrary.simpleMessage("Suggest a word"),
         "youAreYours": MessageLookupByLibrary.simpleMessage("Are you your own?")
       };
 }

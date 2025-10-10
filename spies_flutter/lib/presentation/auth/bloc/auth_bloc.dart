@@ -39,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoadingState());
 
     if (!_formKey.currentState!.validate()) {
-      emit(AuthNameValidationFailedState(title: S.current.nameNotValid));
+      emit(AuthNameInvalidState(title: S.current.nameNotValid));
       return;
     }
 
@@ -52,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (result.isError) {
       return emit(
-        AuthNameValidationFailedState(
+        AuthNameInvalidState(
           title: result.error == GatewayError.serverUnavailable
               ? S.current.serverUnavailable
               : S.current.somethingWentWrong,
@@ -66,10 +66,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _cleanName(AuthOnClearNameEvent event, emit) {
     _nameController.clear();
-    emit(AuthSuffixShownState(isShownSuffix: _nameController.text.isNotEmpty));
+    emit(AuthSuffixShownState(_nameController.text.isNotEmpty));
   }
 
   FutureOr<void> _input(AuthOnInputNameEvent event, emit) {
-    emit(AuthSuffixShownState(isShownSuffix: _nameController.text.isNotEmpty));
+    emit(AuthSuffixShownState(_nameController.text.isNotEmpty));
   }
 }

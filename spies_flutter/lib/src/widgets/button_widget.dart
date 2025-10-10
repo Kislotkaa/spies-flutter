@@ -54,11 +54,13 @@ class ButtonWidget extends StatelessWidget {
         child: ElevatedButton(
           style: switch (state) {
             ButtonStateEnum.fill => defaultButtnStyle.copyWith(
-                backgroundColor: WidgetStatePropertyAll(colorTheme.primaryColor),
-                overlayColor: WidgetStatePropertyAll(colorTheme.revertBasicColor),
+                backgroundColor:
+                    WidgetStatePropertyAll(colorTheme.primaryColor),
+                overlayColor: WidgetStatePropertyAll(colorTheme.cardColor),
               ),
             ButtonStateEnum.outline => defaultButtnStyle.copyWith(
-                backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+                backgroundColor:
+                    const WidgetStatePropertyAll(Colors.transparent),
                 overlayColor: WidgetStatePropertyAll(colorTheme.cardColor),
                 side: WidgetStatePropertyAll(
                   BorderSide(color: colorTheme.textGrayColor),

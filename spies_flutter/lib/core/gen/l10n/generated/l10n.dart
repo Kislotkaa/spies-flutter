@@ -210,21 +210,101 @@ class S {
     );
   }
 
-  /// `Предложить`
-  String get settingsSuggest {
+  /// `Ваш ник успешно изменён!`
+  String get settingsNameChanged {
     return Intl.message(
-      'Предложить',
-      name: 'settingsSuggest',
+      'Ваш ник успешно изменён!',
+      name: 'settingsNameChanged',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сменить имя`
+  String get settingsChangeNameTitle {
+    return Intl.message(
+      'Сменить имя',
+      name: 'settingsChangeNameTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Основные`
+  String get settingsMain {
+    return Intl.message(
+      'Основные',
+      name: 'settingsMain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Дополнительные`
+  String get settingsAdditional {
+    return Intl.message(
+      'Дополнительные',
+      name: 'settingsAdditional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Тёмная тема`
+  String get settingsDarkTheme {
+    return Intl.message(
+      'Тёмная тема',
+      name: 'settingsDarkTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Правила игры`
+  String get settingsGameRules {
+    return Intl.message(
+      'Правила игры',
+      name: 'settingsGameRules',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Политика конфинденциальности`
+  String get settingsPolit {
+    return Intl.message(
+      'Политика конфинденциальности',
+      name: 'settingsPolit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Аккаунт`
+  String get settingsAccount {
+    return Intl.message(
+      'Аккаунт',
+      name: 'settingsAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Удалить аккаунт`
+  String get settingsAccountDelete {
+    return Intl.message(
+      'Удалить аккаунт',
+      name: 'settingsAccountDelete',
       desc: '',
       args: [],
     );
   }
 
   /// `Предложить слово`
-  String get suggestWordTitle {
+  String get settingsSuggestWord {
     return Intl.message(
       'Предложить слово',
-      name: 'suggestWordTitle',
+      name: 'settingsSuggestWord',
       desc: '',
       args: [],
     );

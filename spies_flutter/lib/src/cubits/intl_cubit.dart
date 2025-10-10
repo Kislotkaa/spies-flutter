@@ -16,7 +16,8 @@ class IntlCubit extends Cubit<IntlState> {
 
   StreamSubscription<String>? _localeSubscription;
 
-  void getCurrentLocale() => _localeSubscription = _intlRepository.getLocaleStream.listen(
+  void getCurrentLocale() =>
+      _localeSubscription = _intlRepository.getLocaleStream.listen(
         (locale) => emit(IntlState(locale)),
       );
 

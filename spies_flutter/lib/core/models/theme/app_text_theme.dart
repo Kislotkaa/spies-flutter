@@ -78,19 +78,27 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
   static AppTextTheme get dark => _getTextTheme(AppColorTheme.dark.textColor);
 
   @override
-  ThemeExtension<AppTextTheme> lerp(ThemeExtension<AppTextTheme>? other, double t) {
+  ThemeExtension<AppTextTheme> lerp(
+      ThemeExtension<AppTextTheme>? other, double t) {
     if (other is! AppTextTheme) {
       return this;
     }
 
     return AppTextTheme(
-      semi20: other.semi20.copyWith(color: Color.lerp(semi20.color, other.semi20.color, t)),
-      extra20: other.extra20.copyWith(color: Color.lerp(extra20.color, other.extra20.color, t)),
-      semi18: other.semi18.copyWith(color: Color.lerp(semi18.color, other.semi18.color, t)),
-      semi16: other.semi16.copyWith(color: Color.lerp(semi16.color, other.semi16.color, t)),
-      semi14: other.semi14.copyWith(color: Color.lerp(semi14.color, other.semi14.color, t)),
-      extra14: other.extra14.copyWith(color: Color.lerp(extra14.color, other.extra14.color, t)),
-      semi12: other.semi12.copyWith(color: Color.lerp(semi12.color, other.semi12.color, t)),
+      semi20: other.semi20
+          .copyWith(color: Color.lerp(semi20.color, other.semi20.color, t)),
+      extra20: other.extra20
+          .copyWith(color: Color.lerp(extra20.color, other.extra20.color, t)),
+      semi18: other.semi18
+          .copyWith(color: Color.lerp(semi18.color, other.semi18.color, t)),
+      semi16: other.semi16
+          .copyWith(color: Color.lerp(semi16.color, other.semi16.color, t)),
+      semi14: other.semi14
+          .copyWith(color: Color.lerp(semi14.color, other.semi14.color, t)),
+      extra14: other.extra14
+          .copyWith(color: Color.lerp(extra14.color, other.extra14.color, t)),
+      semi12: other.semi12
+          .copyWith(color: Color.lerp(semi12.color, other.semi12.color, t)),
     );
   }
 
