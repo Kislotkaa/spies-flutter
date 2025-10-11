@@ -66,7 +66,7 @@ class ButtonWidget extends StatelessWidget {
                 ),
               ),
           },
-          onPressed: onTap,
+          onPressed: isLoading ? null : onTap,
           child: isLoading
               ? const ProgressIndicatorWidget(size: 24)
               : Row(
