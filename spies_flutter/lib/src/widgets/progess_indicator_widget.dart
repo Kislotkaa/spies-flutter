@@ -31,8 +31,8 @@ class ProgressIndicatorWidget extends StatelessWidget {
           ),
         ProgressIndicatorEnum.linear => const LinearProgressIndicator(),
         ProgressIndicatorEnum.shimmer => Shimmer.fromColors(
-            baseColor: colorTheme.cardColor.withOpacity(0.3),
-            highlightColor: colorTheme.cardColor,
+            baseColor: colorTheme.textGrayColor.withOpacity(0.3),
+            highlightColor: colorTheme.textGrayColor,
             child: shimmerChild ?? const SizedBox.shrink(),
           ),
       },

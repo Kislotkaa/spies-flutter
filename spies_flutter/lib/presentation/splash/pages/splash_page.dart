@@ -5,6 +5,7 @@ import 'package:sample/core/router/app_router.dart';
 import 'package:sample/core/router/app_router.gr.dart';
 import 'package:sample/presentation/splash/bloc/splash_bloc.dart';
 import 'package:sample/src/repositories/user_repository.dart';
+import 'package:sample/src/widgets/logo_widget.dart';
 import 'package:sample/src/widgets/progess_indicator_widget.dart';
 
 @RoutePage()
@@ -36,9 +37,12 @@ class _SplashView extends StatelessWidget {
           router.replace(const MainRoute());
         }
       },
-      child: const Scaffold(
+      child: Scaffold(
         body: Center(
-          child: ProgressIndicatorWidget(),
+          child: ProgressIndicatorWidget(
+            state: ProgressIndicatorEnum.shimmer,
+            shimmerChild: LogoWidget(size: MediaQuery.of(context).size.width),
+          ),
         ),
       ),
     );

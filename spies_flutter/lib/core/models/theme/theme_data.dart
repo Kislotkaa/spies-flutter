@@ -27,9 +27,9 @@ class AppThemeData {
     shadowColor: AppDarkColors.shadow,
     hintColor: AppDarkColors.textGray,
     disabledColor: AppDarkColors.textGray,
+    highlightColor: Colors.transparent,
+    splashColor: Colors.transparent,
     scaffoldBackgroundColor: AppStaticColors.black,
-    inputDecorationTheme: const InputDecorationTheme(),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
   );
 
   static final ThemeData light = ThemeData.light().copyWith(
@@ -58,7 +58,7 @@ class AppThemeData {
     scaffoldBackgroundColor: AppStaticColors.white,
     hintColor: AppLightColors.textGray,
     disabledColor: AppLightColors.textGray,
-    inputDecorationTheme: const InputDecorationTheme(),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
+    highlightColor: Colors.transparent,
+    splashColor: Colors.transparent,
   );
 }

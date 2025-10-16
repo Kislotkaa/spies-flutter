@@ -3,16 +3,22 @@ import 'package:sample/core/gen/assets.gen.dart';
 import 'package:sample/core/utils/context_extension.dart';
 
 class LogoWidget extends StatelessWidget {
-  const LogoWidget({super.key});
+  final double size;
+
+  const LogoWidget({
+    super.key,
+    this.size = 288,
+  });
 
   @override
   Widget build(BuildContext context) {
     final colorTheme = context.colorTheme;
 
     return Hero(
-      tag: 'logo',
+      tag: Assets.icons.logo.keyName,
       child: Assets.icons.logo.svg(
-        height: 288,
+        height: size,
+        width: size,
         colorFilter: ColorFilter.mode(
           colorTheme.primaryColor,
           BlendMode.srcIn,
